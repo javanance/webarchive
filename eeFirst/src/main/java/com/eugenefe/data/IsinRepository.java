@@ -32,12 +32,12 @@ import com.eugenefe.qualifiers.SecondEm;
 public class IsinRepository {
 
     @Inject 
-//    @DefaultEm
-    @SecondEm
+    @DefaultEm
+//    @SecondEm
     private EntityManager em;
     
-    @Inject
-    private	Logger logger;
+//    @Inject
+//    private	Logger logger;
 
     public OdsIsinMaster findById(Long id) {
         return em.find(OdsIsinMaster.class, id);
@@ -47,17 +47,14 @@ public class IsinRepository {
         CriteriaQuery<OdsIsinMaster> criteria = cb.createQuery(OdsIsinMaster.class);
         Root<OdsIsinMaster> isinMaster = criteria.from(OdsIsinMaster.class);
         criteria.select(isinMaster).where(cb.equal(isinMaster.get("isin"), isin));
-        logger.info("aaa: {}");
-        logger.info( em.toString());
+//        logger.info("aaa: {}");
+//        logger.info( em.));
         return em.createQuery(criteria).getSingleResult();
     }
     public OdsIsinMaster findByKrName(String mvName) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<OdsIsinMaster> criteria = cb.createQuery(OdsIsinMaster.class);
         Root<OdsIsinMaster> isin = criteria.from(OdsIsinMaster.class);
-        // Swap criteria statements if you would like to try out type-safe criteria queries, a new
-        // feature in JPA 2.0
-        // criteria.select(member).where(cb.equal(member.get(Member_.name), email));
         criteria.select(isin).where(cb.equal(isin.get("mvName"), mvName));
         return em.createQuery(criteria).getSingleResult();
     }

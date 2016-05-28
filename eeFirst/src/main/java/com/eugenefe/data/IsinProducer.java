@@ -21,8 +21,11 @@ import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.persistence.EntityManager;
 
 import com.eugenefe.entities.OdsIsinMaster;
+import com.eugenefe.qualifiers.SecondEm;
+
 import java.util.logging.Logger;
 @RequestScoped
 public class IsinProducer {
@@ -40,9 +43,23 @@ public class IsinProducer {
         return isinMaster;
     }
 
+//    @Inject @SecondEm
+//    private EntityManager em;
+//    
 
     @PostConstruct
     public void retrieveAllIsin() {
     	isinMaster = isinRepository.findByIsin("KR4201NC2702");
+//    	try {
+//    		em.getTransaction().begin();
+//    		em.persist(isinMaster);
+//    		em.flush();
+//    		em.getTransaction().commit();
+//    		System.out.println(em.toString());
+//    		em.close();
+//			
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//		}
     }
 }
