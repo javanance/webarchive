@@ -1,5 +1,5 @@
 package com.eugenefe.entities;
-// Generated May 26, 2016 11:57:16 AM by Hibernate Tools 4.3.1.Final
+// Generated May 29, 2016 10:08:33 AM by Hibernate Tools 4.3.1.Final
 
 import java.math.BigDecimal;
 import javax.persistence.Column;

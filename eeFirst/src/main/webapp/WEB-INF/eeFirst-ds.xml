@@ -31,5 +31,13 @@
             <password>dull6078</password>
         </security>
     </datasource>
+    <!-- <datasource jndi-name="java:jboss/datasources/MysqlRelDS" pool-name="MysqlRelDS" enabled="true"  use-java-context="true">
+        <connection-url>jdbc:mysql://116.41.18.19:3306/eugenefe_rel</connection-url>
+        <driver>mysql</driver>
+        <security>
+            <user-name>takion77</user-name>
+            <password>dull6078</password>
+        </security>
+    </datasource> -->
 </datasources>
  

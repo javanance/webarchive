@@ -17,49 +17,75 @@
 package com.eugenefe.data;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.transaction.UserTransaction;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.eugenefe.entities.OdsIsinMaster;
+import com.eugenefe.qualifiers.DefaultEm;
 import com.eugenefe.qualifiers.SecondEm;
 
-import java.util.logging.Logger;
 @RequestScoped
 public class IsinProducer {
+	private static Logger logger = LoggerFactory.getLogger("IsniProducer");
 
     @Inject
     private IsinRepository isinRepository;
     
-   
+    @Inject @DefaultEm
+    private EntityManager em;
 
     private OdsIsinMaster isinMaster;
+    
+    @Resource
+    private UserTransaction userTransaction;
 
     @Produces
     @Named
     public OdsIsinMaster getIsin() {
+    	OdsIsinMaster temp = new OdsIsinMaster();
+    	temp.setIsin("ss");
+//    	try {
+//    		em.getTransaction().begin();
+//    		em.merge(temp);
+//    		logger.info("bbb : {}", em.contains(isinMaster));
+//    		logger.info("yyy : {}", em.contains(isinMaster));
+//    		em.flush();
+//    		em.getTransaction().commit();
+//    		em.close();
+//			
+//		} catch (Exception e) {
+//			logger.info("ccc : {}", em.contains(isinMaster));
+//		}
+//    	try {
+//    		
+//    		userTransaction.begin();
+//    		logger.info("bbb : {}", em.contains(isinMaster));
+//    		em.merge(temp);
+//    		em.flush();
+//    		logger.info("yyy : {}", em.contains(isinMaster));
+//    		userTransaction.commit();
+//			
+//		} catch (Exception e) {
+//			logger.info("ccc : {}", em.contains(isinMaster));
+//		}
         return isinMaster;
     }
 
-//    @Inject @SecondEm
-//    private EntityManager em;
-//    
+  
 
     @PostConstruct
     public void retrieveAllIsin() {
     	isinMaster = isinRepository.findByIsin("KR4201NC2702");
-//    	try {
-//    		em.getTransaction().begin();
-//    		em.persist(isinMaster);
-//    		em.flush();
-//    		em.getTransaction().commit();
-//    		System.out.println(em.toString());
-//    		em.close();
-//			
-//		} catch (Exception e) {
-//			// TODO: handle exception
-//		}
+    	logger.info("xxx : {}", isinMaster.getIsin());
+    	
     }
 }

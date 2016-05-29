@@ -18,6 +18,7 @@ package com.eugenefe.util;
 
 import java.util.logging.Logger;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.InjectionPoint;
@@ -42,32 +43,21 @@ import com.eugenefe.qualifiers.SecondEm;
  * private EntityManager em;
  * </pre>
  */
-//@ApplicationScoped
+@ApplicationScoped
 public class EntityManagerProducer {
 
+    @Produces
+    @PersistenceContext(unitName="primary")
+    @DefaultEm
+    private EntityManager em;
+
+   
+    @Produces
+    @PersistenceContext(unitName="secondary")
+    @SecondEm   
+    private EntityManager emRel;
+    	
     
-//    @PersistenceContext(unitName="primary")
-//    private EntityManager em;
-//
-//   
-//    @PersistenceContext(unitName="secondary")
-//    private EntityManager emRel;
-    
-    @PersistenceUnit(unitName ="primary")
-    private EntityManagerFactory emf;
-    
-    @PersistenceUnit(unitName="secondary")
-    private EntityManagerFactory emfrel;
-    
-    @Produces   @DefaultEm  
-    public EntityManager getDefaultEm() {  
-       return emf.createEntityManager();
-    }  
-    
-    @Produces   @SecondEm   
-    public EntityManager getSecondEm() {  
-      return emfrel.createEntityManager();
-    }  
     
 
 }
