@@ -16,10 +16,13 @@
  */
 package com.eugenefe.data;
 
+import java.util.Locale;
+
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Produces;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
@@ -47,12 +50,22 @@ public class IsinProducer {
     
     @Resource
     private UserTransaction userTransaction;
+    @Inject
+    private FacesContext ctx ;
+    
+    private Locale locale;
 
+    public String getLocalizedStatus() {
+    	locale = ctx.getViewRoot().getLocale();
+        return locale.toString();
+    }
+    
     @Produces
     @Named
     public OdsIsinMaster getIsin() {
     	OdsIsinMaster temp = new OdsIsinMaster();
-    	temp.setIsin("ss");
+    	temp.setIsin("sss");
+    	temp.setMvName(getLocalizedStatus());
 //    	try {
 //    		em.getTransaction().begin();
 //    		em.merge(temp);
@@ -65,18 +78,18 @@ public class IsinProducer {
 //		} catch (Exception e) {
 //			logger.info("ccc : {}", em.contains(isinMaster));
 //		}
-//    	try {
-//    		
-//    		userTransaction.begin();
-//    		logger.info("bbb : {}", em.contains(isinMaster));
-//    		em.merge(temp);
-//    		em.flush();
-//    		logger.info("yyy : {}", em.contains(isinMaster));
-//    		userTransaction.commit();
-//			
-//		} catch (Exception e) {
-//			logger.info("ccc : {}", em.contains(isinMaster));
-//		}
+    	try {
+    		
+    		userTransaction.begin();
+    		logger.info("bbb : {}", em.contains(isinMaster));
+    		em.merge(temp);
+    		em.flush();
+    		logger.info("yyy : {}", em.contains(isinMaster));
+    		userTransaction.commit();
+			
+		} catch (Exception e) {
+			logger.info("ccc : {}", em.contains(isinMaster));
+		}
         return isinMaster;
     }
 
