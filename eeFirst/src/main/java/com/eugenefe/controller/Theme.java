@@ -4,7 +4,6 @@ import java.io.Serializable;
 public class Theme implements Serializable {
     
     private String name;
-    
     private String image;
     
     public Theme() {}

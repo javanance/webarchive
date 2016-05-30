@@ -19,7 +19,8 @@
 							<p:column colspan="3">
 								<p:themeSwitcher id="defaultSwitcher" value="#{themeSwitcher.theme}" style="width:200px">
 									<f:selectItem itemLabel="#{msg.selectTheme}" itemValue="" />
-									<f:selectItems value="#{themeSwitcher.themes}" var="_theme"	itemLabel="#{_theme}" itemValue="#{_theme}" />
+									<f:selectItems value="#{themeSwitcher.themeList}"  ></f:selectItems>
+									<!-- <f:selectItems value="#{themeSwitcher.themes}" var="_theme"	itemLabel="#{_theme}" itemValue="#{_theme}" /> -->
 									<!-- <p:ajax listener="#{themeSwitcher.saveTheme}" /> -->
 								</p:themeSwitcher>
 							</p:column>

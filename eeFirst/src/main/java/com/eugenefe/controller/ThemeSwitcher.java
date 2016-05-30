@@ -2,6 +2,7 @@ package com.eugenefe.controller;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -24,6 +25,8 @@ public class ThemeSwitcher implements Serializable{
 	private Map<String, String> themes;
 
 	private List<Theme> advancedThemes;
+	
+	private List<String> themeList;
 
 	private String theme;
 
@@ -32,7 +35,8 @@ public class ThemeSwitcher implements Serializable{
 
 	public ThemeSwitcher() {
 	}
-
+	
+	
 	@PostConstruct
 	public void init() {
 		if ( guestPref== null){
@@ -87,6 +91,9 @@ public class ThemeSwitcher implements Serializable{
 		themes.put("UI-Darkness", "ui-darkness");
 		themes.put("UI-Lightness", "ui-lightness");
 		themes.put("Vader", "vader");
+		
+		themeList = new ArrayList<String>();
+		themeList.addAll(themes.values());
 	}
 
 	public Map<String, String> getThemes() {
@@ -116,11 +123,19 @@ public class ThemeSwitcher implements Serializable{
 	public void saveTheme() {
 //		log.info("Selected Theme1 :#0", guestPref.getTheme());
 		guestPref.setTheme(theme);
-		logger.info("Selected Theme :#0", guestPref.getTheme());
+		logger.info("Selected Theme : {}", guestPref.getTheme());
 	}
 
 	public List<Theme> getAdvancedThemes() {
 		return advancedThemes;
+	}
+
+
+	public List<String> getThemeList() {
+		return themeList;
+	}
+	public void setThemeList(List<String> themeList) {
+		this.themeList = themeList;
 	}
 
 }
