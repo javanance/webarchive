@@ -25,6 +25,7 @@ private static final long serialVersionUID = 1L;
         availableLanguages.put("Español", "es");
         availableLanguages.put("English", "en");
         availableLanguages.put("Français", "fr");
+        availableLanguages.put("Korean", "ko");
     }
 
     public Map<String, String> getAvailableLanguages() {
@@ -40,7 +41,16 @@ private static final long serialVersionUID = 1L;
     }
 
     public void setLanguage(String language) {
+    	System.out.println("as is locale" + locale.toLanguageTag());
         locale = new Locale(language);
         FacesContext.getCurrentInstance().getViewRoot().setLocale(locale);
+        System.out.println("locale set" + locale.toLanguageTag());
+    }
+    
+    public Locale select(){
+    	System.out.println("as is locale" + locale.toLanguageTag());
+    	FacesContext.getCurrentInstance().getViewRoot().setLocale(locale);
+    	System.out.println("locale set in select");
+    	return locale;
     }
 }

@@ -15,6 +15,8 @@ import javax.inject.Named;
 
 import org.slf4j.Logger;
 
+import com.eugenefe.service.ThemeService;
+
 
 @Named
 @SessionScoped
@@ -24,12 +26,14 @@ public class ThemeSwitcher implements Serializable{
 
 	private Map<String, String> themes;
 
-	private List<Theme> advancedThemes;
 	
 	private List<String> themeList;
 
-	private String theme;
+	private String selectedTheme;
 
+	@Inject
+    private ThemeService service;
+	
 	@Inject
 	private GuestPreferences guestPref;
 
@@ -43,12 +47,12 @@ public class ThemeSwitcher implements Serializable{
 			logger.info("Prep Null");
 		}
 		logger.info("Prep:{}", guestPref.getTheme());
-		theme = guestPref.getTheme();
+		selectedTheme = guestPref.getTheme();
 
-		advancedThemes = new ArrayList<Theme>();
-		advancedThemes.add(new Theme("aristo", "aristo.png"));
-		advancedThemes.add(new Theme("cupertino", "cupertino.png"));
-		advancedThemes.add(new Theme("trontastic", "trontastic.png"));
+//		advancedThemes = new ArrayList<Theme>();
+//		advancedThemes.add(new Theme("aristo", "aristo.png"));
+//		advancedThemes.add(new Theme("cupertino", "cupertino.png"));
+//		advancedThemes.add(new Theme("trontastic", "trontastic.png"));
 
 		themes = new TreeMap<String, String>();
 		themes.put("Afterdark", "afterdark");
@@ -104,12 +108,12 @@ public class ThemeSwitcher implements Serializable{
 		this.themes = themes;
 	}
 
-	public String getTheme() {
-		return theme;
+	public String getSelectedTheme() {
+		return selectedTheme;
 	}
 
-	public void setTheme(String theme) {
-		this.theme = theme;
+	public void setSelectedTheme(String theme) {
+		this.selectedTheme = theme;
 	}
 
 	public GuestPreferences getGuestPref() {
@@ -122,12 +126,13 @@ public class ThemeSwitcher implements Serializable{
 
 	public void saveTheme() {
 //		log.info("Selected Theme1 :#0", guestPref.getTheme());
-		guestPref.setTheme(theme);
+		guestPref.setTheme(selectedTheme);
 		logger.info("Selected Theme : {}", guestPref.getTheme());
 	}
 
 	public List<Theme> getAdvancedThemes() {
-		return advancedThemes;
+//		return advancedThemes;
+		return null;
 	}
 
 

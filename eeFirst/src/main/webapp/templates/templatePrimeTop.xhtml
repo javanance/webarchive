@@ -2,26 +2,12 @@
    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <f:view xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
   xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui"
-  xmlns:s="http://jboss.org/schema/seam/taglib" contentType="text/html"
-  >
+  xmlns:s="http://jboss.org/schema/seam/taglib" contentType="text/html" 
+   locale="#{localeSelector.language}">>
   <h:html>
   
   <h:head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>#{msg.appTitle}</title>
-    <link rel="shortcut icon" href="#{request.contextPath}/resources/archon.ico" />
-
-    <link type="text/css" rel="stylesheet" href="#{request.contextPath}/resources/css/default.css" />
-    <link type="text/css" rel="stylesheet" href="#{request.contextPath}/resources/css/charts.css" />
-    <link type="text/css" rel="stylesheet"
-      href="#{request.contextPath}/resources/css/syntaxhighlighter/syntaxhighlighter.css" />
-    <!-- <f:facet name="last">
-      <style type="text/css">
-          .ui-layout-pane-north .ui-layout-unit-content {
-                overflow: visible;
-          }
-      </style>
-    </f:facet> -->
+    <ui:include src="headerFacet.xhtml"/>
   </h:head>
   <h:body style="background:grey">
   	<!-- <f:loadBundle basename="msg" var="msg"/> -->

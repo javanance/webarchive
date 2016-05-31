@@ -4,22 +4,29 @@ import java.io.Serializable;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-@Named("guestPref")
-public class GuestPreferences implements Serializable {
+import org.slf4j.Logger;
 
+@Named("guestPref")
+@SessionScoped
+public class GuestPreferences implements Serializable {
+	@Inject
+	private Logger logger;
 //	private String theme = "aristo"; //default
-	private String theme ;
+	private String themeString ;
+	
+	private Theme theme;
 	
 	@Inject
 	private FacesContext ctx;
 	
 	@PostConstruct
 	public void init() {
-		theme = "sam";
+		themeString = "sam";
 	}    	
 
 	public GuestPreferences(){
@@ -29,15 +36,16 @@ public class GuestPreferences implements Serializable {
 	public String getTheme() {
 //		Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
 		Map<String, String> params = ctx.getExternalContext().getRequestParameterMap();
-		
+		logger.info("param: {}", params);
 		if(params.containsKey("theme")) {
-			theme = params.get("theme");
+			logger.info("param1: {}", params.get("theme"));
+			themeString = params.get("theme");
 		}
 		
-		return theme;
+		return themeString;
 	}
 
 	public void setTheme(String theme) {
-		this.theme = theme;
+		this.themeString = theme;
 	}
 }
