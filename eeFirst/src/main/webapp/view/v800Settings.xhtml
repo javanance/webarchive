@@ -2,9 +2,8 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
   xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
-  xmlns:o="http://omnifaces.org/ui"
-  xmlns:of="http://omnifaces.org/functions"
-  xmlns:p="http://primefaces.org/ui" template="/templates/templatePrimeMain.xhtml">
+  xmlns:o="http://omnifaces.org/ui" xmlns:of="http://omnifaces.org/functions" xmlns:p="http://primefaces.org/ui"
+  template="/templates/templatePrimeMain.xhtml">
 
   <ui:define name="layoutCenter">
     <h:form id="formSettings">
@@ -12,15 +11,19 @@
         <p:tab title="#{msg.generalSettings}">
           <p:growl id="growl1" showDetail="true" />
           <p:panelGrid columns="2">
-            
+
             <p:outputLabel for="themeSwitcher" value="#{msg.theme}" />
-            <p:themeSwitcher id="themeSwitcher" value="#{themeSwitcher.selectedTheme}" style="width:200px">
-              <!-- <f:selectItem itemLabel="#{msg.selectTheme}" itemValue="" /> -->
-              <f:selectItems value="#{themeSwitcher.themeList}"></f:selectItems>
-              <!-- <f:selectItems value="#{themeSwitcher.themes}" var="_theme" itemLabel="#{_theme}" itemValue="#{_theme}" /> -->
-              <p:ajax listener="#{themeSwitcher.saveTheme()}" />
+            <p:themeSwitcher id="themeSwitcher" value="#{themeSwitcher.selectedTheme}" var="t" converter="selectThemeConverter"
+              style="width:200px">
+              <f:selectItems value="#{themeSwitcher.themeList}" var="_theme" itemLabel="#{_theme.displayName}" itemValue="#{_theme}" />
+              <p:column>
+                <p:outputLabel value="#{t.displayName}"/>
+              </p:column>
+              <p:ajax listener="#{themeSwitcher.saveTheme()}" update="growl1" />
             </p:themeSwitcher>
-           
+
+
+
             <p:outputLabel for="localeSelecter" value="#{msg.language}" />
             <p:selectOneMenu id="localeSelecter" value="#{localeSelector.language}" style="width:200px">
               <f:selectItems value="#{localeSelector.availableLanguages}" />

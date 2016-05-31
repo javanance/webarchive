@@ -40,7 +40,21 @@ public class Theme implements Serializable {
     }
      
     @Override
+    public boolean equals(Object other) {
+        return (other instanceof Theme) && (name != null)
+            ? name.equals(((Theme) other).name)
+            : (other == this);
+    }
+
+    @Override
+    public int hashCode() {
+        return (name != null)
+            ? (this.getClass().hashCode() + name.hashCode())
+            : super.hashCode();
+    }
+
+    @Override
     public String toString() {
-        return name;
+        return String.format("Theme[%d, %s]", id, name);
     }
 }
