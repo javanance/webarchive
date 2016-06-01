@@ -21,26 +21,22 @@
           </p:dialog> -->
       </p:layoutUnit>
 
-      <p:layoutUnit position="south" resizable="true" collapsible="true" size="300" gutter="4" 
-        rendered="#{layoutInit.renderBottom}">
+      <p:layoutUnit position="south" resizable="true" collapsible="true" size="300" gutter="4"   rendered="#{layoutInit.renderBottom}">
         <ui:insert name="layoutBottom" />
       </p:layoutUnit>
 
-      <p:layoutUnit position="east" resizable="true" collapsible="true" size="200" gutter="4" style="oveflow:visible;"
-        rendered="#{layoutInit.renderRight}">
+      <p:layoutUnit position="east" resizable="true" collapsible="true" size="200" gutter="4" style="oveflow:visible;" rendered="#{layoutInit.renderRight}">
         <ui:insert name="layoutRight" />
 
       </p:layoutUnit>
-      <p:layoutUnit position="west" resizable="true" collapsible="true" size="200" gutter="4" style="oveflow:visible;" 
-        rendered="#{layoutInit.renderLeft}">
+      <p:layoutUnit position="west" resizable="true" collapsible="true" size="200" gutter="4" style="oveflow:visible;" rendered="#{layoutInit.renderLeft}">
       
         <ui:insert name="layoutLeft" />
       </p:layoutUnit>
       
-      <p:layoutUnit position="north" resizable="true" size="116" collapsible="true" gutter="4"
-        styleClass="ui-layout-pane-north-outer">
+      <p:layoutUnit position="north" resizable="false" size="116" collapsible="true" gutter="4"  styleClass="ui-layout-pane-north-outer">
         <!-- <ui:include src="/templates/primeMenubar.xhtml" /> -->
-         <ui:include src="/menubar/primeMegaMenu.xhtml" />
+         <ui:include src="/fragment/header.xhtml" />
         <ui:insert name="layoutTop" />
       </p:layoutUnit>
     </p:layout>

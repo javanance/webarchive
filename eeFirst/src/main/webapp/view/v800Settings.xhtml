@@ -10,9 +10,9 @@
       <p:tabView>
         <p:tab title="#{msg.generalSettings}">
           <p:growl id="growl1" showDetail="true" />
-          <p:panelGrid columns="2">
+          <p:panelGrid columns="2" cellpadding="50">
 
-            <p:outputLabel for="themeSwitcher" value="#{msg.theme}" />
+            <p:outputLabel for="themeSwitcher" value="#{msg.theme}" style="width:200px"/>
             <p:themeSwitcher id="themeSwitcher" value="#{themeSwitcher.selectedTheme}" var="t" converter="selectThemeConverter"
               style="width:200px">
               <f:selectItems value="#{themeSwitcher.themeList}" var="_theme" itemLabel="#{_theme.displayName}" itemValue="#{_theme}" />
@@ -24,7 +24,7 @@
 
 
 
-            <p:outputLabel for="localeSelecter" value="#{msg.language}" />
+            <p:outputLabel for="localeSelecter" value="#{msg.language}" style="width:200px"/>
             <p:selectOneMenu id="localeSelecter" value="#{localeSelector.language}" style="width:200px">
               <f:selectItems value="#{localeSelector.availableLanguages}" />
               <!-- <p:ajax listener="#{localeSelector.language}" update="@(form)" /> -->

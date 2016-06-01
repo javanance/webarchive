@@ -1,0 +1,25 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+  <h:form>
+    <p:growl id="growl" sticky="true" showDetail="true" life="3000" />
+
+    <h:panelGrid columns="2" cellpadding="5" rendered="#{not userLoginView.loggedIn}">
+        <p:outputLabel for="username" value="Username:" />
+        <p:inputText id="username" value="#{userLoginView.username}" required="true" label="username" />
+
+        <p:outputLabel for="password" value="Password:" />
+        <p:password id="password" value="#{userLoginView.password}" required="true" label="password" />
+
+        <f:facet name="footer">
+          <p:commandButton value="Login" update="@(form)" action="#{userLoginView.login()}" />
+        </f:facet>
+      </h:panelGrid>
+      
+      <p:panelGrid columns="2" cellpadding="5" rendered="#{userLoginView.loggedIn}">
+        <p:outputLabel value="LogIn as #{userLoginView.username}" />
+          <p:commandButton value="Logout" update="@(form)" action="#{userLoginView.logout()}" />
+      </p:panelGrid>
+    
+  </h:form>
+</ui:composition>
+

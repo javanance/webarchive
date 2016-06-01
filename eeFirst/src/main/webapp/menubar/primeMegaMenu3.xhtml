@@ -1,0 +1,174 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+	<h:form id="formMegaMenu">
+		<p:growl id="growl" showDetail="true" />
+		<p:panelGrid columns="4">
+			<p:graphicImage name="img/primefaces/prime_logo.png" ></p:graphicImage>
+			<p:graphicImage name="img/true.png"></p:graphicImage>
+		   
+				
+			<f:facet name="footer">
+					
+			
+		<p:megaMenu orientation="horizontal" style="margin-top:0px">
+			<p:menuitem value="#{msg.menuHome}" icon="img_home_nav" url="/home.xhtml"></p:menuitem>
+			
+			<p:submenu label="#{msg.marketVariables}" icon="img_markget_variable">
+				<p:column>
+					<p:submenu label="TV.1">
+						<p:menuitem value="TV.1.1" url="#" />
+						<p:menuitem value="TV.1.2" url="#" />
+					</p:submenu>
+					<p:submenu label="TV.2">
+						<p:menuitem value="TV.2.1" url="#" />
+						<p:menuitem value="TV.2.2" url="#" />
+						<p:menuitem value="TV.2.3" url="#" />
+					</p:submenu>
+				</p:column>
+
+				<p:column>
+					<p:submenu label="TV.4">
+						<p:menuitem value="TV.4.1" url="#" />
+						<p:menuitem value="TV.4.2" url="#" />
+					</p:submenu>
+					<p:submenu label="TV.5">
+						<p:menuitem value="TV.5.1" url="#" />
+						<p:menuitem value="TV.5.2" url="#" />
+						<p:menuitem value="TV.5.3" url="#" />
+					</p:submenu>
+				</p:column>
+
+				<p:column>
+					<strong>Image</strong>
+					<p:graphicImage name="/demo/images/nature/nature1.jpg" width="200" />
+				</p:column>
+			</p:submenu>
+
+			<p:submenu label="#{msg.portfolioAnalysis}" icon="img_chart_org">
+
+				<p:column>
+					<p:submenu label="Sports.1">
+						<p:menuitem value="Sports.1.1" url="#" />
+						<p:menuitem value="Sports.1.2" url="#" />
+					</p:submenu>
+					<p:submenu label="Sports.2">
+						<p:menuitem value="Sports.2.1" url="#" />
+						<p:menuitem value="Sports.2.2" url="#" />
+						<p:menuitem value="Sports.2.3" url="#" />
+					</p:submenu>
+				</p:column>
+
+				<p:column>
+					<p:submenu label="Sports.4">
+						<p:menuitem value="Sports.4.1" url="#" />
+						<p:menuitem value="Sports.4.2" url="#" />
+					</p:submenu>
+					<p:submenu label="Sports.5">
+						<p:menuitem value="Sports.5.1" url="#" />
+						<p:menuitem value="Sports.5.2" url="#" />
+						<p:menuitem value="Sports.5.3" url="#" />
+					</p:submenu>
+				</p:column>
+				<p:column>
+					<p:submenu label="Sports.7">
+						<p:menuitem value="Sports.7.1" url="#" />
+						<p:menuitem value="Sports.7.2" url="#" />
+					</p:submenu>
+				</p:column>
+			</p:submenu>
+
+			<p:submenu label="#{msg.whatIf}" icon="img_whatIf">
+				<p:column>
+					<p:submenu label="Entertainment.1">
+						<p:menuitem value="Entertainment.1.1" url="#" />
+						<p:menuitem value="Entertainment.1.2" url="#" />
+					</p:submenu>
+					<p:submenu label="Entertainment.2">
+						<p:menuitem value="Entertainment.2.1" url="#" />
+						<p:menuitem value="Entertainment.2.2" url="#" />
+						<p:menuitem value="Entertainment.2.3" url="#" />
+					</p:submenu>
+				</p:column>
+
+				<p:column>
+					<p:submenu label="Entertainment.4" icon="ui-icon-help">
+						<p:menuitem value="Entertainment.4.1" url="#" />
+						<p:menuitem value="Entertainment.4.2" url="#" />
+					</p:submenu>
+					<p:submenu label="Entertainment.5">
+						<p:menuitem value="Entertainment.5.1" url="#" />
+						<p:menuitem value="Entertainment.5.2" url="#" />
+						<p:menuitem value="Entertainment.5.3" url="#" />
+					</p:submenu>
+				</p:column>
+			</p:submenu>
+
+			<p:submenu label="#{msg.limitManagement}" icon="img_limit">
+				<p:column>
+					<p:submenu label="Tech.1">
+						<p:menuitem value="Tech.1.1" url="#" />
+						<p:menuitem value="Tech.1.2" url="#" />
+					</p:submenu>
+					<p:submenu label="Tech.2">
+						<p:menuitem value="Tech.2.1" url="#" />
+						<p:menuitem value="Tech.2.2" url="#" />
+						<p:menuitem value="Tech.2.3" url="#" />
+					</p:submenu>
+				</p:column>
+
+				<p:column>
+					<p:submenu label="Tech.4">
+						<p:menuitem value="Tech.4.1" url="#" />
+						<p:menuitem value="Tech.4.2" url="#" />
+					</p:submenu>
+				</p:column>
+			</p:submenu>
+			
+			
+			<p:menuitem value="#{msg.settings}" icon="img_help" url="/view/v800Settings.xhtml" />
+			
+			
+			<f:facet name="options">
+				<p:inputText style="margin-right:10px" placeholder="Search"/>
+				<!-- <p:panelGrid columns="2" style="padding: 10px; border:none; float:right ;"> -->
+				<!-- <p:panelGrid columns="3">
+
+					<p:menubar model="#{navigationMenu.menuModel}" style="border: none"/>
+					<s:link id="toolbarLogin" view="/view/login.xhtml"
+						value="#{messages.logIn}" rendered="#{not identity.loggedIn}"
+						propagation="none" />
+
+					<s:link id="toolbarLogout" view="/view/home.xhtml"
+						action="#{identity.logout}" value="#{messages.logOut}"
+						rendered="#{identity.loggedIn}" propagation="none" />
+
+					<h:outputText id="toolbarWelcome"
+						value="#{messages.signedAs}: #{credentials.username}"
+						rendered="#{identity.loggedIn}" />
+					<h:outputText id="toolbarWelcome1" value=""
+						rendered="#{not identity.loggedIn}" />
+
+					<h:outputText value="" />
+					<h:outputText value="#{messages.baseDate}:" />
+					<p:calendar id="baseDate" value="#{basedateSession.baseDate}"
+						showButtonPanel="true" pattern="yyyy/MM/dd" navigator="true"
+						mindate="#{basedateSession.stDate}"
+						maxdate="#{basedateSession.endDate}">
+						<p:ajax event="dateSelect"
+							listener="#{basedateSession.handleDateSelect}" update="@(form)" />
+					</p:calendar>
+				</p:panelGrid> -->
+			</f:facet>
+		</p:megaMenu>
+		</f:facet>		
+		</p:panelGrid>
+	</h:form>
+</ui:composition>
+
+
+

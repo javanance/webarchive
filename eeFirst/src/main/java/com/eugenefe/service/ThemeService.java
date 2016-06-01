@@ -16,7 +16,6 @@ public class ThemeService implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private List<Theme> themes;
 	
-	
 	public ThemeService() {
 	}
 

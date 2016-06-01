@@ -17,6 +17,8 @@
 package com.eugenefe.util;
 
 
+import java.util.ResourceBundle;
+
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.InjectionPoint;
@@ -24,6 +26,8 @@ import javax.faces.context.FacesContext;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.eugenefe.qualifiers.MessageBundle;
 
 /**
  * This class uses CDI to alias Java EE resources, such as the persistence context, to CDI beans
@@ -60,5 +64,11 @@ public class Resources {
     public FacesContext produceFacesContext() {
         return FacesContext.getCurrentInstance();
     }
+    
+    @Produces @MessageBundle
+    public ResourceBundle getBundle() {
+           FacesContext context = FacesContext.getCurrentInstance();
+           return context.getApplication().getResourceBundle(context, "msg");
+   }
 
 }
