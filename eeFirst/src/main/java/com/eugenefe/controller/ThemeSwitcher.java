@@ -32,6 +32,9 @@ public class ThemeSwitcher implements Serializable{
 	public ThemeSwitcher() {
 	}
 	
+	public String goToHome(){
+		return "/home.xhtml?faces-redirect=true";
+	}
 	
 	@PostConstruct
 	public void init() {

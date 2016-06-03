@@ -8,6 +8,9 @@ import org.omnifaces.converter.SelectItemsConverter;
 
 import com.eugenefe.controller.Theme;
 
+
+/** this Class can be deleted when omnifaces.SelectItemConveter works in the xhtml file 
+*/
 @FacesConverter("selectThemeConverter")
 public class SelectThemeConverter extends SelectItemsConverter {
 	@Override

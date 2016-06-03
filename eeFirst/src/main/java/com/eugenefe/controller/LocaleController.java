@@ -68,7 +68,7 @@ private static final long serialVersionUID = 1L;
     public Locale select(){
     	System.out.println("as is locale" + locale.toLanguageTag());
     	FacesContext.getCurrentInstance().getViewRoot().setLocale(locale);
-    	System.out.println("locale set in select");
+    	System.out.println("locale set in select" + locale.toLanguageTag());
     	return locale;
     }
 }

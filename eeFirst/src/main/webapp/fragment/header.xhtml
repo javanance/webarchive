@@ -4,9 +4,12 @@
   <!-- <p:layout collapseTitle="close" resizeTitle="resize" widgetVar="innerLayout"> -->
   <p:layout>
     <p:layoutUnit position="west" gutter="2" size="150" style="text-align : center;">
-      <p:commandLink action="/home.xhtml">
-        <p:graphicImage library="img" name="seamlogo.png" width="auto" height="110px" />
+      <h:form>
+      <p:commandLink action="/home.xhtml?faces-redirect=true}">
+        <p:graphicImage library="img" name="seamlogo.png" width="auto" height="100px" />
       </p:commandLink>
+      </h:form>
+     
     </p:layoutUnit>
 
     <p:layoutUnit position="east" size="230" gutter="4">
