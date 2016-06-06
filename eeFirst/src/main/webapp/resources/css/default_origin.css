@@ -614,6 +614,12 @@ overflow: auto;
 	width:16px;
 }
 
+.ui-menuitem-icon.img_product {
+	background: url("./../../img/starcraft/darktempler_16.png") no-repeat;
+	height:16px;
+	width:16px;
+}
+
 .ui-menuitem-icon.img_setting {
 	background: url("./../../img/famsilk/cog.png") no-repeat;
 	height:16px;

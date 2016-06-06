@@ -16,6 +16,7 @@
  */
 package com.eugenefe.util;
 
+import java.io.Serializable;
 import java.util.logging.Logger;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -44,7 +45,7 @@ import com.eugenefe.qualifiers.SecondEm;
  * </pre>
  */
 @ApplicationScoped
-public class EntityManagerFactoryProducer {
+public class EntityManagerFactoryProducer implements Serializable{
 
 //    @Produces
 //    @PersistenceContext(unitName="primary")

@@ -1,8 +1,9 @@
 package com.eugenefe.util;
 
-//@Name("eViewNew")
-//@Scope(ScopeType.SESSION)
-public enum EViewNew {
+import javax.inject.Named;
+
+//@Named("eViewNew")
+public enum EViewNew  {
 	 Home("home", 									false, 	false, 	false, 	false,	false, 	false)
 //	,MarketVariable("v100MarketVariable")
 	,ViewHistoryData("v101ViewHistoryData"		, 	true, 	true, 	true, 	false,	false, 	false)
@@ -62,13 +63,17 @@ public enum EViewNew {
 	,vv600("vv600View",			 					true, 	false, 	false,	false, 	false,	true)	
 	;
 	
-	public final String url;
-	public boolean renderLeft;
-	public boolean renderRight;
-	public boolean renderBottom;
-	public boolean renderInnerTop;
-	public boolean renderInnerRight;
-	public boolean renderInnerBottom;
+	
+	private EViewNew() {
+	}
+
+	private String url;
+	private boolean renderLeft;
+	private boolean renderRight;
+	private boolean renderBottom;
+	private boolean renderInnerTop;
+	private boolean renderInnerRight;
+	private boolean renderInnerBottom;
 
 	private EViewNew(String url, boolean left, boolean right, boolean bottom, boolean innerTop, boolean innerRight, boolean innerBottom) {
 		this.url = url;

@@ -3,11 +3,13 @@ package com.eugenefe.util;
 import java.io.Serializable;
 import java.util.Map;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.persistence.PostPersist;
 
 import org.slf4j.Logger;
 
@@ -20,6 +22,7 @@ public class LayoutInit implements Serializable{
 //	@Inject
 //	private SimpleMessage smpMsg;
 //	private Map<String, String> messages;
+	
 	
 	private String viewId;
 	private String viewUrl;
@@ -94,10 +97,10 @@ public class LayoutInit implements Serializable{
 	}
 
 	//***********************************************************************
-	public String setupLayout(){
+	public String setupLayout(String viewId){
 //    	public String loadLayout(String view){    	
-    	log.info("Layout : #0", viewId);
     	EViewNew temp = EViewNew.valueOf(viewId);
+    	log.info("Layout : {}, {}", viewId, temp.getUrl());
     	renderBottom = temp.isRenderBottom();
     	renderLeft = temp.isRenderLeft();
     	renderRight = temp.isRenderRight();
@@ -106,7 +109,7 @@ public class LayoutInit implements Serializable{
     	renderInnerBottom =temp.isRenderInnerBottom();
     	
     	viewUrl = temp.getUrl();
-    	return viewId;
+    	return viewUrl+"?faces-redirect=true";
     }
     
 //    public String loadLayout2(){
@@ -119,7 +122,7 @@ public class LayoutInit implements Serializable{
 //    	return "v691";
 //    }
     public void extractViewId(ActionEvent evt){
-    	log.info("Layout : #0", evt.getComponent().getId());
+    	log.info("Layout : {}", evt.getComponent().getId());
     	viewId =evt.getComponent().getId();
     }
 }

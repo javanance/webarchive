@@ -1,0 +1,32 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+ xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+ <h:form id="registerForm">
+  <p:growl id="growl" sticky="true" showDetail="true" life="3000" />
+
+  <h:panelGrid id="registerPg" columns="2">
+   <p:outputLabel id="usernameLabel" for="usernameIt" value="#{msg.username}" />
+   <p:inputText id="usernameIt" value="#{userLoginView.username}" required="true" size="20" />
+   
+   
+   <p:outputLabel id="passwordLable" for="password" value="#{msg.password}" />
+   <p:password id="password" value="#{userLoginView.password}" required="true" size="20" />
+   
+   
+   <p:outputLabel id="confirmPasswordLable" for="password" value="#{msg.password}" />
+   <p:password id="confirmPassword" value="#{userLoginView.password}" required="true" size="20" />
+   
+   <p:outputLabel id="emailLabel" for="email" value="#{msg.email}" />
+   <p:inputMask id="email" value="#{userLoginView.password}" required="true" size="20" />
+   
+   <p:outputLabel id="phoneLabel" for="phoneNumber" value="#{msg.phoneNumber}" />
+   <p:inputMask id="phoneNumber" value="#{userLoginView.password}"  size="20" />
+
+   <f:facet name="footer">
+    <p:commandButton id="register" value="#{msg.register}" update="@(form)" actionListener="#{userLoginView.login()}"
+       action="#{layoutInit.setupLayout('Home')}" onclick="settingsTabview.select(2)" />
+   </f:facet>
+  </h:panelGrid>
+
+ </h:form>
+</ui:composition>
+

@@ -2,27 +2,22 @@
   xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui" xmlns:c="http://java.sun.com/jsp/jstl/core">
 
   <!-- <p:layout collapseTitle="close" resizeTitle="resize" widgetVar="innerLayout"> -->
-  <p:layout>
-    <p:layoutUnit position="west" gutter="2" size="150" style="text-align : center;">
-      <h:form>
-      <p:commandLink action="/home.xhtml?faces-redirect=true}">
-        <p:graphicImage library="img" name="seamlogo.png" width="auto" height="100px" />
+  <p:layout id="headerLayout">
+    <p:layoutUnit id="headerLeftLayoutUnit" position="west" gutter="2" size="200" style="text-align : center;">
+      <h:form id="logoForm">
+      <p:commandLink id="logoLink" action="#{layoutInit.setupLayout('Home')}" >
+        <p:graphicImage id="logoImage" library="img" name="seamlogo.png" width="auto" height="100px" />
       </p:commandLink>
       </h:form>
      
     </p:layoutUnit>
 
-    <p:layoutUnit position="east" size="230" gutter="4">
+    <p:layoutUnit id="headerRightLayoutUnit" position="east" size="200" gutter="4">
       <ui:include src="login.xhtml" />
     </p:layoutUnit>
 
-    <p:layoutUnit position="center" resizable="false" gutter="4">
-
-      <p:graphicImage value="/img/adv/modern-buildings-website-header.jpg" height="78px" width="100%" />
-      <!-- <p:contentFlow value="#{imageService.imageNames}" var="image" itemStyle="height : 26px" circular="true" >
-        <p:graphicImage value="/img/adv/#{image}" />
-      </p:contentFlow> -->
-
+    <p:layoutUnit id="headerCentorLayoutUnit" position="center" resizable="false" gutter="4">
+      <p:graphicImage id="topCenterImage" value="/img/adv/modern-buildings-website-header.jpg" height="78px" width="100%" />
       <ui:include src="/menubar/primeMegaMenu.xhtml" />
     </p:layoutUnit>
 
