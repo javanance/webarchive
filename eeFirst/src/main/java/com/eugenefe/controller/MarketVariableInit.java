@@ -22,9 +22,12 @@ import com.eugenefe.enums.EMarketVariableType;
 import com.eugenefe.qualifiers.DefaultEm;
 
 @Named
-//@SessionScoped
+@SessionScoped
 public class MarketVariableInit implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	@Inject 	private Logger logger;
+	
 	@Inject
 	@DefaultEm
 	private EntityManager entityManager;
@@ -53,17 +56,28 @@ public class MarketVariableInit implements Serializable {
 	public  void  getViewFullMarketVariables() {
 //		marketVariables = entityManager.createQuery(NamedQuery..getQuery()).getResultList();
 		List<MarketVariable> aa = new ArrayList<MarketVariable>();
+		
 		MarketVariable temp = new MarketVariable();
 		temp.setMvId("aa");
 		temp.setMvName("aa");
 		temp.setMvType(EMarketVariableType.STOCK);
+		
 		MarketVariable temp1 = new MarketVariable();
-		temp.setMvId("bb");
-		temp.setMvName("bb");
-		temp.setMvType(EMarketVariableType.STOCK);
+		temp1.setMvId("bb");
+		temp1.setMvName("bb");
+		temp1.setMvType(EMarketVariableType.STOCK);
+		
+		MarketVariable temp2 = new MarketVariable();
+		temp2.setMvId("cc");
+		temp2.setMvName("cc");
+		temp2.setMvType(EMarketVariableType.BOND);
+		
+		aa.add(temp);
 		aa.add(temp1);
+		aa.add(temp2);
 		marketVariables= aa;
-		System.out.println("Construction MarketVariableInit"+ "_"+aa);
+//		System.out.println("Construction MarketVariableInit"+ "_"+aa);
+		logger.info("mv init : {} , {}", marketVariables.size());
 	}
 	
 	public MarketVariable getSelectedMarketVariable() {

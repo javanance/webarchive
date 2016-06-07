@@ -1,28 +1,28 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
- xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
- <h:form id="loginForm">
-  <p:growl id="growl" sticky="true" showDetail="true" life="3000" />
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:p="http://primefaces.org/ui">
+  <h:form id="loginForm">
+    <p:panelGrid id="loginPg" columns="2" rendered="#{not userLoginView.loggedIn}">
+      <p:outputLabel id="usernameLabel" for="usernameIt" value="#{msg.username}" />
+      <p:inputText id="usernameIt" value="#{userLoginView.username}" required="false" size="12" />
 
-  <h:panelGrid id="loginPg" columns="2" rendered="#{not userLoginView.loggedIn}">
-   <p:outputLabel id="usernameLabel" for="usernameIt" value="#{msg.username}" />
-   <p:inputText id="usernameIt" value="#{userLoginView.username}" required="true" size="12" />
+      <p:outputLabel id="passwordLable" for="password" value="#{msg.password}" />
+      <p:password id="password" value="#{userLoginView.password}" required="false" size="12" />
+      
+      <f:facet name="footer">
+        <p:panelGrid id="buttonPg" columns="2" style="margin: 0 auto;">
+          <p:commandButton id="loginButton" value="#{msg.login}" update="@(form)" action="#{userLoginView.login()}" style="width: 80px"/>
+          <p:commandButton id="register" value="#{msg.register}" action="/view/v800Settings?faces-redirect=true" ajax="false" style="width:80px"/>
+        </p:panelGrid>
+      </f:facet>
+    </p:panelGrid>
 
-   <p:outputLabel id="passwordLable" for="password" value="#{msg.password}" />
-   <p:password id="password" value="#{userLoginView.password}" required="true" size="12" />
+    <p:panelGrid id="logoutPg" columns="2" rendered="#{userLoginView.loggedIn}">
+      <h:outputFormat value="#{msg.loggedInAs}">
+        <f:param value="#{userLoginView.username}" />
+      </h:outputFormat>
+      <p:commandButton id="logoutButton" value="#{msg.logout}" update="@(form)" action="#{userLoginView.logout()}" />
+    </p:panelGrid>
 
-   <f:facet name="footer">
-    <p:commandButton id="loginButton" value="#{msg.login}" update="@(form)" action="#{userLoginView.login()}" />
-    <p:commandButton id="register" value="#{msg.register}" update="@(form)" action="#{layoutInit.setupLayout('v800')}"/>
-   </f:facet>
-  </h:panelGrid>
-
-  <p:panelGrid id="logoutPg" columns="2" rendered="#{userLoginView.loggedIn}">
-   <h:outputFormat value="#{msg.loggedInAs}">
-    <f:param value="#{userLoginView.username}" />
-   </h:outputFormat>
-   <p:commandButton id="logoutButton" value="#{msg.logout}" update="@(form)" action="#{userLoginView.logout()}" />
-  </p:panelGrid>
-
- </h:form>
+  </h:form>
 </ui:composition>
 

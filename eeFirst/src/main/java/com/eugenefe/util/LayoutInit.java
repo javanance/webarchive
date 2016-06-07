@@ -13,6 +13,8 @@ import javax.persistence.PostPersist;
 
 import org.slf4j.Logger;
 
+import com.eugenefe.enums.EViewNew;
+
 
 @Named
 @SessionScoped
@@ -34,11 +36,15 @@ public class LayoutInit implements Serializable{
 	private boolean renderInnerRight;
 	private boolean renderInnerBottom;
 	
+	private String leftSize;
+	
 //	private Map<String, Renderer> rendererMap =new HashMap<String, Renderer>();
 //	private Renderer renderer;
 
 	public LayoutInit() {
 		System.out.println("LayoutInit Construction");
+		
+		
 	}
 
 	public String getViewId() {
@@ -95,12 +101,19 @@ public class LayoutInit implements Serializable{
 	public void setRenderInnerTop(boolean renderInnerTop) {
 		this.renderInnerTop = renderInnerTop;
 	}
+	public String getLeftSize() {
+		return leftSize;
+	}
+
+	public void setLeftSize(String leftSize) {
+		this.leftSize = leftSize;
+	}
 
 	//***********************************************************************
 	public String setupLayout(String viewId){
 //    	public String loadLayout(String view){    	
+		log.info("Layout0 : {}, {}", viewId);
     	EViewNew temp = EViewNew.valueOf(viewId);
-    	log.info("Layout : {}, {}", viewId, temp.getUrl());
     	renderBottom = temp.isRenderBottom();
     	renderLeft = temp.isRenderLeft();
     	renderRight = temp.isRenderRight();
@@ -109,6 +122,8 @@ public class LayoutInit implements Serializable{
     	renderInnerBottom =temp.isRenderInnerBottom();
     	
     	viewUrl = temp.getUrl();
+    	log.info("Layout : {}, {}", viewId, temp.getUrl());
+    	leftSize  = "200";
     	return viewUrl+"?faces-redirect=true";
     }
     

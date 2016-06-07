@@ -8,9 +8,11 @@
   </h:head>
 
   <h:body style="background:tan">
-    <p:layout id="mainLayout" fullPage="true" resizeTitle="#{msg.resizeTitle}" >
-      <p:layoutUnit id="centerLayoutUnit" position="center" resizable="true" gutter="4" style="background:tan">
-        <ui:include src="/templates/templatePrimeInner.xhtml" />
+    <p:layout id="mainLayout" fullPage="true">
+      
+
+      <p:layoutUnit id="centerLayoutUnit" position="center" resizable="true" gutter="4" style="background:grey">
+        <ui:insert name="layoutCenter" />
       </p:layoutUnit>
 
       <p:layoutUnit id="bottomLayoutUnit" position="south" resizable="true" collapsible="true" size="300" gutter="4" rendered="#{layoutInit.renderBottom}">
@@ -21,11 +23,11 @@
         <ui:insert name="layoutRight" />
 
       </p:layoutUnit>
-      <p:layoutUnit id="rightLayoutUnit" position="west" resizable="true" collapsible="true" size="#{layoutInit.leftSize}" gutter="4" style="oveflow:visible;" rendered="#{layoutInit.renderLeft}">
+      <p:layoutUnit id="rightLayoutUnit" position="west" resizable="true" collapsible="true" size="200" gutter="4" style="oveflow:visible;" rendered="#{layoutInit.renderLeft}">
         <ui:insert name="layoutLeft" />
       </p:layoutUnit>
-
-      <p:layoutUnit id="topLayoutUnit" position="north" size="116" collapsible="true" gutter="4" styleClass="ui-layout-pane-north-outer" style="background:tan">
+      
+      <p:layoutUnit id="topLayoutUnit" position="north" size="116" collapsible="true" gutter="4" styleClass="ui-layout-pane-north-outer">
         <ui:include src="/fragment/header.xhtml" />
         <ui:insert name="layoutTop" />
       </p:layoutUnit>

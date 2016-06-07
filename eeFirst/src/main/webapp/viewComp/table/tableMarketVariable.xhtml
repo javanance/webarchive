@@ -1,35 +1,33 @@
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
- xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui"
- xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:o="http://omnifaces.org/ui" xmlns:of="http://omnifaces.org/functions">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:p="http://primefaces.org/ui" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:o="http://omnifaces.org/ui" xmlns:of="http://omnifaces.org/functions">
 
- <h:form id="marketVariableForm">
-  <p:dataTable id="marketVariableTable" var="_var" value="#{marketVariableInit.marketVariables}" widgetVar="wgMvTable"
-   emptyMessage="#{msg.noDataFound}" 
-   selection="#{marketVariableInit.selectedMv}" 
-   rowKey="#{_var}" 
-   resizableColumns="true" liveResize="false" paginator="true" paginatorPosition="bottom"
-   paginatorTemplate="{FirstPageLink} {LastPageLink}" rows="20">
+  <h:form id="marketVariableForm">
+    <p:dataTable id="marketVariableTable" var="_var" value="#{marketVariableInit.marketVariables}" widgetVar="wgMvTable" emptyMessage="#{msg.noDataFound}"
+      selection="#{marketVariableInit.selectedMv}" rowKey="#{_var.mvId}" selectionMode="multiple"
+      resizableColumns="true" sortMode="multiple" liveResize="false" 
+      draggableColumns="true" paginator="true"
+      paginatorTemplate="{FirstPageLink} {PreviousPageLink} {JumpToPageDropdown} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" paginatorPosition="bottom" rows="15"
+      style="height : 90%; width:auto; border-top-left-radius: 8px ;border-top-right-radius: 8px; "
+      tableStyle="font-size:12px; ">
 
 
-   <p:column id="selectModeCol" selectionMode="multiple" headerText="All" exportable="false" width="6" />
+      <!-- <p:column id="selectModeCol" selectionMode="multiple" headerText="All" exportable="false" width="2"  style="font-weight: bold ; font-size : 100%; text-align:center"/> -->
 
-   <p:column id="mvTypeCol" sortBy="#{_var.mvType}" filterBy="#{_var.mvType}" filterMatchMode="contains" width="100"
-    style="font-size : 90%">
-    <f:facet name="header">
-     <h:outputText value="#{msg.mvType}" />
-    </f:facet>
-    <h:outputText value="#{_var.mvType}" />
-   </p:column>
-   <p:column id="mvNameCol" sortBy="#{_var.mvName}" filterBy="#{_var.mvName}" filterMatchMode="contains" width="100"
-    style="font-size : 90%">
-    <f:facet name="header">
-     <h:outputText value="#{msg.mvName}" />
-    </f:facet>
-    <h:outputText value="#{_var.mvName}" />
-   </p:column>
+      <p:column id="mvTypeCol" sortBy="#{_var.mvType}" filterBy="#{_var.mvType}" filterMatchMode="contains" width="50" >
+        <f:facet name="header">
+          <h:outputText value="#{msg.mvType}" style="font-weight: bold;font-size : 100% " />
+        </f:facet>
+        <h:outputText value="#{_var.mvType}" />
+      </p:column>
+      <p:column id="mvNameCol" sortBy="#{_var.mvName}" filterBy="#{_var.mvName}" filterMatchMode="contains" width="50" >
+        <f:facet name="header"  >
+          <h:outputText value="#{msg.mvName}" style="font-weight: bold ; font-size : 100%"/>
+        </f:facet>
+        <h:outputText value="#{_var.mvName}" />
+      </p:column>
 
-  </p:dataTable>
- </h:form>
+    </p:dataTable>
+  </h:form>
 </ui:composition>

@@ -82,4 +82,9 @@ public class UserLoginView  implements Serializable{
 //      FacesContext.getCurrentInstance().addMessage(null, message);
 //      context.addCallbackParam("loggedIn", loggedIn);
   } 
+	
+	public String goToRegister() {
+		System.out.println("in the register");
+		return "/temp/v800Settings.xhtml?faces-redirect=true";
+	}
 }

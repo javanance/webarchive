@@ -1,12 +1,12 @@
-package com.eugenefe.util;
+package com.eugenefe.enums;
 
 import javax.inject.Named;
 
 //@Named("eViewNew")
 public enum EViewNew  {
-	 Home("home", 									false, 	false, 	false, 	false,	false, 	false)
+	 Home("/home", 									false, 	false, 	false, 	false,	false, 	false)
 //	,MarketVariable("v100MarketVariable")
-	,ViewHistoryData("v101ViewHistoryData"		, 	true, 	true, 	true, 	false,	false, 	false)
+	,ViewHistoryData("/view/v101ViewHistoryData"		, 	true, 	false, 	false, 	false,	true, 	true)
 //	,ViewRfHistoryData("v102ViewRfHistoryData")
 //	,ViewProdHistoryData("v103ViewProdHistoryData")
 //	,MarketVariableSelect("v100MarketVariable")
@@ -52,7 +52,7 @@ public enum EViewNew  {
 	,v697("v697CreditDerivatives",					false,	false, 	false, 	false, 	false, 	false)
 	,v698("v698EquitySwap",							false,	false, 	false, 	false, 	false, 	true)
 	,v699("v699ElsDls",								false,	false, 	false, 	false, 	false, 	true)
-	,v800("v800Settings", 							false, 	false, 	false,	false, 	false, 	false)
+	,v800("/view/v800Settings", 							false, 	false, 	false,	false, 	false, 	false)
 	,LimitManagement("v700Limit", true, true, true, false,false, false)
 	,v900("v900DataNavigation", 					true, 	false, 	false,	false, 	false,	true)
 	,vv100("vv100View",			 					false, 	false, 	false,	false, 	false,	false)
@@ -86,7 +86,7 @@ public enum EViewNew  {
 	}
 
 	public String getUrl() {
-		return "/view/"+ url;
+		return url;
 	}
 
 	public boolean isRenderRight() {
