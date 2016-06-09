@@ -1,21 +1,27 @@
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
-                xmlns:ui="http://java.sun.com/jsf/facelets" 
-                xmlns:f="http://java.sun.com/jsf/core" 
-                xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:p="http://primefaces.org/ui" >
-     <f:facet name="first">
-      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-      <title>Hime</title>
-    </f:facet>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:p="http://primefaces.org/ui">
+  <f:facet name="first">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Hime</title>
+  </f:facet>
 
-    <f:facet name="last">
-      <h:outputStylesheet library="css" name="default_origin.css"/>
-      <h:outputStylesheet library="css" name="menubar.css"/>
-      <h:outputStylesheet library="css" name="syntaxhighlighter.css"/>
-      <h:outputStylesheet library="css" name="charts.css"/>
-      <h:outputStylesheet library="css" name="decorator.css"/>
-    </f:facet>  
-    <link rel="shortcut icon" type="image/png" href="#{request.contextPath}/resources/starcraft/archon.png" />
+  <f:facet name="last">
+    <h:outputStylesheet library="css" name="default_origin.css" />
+    <h:outputStylesheet library="css" name="menubar.css" />
+    <h:outputStylesheet library="css" name="syntaxhighlighter.css" />
+    <h:outputStylesheet library="css" name="charts.css" />
+    <h:outputStylesheet library="css" name="decorator.css" />
+    <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script> -->
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+    <script src="http://code.highcharts.com/stock/highstock.js"></script>
+    <script src="http://code.highcharts.com/modules/exporting.js"></script>
+  </f:facet>
+  <link rel="shortcut icon" type="image/png" href="#{request.contextPath}/resources/starcraft/archon.png" />
+  <script type='text/javascript' src='https://www.google.com/jsapi'></script>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+
+
 </ui:composition>

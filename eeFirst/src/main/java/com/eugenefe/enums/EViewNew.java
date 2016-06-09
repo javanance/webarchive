@@ -2,11 +2,13 @@ package com.eugenefe.enums;
 
 import javax.inject.Named;
 
-//@Named("eViewNew")
+
 public enum EViewNew  {
 	 Home("/home", 									false, 	false, 	false, 	false,	false, 	false)
 //	,MarketVariable("v100MarketVariable")
-	,ViewHistoryData("/view/v101ViewHistoryData"		, 	true, 	false, 	false, 	false,	true, 	true)
+	
+	,MarketOverview("/view/v101MarketOverview"		, 	true, 	false, 	false, 	false,	false, 	false)
+	,ViewHistoryData("/view/v102ViewHistoryData"	, 	true, 	false, 	false, 	false,	true, 	true)
 //	,ViewRfHistoryData("v102ViewRfHistoryData")
 //	,ViewProdHistoryData("v103ViewProdHistoryData")
 //	,MarketVariableSelect("v100MarketVariable")
@@ -108,5 +110,14 @@ public enum EViewNew  {
 
 	public boolean isRenderInnerTop() {
 		return renderInnerTop;
+	}
+	
+	public static EViewNew getTypeFromUrl(String url){
+		for(EViewNew  aa : EViewNew.values()){
+			if(url.contains(aa.getUrl())){
+				return aa;
+			}
+		}
+		return  Home;
 	}
 }

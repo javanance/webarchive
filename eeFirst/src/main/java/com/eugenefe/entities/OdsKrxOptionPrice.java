@@ -14,6 +14,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "ods_krx_option_price", catalog = "eugenefe")
+
 public class OdsKrxOptionPrice implements java.io.Serializable {
 
 	private OdsKrxOptionPriceId id;

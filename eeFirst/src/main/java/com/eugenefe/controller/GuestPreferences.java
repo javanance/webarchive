@@ -36,7 +36,7 @@ public class GuestPreferences implements Serializable {
 	public String getTheme() {
 //		Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
 		Map<String, String> params = ctx.getExternalContext().getRequestParameterMap();
-		logger.info("param: {}", params);
+		logger.info("param: {}, {}", themeString, params);
 		if(params.containsKey("theme")) {
 			logger.info("param1: {}", params.get("theme"));
 			themeString = params.get("theme");

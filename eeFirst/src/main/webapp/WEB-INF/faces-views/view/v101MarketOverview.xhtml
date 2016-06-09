@@ -1,0 +1,55 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions" xmlns:o="http://omnifaces.org/ui" xmlns:of="http://omnifaces.org/functions"
+  template="/templates/templatePrimeMain.xhtml">
+
+  <ui:define name="layoutLeft">
+  </ui:define>
+
+  <ui:define name="layoutCenter">
+    <h1>#{geoChartController.lable} aa</h1>
+    <ui:include src="/fragment/geoChart.xhtml" />
+    <div id="chart_div" style="margin: 1em"></div>
+  <h1>#{geoChartController.lable} bb</h1> 
+  
+    <script type='text/javascript'> 
+    google.charts.load('current', {'packages':['annotationchart']});
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+      var col =#{geoChartController.lable};
+      var data = new google.visualization.DataTable();
+      data.addColumn('date', 'Date');
+      data.addColumn('number', col);
+      data.addColumn('string', 'Kepler title');
+      data.addColumn('string', 'Kepler text');
+      data.addColumn('number', 'Gliese 163 mission');
+      data.addColumn('string', 'Gliese title');
+      data.addColumn('string', 'Gliese text');
+      data.addRows([
+        [new Date(2314, 2, 15), 12400, undefined, undefined,
+                                10645, undefined, undefined],
+        [new Date(2314, 2, 16), 24045, 'Lalibertines', 'First encounter',
+                                12374, undefined, undefined],
+        [new Date(2314, 2, 17), 35022, 'Lalibertines', 'They are very tall',
+                                15766, 'Gallantors', 'First Encounter'],
+        [new Date(2314, 2, 18), 12284, 'Lalibertines', 'Attack on our crew!',
+                                34334, 'Gallantors', 'Statement of shared principles'],
+        [new Date(2314, 2, 19), 8476, 'Lalibertines', 'Heavy casualties',
+                                66467, 'Gallantors', 'Mysteries revealed'],
+        [new Date(2314, 2, 20), 0, 'Lalibertines', 'All crew lost',
+                                79463, 'Gallantors', 'Omniscience achieved']
+      ]);
+
+      var chart = new google.visualization.AnnotationChart(document.getElementById('chart_div'));
+
+      var options = {
+        displayAnnotations: false
+      };
+
+      chart.draw(data, options);
+    }
+   </script>
+  </ui:define>
+
+</ui:composition>

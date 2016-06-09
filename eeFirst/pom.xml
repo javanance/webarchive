@@ -54,12 +54,12 @@
 		<deltaspike.version>1.6.1</deltaspike.version>
 	</properties>
 	<repositories>
-	    <repository>
-	        <id>prime-repo</id>
-	        <name>PrimeFaces Maven Repository</name>
-	        <url>http://repository.primefaces.org</url>
-	        <layout>default</layout>
-	    </repository>
+		<repository>
+			<id>prime-repo</id>
+			<name>PrimeFaces Maven Repository</name>
+			<url>http://repository.primefaces.org</url>
+			<layout>default</layout>
+		</repository>
 	</repositories>
 
 	<dependencyManagement>
@@ -86,14 +86,10 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
-			
-			<!-- <dependency>
-            <groupId>org.apache.deltaspike.distribution</groupId>
-            <artifactId>distributions-bom</artifactId>
-            <version>${deltaspike.version}</version>
-            <type>pom</type>
-            <scope>import</scope> 
-        </dependency>-->
+
+			<!-- <dependency> <groupId>org.apache.deltaspike.distribution</groupId> 
+				<artifactId>distributions-bom</artifactId> <version>${deltaspike.version}</version> 
+				<type>pom</type> <scope>import</scope> </dependency> -->
 
 			<!-- <dependency> <groupId>org.jboss.arquillian</groupId> <artifactId>arquillian-bom</artifactId> 
 				<version>1.1.11.Final</version> <scope>import</scope> <type>pom</type> </dependency> -->
@@ -210,47 +206,40 @@
 
 
 		<dependency>
-		    <groupId>org.primefaces</groupId>
-		    <artifactId>primefaces</artifactId>
-		    <version>5.3</version>
+			<groupId>org.primefaces</groupId>
+			<artifactId>primefaces</artifactId>
+			<version>5.3</version>
 		</dependency>
 		<dependency>
-		    <groupId>org.primefaces.themes</groupId>  
-		    <artifactId>all-themes</artifactId>  
-		    <version>1.0.10</version>  
+			<groupId>org.primefaces.themes</groupId>
+			<artifactId>all-themes</artifactId>
+			<version>1.0.10</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.omnifaces</groupId>
 			<artifactId>omnifaces</artifactId>
 			<version>2.3</version>
 		</dependency>
-		
-<!-- <dependency>
-    <groupId>org.apache.deltaspike.core</groupId>
-    <artifactId>deltaspike-core-api</artifactId>
-    <scope>compile</scope>
-</dependency>
+		<dependency>
+			<groupId>org.primefaces.extensions</groupId>
+			<artifactId>primefaces-extensions</artifactId>
+			<version>4.0.0</version>
+		</dependency>
 
-<dependency>
-    <groupId>org.apache.deltaspike.core</groupId>
-    <artifactId>deltaspike-core-impl</artifactId>
-    <scope>runtime</scope>
-</dependency>
+		<dependency>
+			<groupId>org.highfaces</groupId>
+			<artifactId>highfaces</artifactId>
+			<version>1.1</version>
+		</dependency>
 
-<dependency>
-    <groupId>org.apache.deltaspike.modules</groupId>
-    <artifactId>deltaspike-jsf-module-api</artifactId>
-    <version>${deltaspike.version}</version>
-    <scope>compile</scope>
-</dependency>
-
-<dependency>
-    <groupId>org.apache.deltaspike.modules</groupId>
-    <artifactId>deltaspike-jsf-module-impl</artifactId>
-    <version>${deltaspike.version}</version>
-    <scope>runtime</scope>
-</dependency> -->
+		<!-- <dependency> <groupId>org.apache.deltaspike.core</groupId> <artifactId>deltaspike-core-api</artifactId> 
+			<scope>compile</scope> </dependency> <dependency> <groupId>org.apache.deltaspike.core</groupId> 
+			<artifactId>deltaspike-core-impl</artifactId> <scope>runtime</scope> </dependency> 
+			<dependency> <groupId>org.apache.deltaspike.modules</groupId> <artifactId>deltaspike-jsf-module-api</artifactId> 
+			<version>${deltaspike.version}</version> <scope>compile</scope> </dependency> 
+			<dependency> <groupId>org.apache.deltaspike.modules</groupId> <artifactId>deltaspike-jsf-module-impl</artifactId> 
+			<version>${deltaspike.version}</version> <scope>runtime</scope> </dependency> -->
 
 		<!-- <dependency> <groupId>org.jboss.arquillian.container</groupId> <artifactId>arquillian-weld-ee-embedded-1.1</artifactId> 
 			<version>1.0.0.CR3</version> <scope>test</scope> </dependency> <dependency> 

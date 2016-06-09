@@ -9,8 +9,8 @@
    <p:submenu id="marketVariableSubmenu" label="#{msg.marketVariables}" icon="img_markget_variable">
     <p:column>
      <p:submenu style="display: none;">
-      <p:menuitem value="#{msg.marketOverview}"  action="#{layoutInit.setupLayout('ViewHistoryData')}" />
-      <p:menuitem value="#{msg.marketSearch}"  action="#{layoutInit.setupLayout('ViewHistoryData')}" />
+      <p:menuitem value="#{msg.marketOverview}"  action="#{layoutInit.initLayout('MarketOverview')}" />
+      <p:menuitem value="#{msg.marketSearch}"  action="#{layoutInit.initLayout('ViewHistoryData')}" />
      </p:submenu>
     </p:column>
    </p:submenu>
@@ -52,7 +52,7 @@
 
    </p:submenu>
 
-   <p:menuitem value="#{msg.settings}" icon="img_setting"  action="#{layoutInit.setupLayout('v800')}"  />
+   <p:menuitem value="#{msg.settings}" icon="img_setting"  action="#{layoutInit.initLayout('v800')}"  />
 
    
 

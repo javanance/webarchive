@@ -2,15 +2,20 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
- xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui" template="/templates/templatePrimeMain.xhtml">
+ xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions"  
+ template="/templates/templatePrimeMain.xhtml">
 
-
+   <f:metadata>
+      <f:viewAction action="#{layoutInit.initLayout('Home')}" />
+    </f:metadata>
  <ui:define name="layoutCenter">
   <h1>
    <p> </p>
    <p>Tang Eu...Geneous!!! new
    </p>
    </h1>
+  <pe:gChart id="gchart" value="#{geoChartController.chartModel}" height="500" width="800" />  
+
   <p:galleria id="galleria" value="#{imageService.imageNames}" var="image">
    <p:graphicImage id="homeImage" value="/img/adv/#{image}" />
   </p:galleria>
