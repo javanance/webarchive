@@ -1,26 +1,54 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
-  xmlns:p="http://primefaces.org/ui" 
-  xmlns:pe="http://primefaces.org/ui/extensions"  
-  xmlns:o="http://omnifaces.org/ui" xmlns:of="http://omnifaces.org/functions" >
- <h:form id="geoChartForm">
-  
-<p:panelGrid id="pg1" columns="2" cellpadding="50">
-            <p:outputLabel id="regionLabel" for="regionSelector" value="#{msg.region}" style="width:200px" />
-            <p:selectOneMenu id="regionSelector" value="#{geoChartController.geoCode}" style="width:200px">
-              <f:selectItem itemValue="world" itemLabel="#{msg.world}" />
-              <f:selectItem itemValue="142" itemLabel="#{msg.asia}" />
-              <f:selectItem itemValue="150" itemLabel="#{msg.europe}" />
-              <f:selectItem itemValue="021" itemLabel="#{msg.northAmericas}" />
-              <f:selectItem itemValue="005" itemLabel="#{msg.southAmericas}" />
-              <f:selectItem itemValue="002" itemLabel="#{msg.africa}" />
-              <f:selectItem itemValue="IT" itemLabel="#{msg.italy}" />
-              <f:selectItem itemValue="KR" itemLabel="#{msg.korea}" />
-              <f:selectItem itemValue="FR" itemLabel="#{msg.france}" />
-              
-              <p:ajax listener="#{geoChartController.geoCodeSelect()}" update="@(form)" />
-            </p:selectOneMenu>
-    </p:panelGrid>        
-    <pe:gChart id="gchart" value="#{geoChartController.chartModel}" width="800"/>  
- </h:form>
+  xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions" xmlns:o="http://omnifaces.org/ui" xmlns:of="http://omnifaces.org/functions">
+  <h:form id="geoChartForm">
+    <p:panel id="geoChartPanel"  header="aaa" collapsed="false" menuTitle="aaab" toggleable="true" style="width : 900px" toggleOrientation="vertical">
+      <f:facet name="options">
+        <p:menu id="tempId">
+          <p:menuitem value="aaa"></p:menuitem>
+        </p:menu>
+      </f:facet>
+      <f:facet name="actions">
+        <h:commandLink styleClass="ui-panel-titlebar-icon ui-corner-all ui-state-default">
+          <h:outputText styleClass="ui-icon ui-icon-help"  value="aazz"/>
+        </h:commandLink>
+      </f:facet>
+      <p:panelGrid id="pg1" columns="2" cellpadding="50">
+        <p:outputLabel id="regionLabel" for="regionSelector" value="#{msg.region}" style="width:200px" />
+        <p:selectOneMenu id="regionSelector" value="#{geoChartController.geoCode}" style="width:200px">
+          <f:selectItem itemValue="world" itemLabel="#{msg.world}" />
+          <f:selectItem itemValue="142" itemLabel="#{msg.asia}" />
+          <f:selectItem itemValue="150" itemLabel="#{msg.europe}" />
+          <f:selectItem itemValue="021" itemLabel="#{msg.northAmericas}" />
+          <f:selectItem itemValue="005" itemLabel="#{msg.southAmericas}" />
+          <f:selectItem itemValue="002" itemLabel="#{msg.africa}" />
+          <f:selectItem itemValue="IT" itemLabel="#{msg.italy}" />
+          <f:selectItem itemValue="KR" itemLabel="#{msg.korea}" />
+          <f:selectItem itemValue="FR" itemLabel="#{msg.france}" />
+          <p:ajax listener="#{geoChartController.geoCodeSelect()}" update="@(form)" />
+        </p:selectOneMenu>
+      </p:panelGrid>
+      <pe:gChart id="gchart" value="#{geoChartController.chartModel}" width="800" />
+    </p:panel>
+    
+    
+    <p:outputPanel id="geoChartPanel1" style="margin : 10" >
+     <p:panelGrid id="pg2" columns="2" cellpadding="50">
+        <p:outputLabel id="regionLabel1" for="regionSelector1" value="#{msg.region}" style="width:200px" />
+        <p:selectOneMenu id="regionSelector1" value="#{geoChartController.geoCode}" style="width:200px">
+          <f:selectItem itemValue="world" itemLabel="#{msg.world}" />
+          <f:selectItem itemValue="142" itemLabel="#{msg.asia}" />
+          <f:selectItem itemValue="150" itemLabel="#{msg.europe}" />
+          <f:selectItem itemValue="021" itemLabel="#{msg.northAmericas}" />
+          <f:selectItem itemValue="005" itemLabel="#{msg.southAmericas}" />
+          <f:selectItem itemValue="002" itemLabel="#{msg.africa}" />
+          <f:selectItem itemValue="IT" itemLabel="#{msg.italy}" />
+          <f:selectItem itemValue="KR" itemLabel="#{msg.korea}" />
+          <f:selectItem itemValue="FR" itemLabel="#{msg.france}" />
+          <p:ajax listener="#{geoChartController.geoCodeSelect()}" update="@(form)" />
+        </p:selectOneMenu>
+      </p:panelGrid>
+      <pe:gChart id="gchart1" value="#{geoChartController.chartModel}" width="800" />
+  </p:outputPanel>
+  </h:form>
 </ui:composition>
 

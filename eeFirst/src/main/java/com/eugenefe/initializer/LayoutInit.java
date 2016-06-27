@@ -1,4 +1,4 @@
-package com.eugenefe.util;
+package com.eugenefe.initializer;
 
 import java.io.Serializable;
 import java.util.Map;
@@ -50,8 +50,6 @@ public class LayoutInit implements Serializable{
 
 	public LayoutInit() {
 		System.out.println("LayoutInit Construction");
-		
-		
 	}
 
 	public String getViewId() {
@@ -117,11 +115,8 @@ public class LayoutInit implements Serializable{
 	}
 
 	//***********************************************************************
-	public String initLayout(String viewId){
-//    	public String loadLayout(String view){    	
-		log.info("Layout0 : {}, {}", viewId);
-    	EViewNew temp = EViewNew.valueOf(viewId);
-//    	return initLayoutFromBookmark(viewId);
+	public void initLayout(String url){
+    	EViewNew temp = EViewNew.getTypeFromUrl(url);
     	renderBottom = temp.isRenderBottom();
     	renderLeft = temp.isRenderLeft();
     	renderRight = temp.isRenderRight();
@@ -130,57 +125,11 @@ public class LayoutInit implements Serializable{
     	renderInnerBottom =temp.isRenderInnerBottom();
     	
     	viewUrl = temp.getUrl();
-    	log.info("Layout : {}, {}", viewId, temp.getUrl());
     	leftSize  = "200";
-    	return viewUrl+"?faces-redirect=true";
+    	log.info("Layout : {}, {}", url, temp.getUrl());
     }
 	
-	@PostConstruct
-	public void init(){
-		log.info("Path null: {}, {}", ctx.getViewRoot() );
-    	EViewNew temp = EViewNew.getTypeFromUrl(ctx.getViewRoot().toString());
-    	
-    	renderBottom = temp.isRenderBottom();
-    	renderLeft = temp.isRenderLeft();
-    	renderRight = temp.isRenderRight();
-    	renderInnerTop = temp.isRenderInnerTop();
-    	renderInnerRight =temp.isRenderInnerRight();
-    	renderInnerBottom =temp.isRenderInnerBottom();
-    	
-    	viewUrl = temp.getUrl();
-	}
 	
-	public String initLayoutFromBookmark(String path){
-//    	public String loadLayout(String view){
-		
-		HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-		String url = req.getHeader("referer");
-		log.info("Path null2: {}, {}",url );
-		
-    	EViewNew temp = EViewNew.getTypeFromUrl(path);
-    	
-    	renderBottom = temp.isRenderBottom();
-    	renderLeft = temp.isRenderLeft();
-    	renderRight = temp.isRenderRight();
-    	renderInnerTop = temp.isRenderInnerTop();
-    	renderInnerRight =temp.isRenderInnerRight();
-    	renderInnerBottom =temp.isRenderInnerBottom();
-    	
-    	viewUrl = temp.getUrl();
-    	log.info("Layout : {}, {}", path, temp.getUrl());
-    	leftSize  = "200";
-    	return viewUrl+"?faces-redirect=true";
-    }
-    
-//    public String loadLayout2(){
-////    	public String loadLayout(String view){    	
-//    	
-//    	EViewNew temp = EViewNew.valueOf("v691");
-//    	renderBottom = temp.isRenderBottom();
-//    	renderLeft = temp.isRenderLeft();
-//    	renderRight = temp.isRenderRight();
-//    	return "v691";
-//    }
     public void extractViewId(ActionEvent evt){
     	log.info("Layout : {}", evt.getComponent().getId());
     	viewId =evt.getComponent().getId();

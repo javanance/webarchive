@@ -52,10 +52,14 @@ public class GeoChartController implements Serializable{
 		return "Date1";
 	}
 	public String getLable(){
-		return "package";
+		return lable;
 	}
-	
-	
+	private String lable;
+		
+	public void setLable(String lable) {
+		this.lable = lable;
+	}
+
 	public String getArea(){
 		return "area";
 	}
