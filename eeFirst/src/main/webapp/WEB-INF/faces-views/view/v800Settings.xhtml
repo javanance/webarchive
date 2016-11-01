@@ -10,14 +10,14 @@
     </f:metadata>
   <ui:define name="layoutCenter">
     <h:form id="settingsForm">
-      <p:tabView id="tabView" widgetVar="settingsTabview">
-        <p:tab id="registerTab" title="#{msg.register}" rendered="#{not userLoginView.loggedIn}">
+      <p:tabView id="tabView" widgetVar="settingsTabview" >
+        <p:tab id="registerTab" title="#{msg.register}" rendered="#{not userLoginView.loggedIn}" titleStyleClass="takion">
           <ui:include src="/fragment/register.xhtml" />
           <!-- <p:commandLink id="com111" onclick="PF('settingsTabview').select(2)"  value="aaa"></p:commandLink> -->
 
         </p:tab>
 
-        <p:tab id="generalSettingTab" title="#{msg.generalSettings}">
+        <p:tab id="generalSettingTab" title="#{msg.themeAndLanguage}" titleStyleClass="takion">
           <p:growl id="growl1" showDetail="true" />
           <p:panelGrid id="pg1" columns="2" cellpadding="50">
 
@@ -41,7 +41,10 @@
             </p:selectOneMenu>
 
             <f:facet name="footer">
-              <p:commandButton id="settingSaveButton" value="#{msg.save}" icon="ui-icon-check" action="#{localeSelector.select()}" />
+              <!-- <p:commandButton id="settingSaveButton" value="#{msg.save}" icon="ui-icon-check" action="#{localeSelector.select()}" /> -->
+              <p:commandButton id="settingSaveButton" value="#{msg.save}" icon="fa fa-check" action="#{localeSelector.select()}" />
+              
+               
             </f:facet>
           </p:panelGrid>
 

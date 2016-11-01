@@ -37,16 +37,27 @@
 	right: 50px;
 }
 
-/* ********************************Menu Image**************** */
 
+
+
+/* ********************************Menu Image**************** */
+ 
 .ui-menu .ui-menu-parent .ui-menu-child {
 	width : 20em
+}
 }
 .ui-menuitem-icon.img_home_nav {
 	background: url("../img/eclipse/home_nav.gif") no-repeat;
 	height:16px;
 	width:16px;
 }
+
+.ui-menuitem-icon.img_home_nav {
+	background: url("./../../img/eclipse/home_nav.gif") no-repeat;
+	height:16px;
+	width:16px;
+}
+
 .ui-menuitem-icon.img_markget_variable {
 	background: url("../img/famsilk/chart_curve.png") no-repeat;
 	height:16px;
@@ -81,6 +92,8 @@
 	height:16px;
 	width:16px;
 }
+
+
 
 .takion77-menu .ui-state-hover {
 	background-color: blue;

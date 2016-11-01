@@ -27,10 +27,12 @@
 	<persistence-unit name="primary" transaction-type="JTA">
 		<jta-data-source>java:jboss/datasources/MysqlDS</jta-data-source>
 	</persistence-unit>
+	
 
 	<persistence-unit name="secondary" transaction-type="JTA">
-		<jta-data-source>java:jboss/datasources/MysqlRelDS</jta-data-source>
+		<jta-data-source>java:jboss/datasources/OracleDS</jta-data-source>
 		<!-- <jta-data-source>java:jboss/datasources/eeFirstMysqlDS</jta-data-source> -->
+		<!-- <jta-data-source>java:jboss/datasources/MysqlRelDS</jta-data-source> -->
 		
 	</persistence-unit>
 </persistence>

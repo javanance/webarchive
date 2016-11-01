@@ -4,7 +4,8 @@
   xmlns:p="http://primefaces.org/ui" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:o="http://omnifaces.org/ui" xmlns:of="http://omnifaces.org/functions">
 
   <h:form id="marketVariableForm">
-    <p:dataTable id="marketVariableTable" var="_var" value="#{marketVariableInit.marketVariables}" widgetVar="wgMvTable" emptyMessage="#{msg.noDataFound}"
+    <p:dataTable id="marketVariableTable" var="_var" value="#{marketVariableInit.marketVariables}" widgetVar="wgMvTable" 
+      emptyMessage="#{msg.noDataFound}"
       selection="#{marketVariableInit.selectedMv}" rowKey="#{_var.mvId}" selectionMode="multiple"
       resizableColumns="true" sortMode="multiple" liveResize="false" 
       draggableColumns="true" paginator="true"
@@ -29,5 +30,8 @@
       </p:column>
 
     </p:dataTable>
+    
+    
+    <!-- <h:outputLabel value="#{msg[marketVariableInit.selectedMarketVariable.mvName]}"  /> -->
   </h:form>
 </ui:composition>

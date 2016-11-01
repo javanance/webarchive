@@ -4,7 +4,8 @@ import javax.inject.Named;
 
 
 public enum EViewNew  {
-	 Home("/home", 									false, 	false, 	false, 	false,	false, 	false)
+	 Home("/home", 									true, 	false, 	false, 	false,	false, 	false)
+//	 Home("/home", 									false, 	false, 	false, 	false,	false, 	false)
 //	,MarketVariable("v100MarketVariable")
 	
 	,MarketOverview("/view/v101MarketOverview"		, 	true, 	false, 	false, 	false,	false, 	false)

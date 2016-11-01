@@ -76,6 +76,8 @@ public class MarketVariableInit implements Serializable {
 		aa.add(temp1);
 		aa.add(temp2);
 		marketVariables= aa;
+		
+		selectedMarketVariable= temp;
 //		System.out.println("Construction MarketVariableInit"+ "_"+aa);
 		logger.info("mv init : {} , {}", marketVariables.size());
 	}
@@ -112,6 +114,7 @@ public class MarketVariableInit implements Serializable {
 		this.marketVariables = marketVariables;
 	}
 
+	
 	//TODO : remove String Constant using UI Component Binding 	
 //***************************************************************
 	public void resetTable() {
