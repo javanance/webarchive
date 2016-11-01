@@ -1,0 +1,225 @@
+.takion-body  {
+	/* background :tan; */	
+}
+
+.ui-widget {
+	/* font-size: 12px !important */
+	/* background-color : green; */
+}
+.ui-widget .ui-widget{
+	font-size: 0.9em;
+	/* background-color : yellow; */
+}
+
+.ui-widget .ui-widget-content{
+	/* background-color : white; */
+}
+
+.ui-widget-content{
+	background-color : white;
+	
+}
+
+/* .ui-widget-header{
+	background: navy;
+} */
+
+.ui-toolbar {
+	background: red;
+	padding: 0.2em;
+}
+
+.ui-corner-all { /* -webkit-border-radius: 6px; */
+	border-radius: 0px;
+}
+
+.ui-state-active,
+.ui-widget-content .ui-state-active,
+.ui-widget-header .ui-state-active {
+	color: #cc9900;
+	font-weight: bolder;
+}
+
+
+/* .ui-button {
+	background : #059eff;
+} */
+
+/* ******************layout***************** */
+.ui-layout-unit {
+	border: none;
+	padding: 0em;
+	background: white;
+	/* background: white; */
+	margin : 5px;
+}
+
+.ui-layout-unit .ui-layout-unit-content {
+	padding: 0em;
+	background: none;
+	
+}
+
+.ui-layout-doc .ui-layout-doc .ui-layout-center .ui-layout-unit-content {
+	margin: 5px;
+	
+}
+
+.ui-layout-unit-footer {
+	border: 0px;
+	background: red;
+}
+
+.centerLayout .ui-layout-unit-header {
+	border: 0px;
+	background: none;
+}
+
+
+/* 메뉴바 클릭시 조회되는 패널이 다른 컴포넌트에 가려지지 않고 맨 위로 올려기 */
+.ui-layout-north .ui-layout-unit-content {
+	overflow: visible;
+	
+}
+
+
+.takion.ui-layout-container {
+	 background:tan;
+}
+
+.takion.ui-megamenu {
+	margin-top:0px; 
+	background : tan;
+	border : none;
+	
+}
+
+
+.ui-layout-north-outer {
+	background: red;
+}
+
+/* .ui-layout-pane-center-inner .ui-layout-unit-content {
+	overflow: hidden;
+}
+
+.ui-layout-pane-west .ui-layout-unit-content {
+	overflow: auto;
+} */
+
+
+
+/* -------------------------------Panel---------------------- */
+
+.ui-panel {
+	padding: 0px;
+	margin : 5px;
+}
+
+/* .ui-panel .ui-widget-content{
+	background-color: white;
+} */
+
+/* .ui-panelgrid .ui-widget {
+	border: none;
+} 
+ */
+
+.ui-panelgrid .ui-panelgrid-cell {
+	border: none;
+	padding-right: 2px;
+ 	background: none;
+}
+ 
+.ui-panelgrid tr {
+	border: none;
+	padding-right: 2px;
+	background: none;
+}
+
+.ui-panelgrid td {
+	border: none;
+	padding-right: 2px;
+	background: none;
+}
+
+.ui-outputPanel .ui-widget{
+	border: red;
+}
+/* .ui-panel.ui-widget.ui-widget-content.ui-corner-all{
+	display: block;
+	margin : 0px ;
+	left : 50%;
+} */
+.ui-panel-content.ui-widget-content{
+	position :relative;
+	display: block;
+	margin : 0px auto   ;
+/* 	left : 30%; */
+	padding : 0px auto;
+	text-align: center;
+}
+.ui-panelgrid.ui-widget{
+	margin: 0px, auto;
+}
+
+
+/* --------------------Tree------------- */
+
+/*
+.ui-widget-header 
+.ui-state-default {
+	background : white;
+} */
+
+
+.horizontalTab .ui-widget-header .ui-state-default {
+	background: none;
+}
+
+
+/* ****************tab******************* */
+.ui-tabs {
+	padding: 10px;
+	border : none;
+}
+
+.ui-tabs-nav {
+	padding: 0px;
+}
+	
+.ui-tabs.ui-tabs-top .ui-tabs-nav {
+	padding :0px;
+}
+.ui-tabs.ui-tabs-top .ui-tabs-nav li{
+	margin : 0 0 0 0;
+	
+}
+
+
+.ui-tabs.ui-tabs-top > .ui-tabs-nav li{
+	top : 0px;	
+}
+
+
+.ui-tabs-panel .ui-widget-content{
+	border :  red;
+}
+/* 
+.takion.ui-corner-top{
+	border-top-left-radius: 0px;
+	border-top-right-radius:0px;
+}
+
+.ui-tabs.ui-tabs-top > .ui-tabs-nav{
+	padding : 0px;
+}
+
+
+.ui-tabs .ui-tabs-nav li {
+	margin : 0px;
+}	
+
+.ui-tabs.ui-tabs-top > .ui-tabs-nav li{
+	border : 0px;
+} */

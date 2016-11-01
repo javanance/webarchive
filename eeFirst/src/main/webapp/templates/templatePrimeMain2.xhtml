@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:p="http://primefaces.org/ui" xmlns:s="http://jboss.org/schema/seam/taglib" contentType="text/html" locale="#{localeSelector.language}">
+  <h:html>
+  <h:head>
+    <ui:include src="/fragment/headerFacet.xhtml" />
+  </h:head>
+
+  <h:body styleClass="takion">
+    <p:layout id="mainLayout" fullPage="true" resizeTitle="#{msg.resizeTitle}"    >
+      <p:layoutUnit id="centerLayoutUnit" position="center" resizable="true" gutter="4" styleClass="takion">
+        <ui:include src="/templates/templatePrimeInner.xhtml" />
+      </p:layoutUnit>
+
+      <p:layoutUnit id="bottomLayoutUnit" position="south" resizable="true" collapsible="true" size="300" gutter="4" rendered="#{layoutInit.renderBottom}">
+        <ui:insert name="layoutBottom" />
+      </p:layoutUnit>
+
+      <p:layoutUnit id="leftLayoutUnit" position="east" resizable="true" collapsible="true" size="200" gutter="4" style="oveflow:visible;" rendered="#{layoutInit.renderRight}">
+        <ui:insert name="layoutRight" />
+
+      </p:layoutUnit>
+      <p:layoutUnit id="rightLayoutUnit" position="west" resizable="true" collapsible="true" size="#{layoutInit.leftSize}" gutter="4" style="oveflow:visible;"
+        rendered="#{layoutInit.renderLeft}">
+        <ui:insert name="layoutLeft" />
+      </p:layoutUnit>
+
+      <p:layoutUnit id="topLayoutUnit" position="north" size="116" collapsible="true" gutter="4" styleClass="takion">
+        <ui:include src="/fragment/header.xhtml" />
+        <ui:insert name="layoutTop" />
+      </p:layoutUnit>
+    </p:layout> 
+  </h:body>
+  </h:html>
+</f:view>
