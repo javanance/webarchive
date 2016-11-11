@@ -9,18 +9,36 @@
     <f:viewAction action="#{layoutInit.initLayout('/view/v102ViewHistoryData')}"></f:viewAction>/>
   </f:metadata>
   <ui:define name="layoutLeft">
-    <ui:include src="/viewComp/table/tableMarketVariable.xhtml" />
+    <!-- <ui:include src="/viewComp/table/tableMarketVariable.xhtml" /> -->
   </ui:define>
 
   <ui:define name="layoutCenter">
-    <div id="container" style="width: 100%; height: 500px">
+     
+    <h:form id="v102TableForm">
+     <ui:include src="/viewComp/table/dynamicTableTemplate.xhtml" >
+      <ui:param name="tableList"      value="#{ncmProductBean.ncmProdList}" />
+      <ui:param name="tableSelectedList" value="#{ncmProductBean.selectProduct}" />
+      <ui:param name="tablefilteredList" value="#{ncmProductBean.filterProdList}" />
+      <ui:param name="selectionMode" value="single" />
+      <ui:param name="tableColumnHeader" value="#{ncmProductBean.columnList}" />
+     </ui:include>
+    </h:form> 
+     
+  </ui:define>
+  
+  <ui:define name="innnerLayoutRight">
+      <h:outputLabel value="#{msg[marketVariableInit.selectedMarketVariable.mvName]}"  />
+      <div id="container" style="width: 100%; height: 500px">
       <h:outputScript library="js" name="test.js"></h:outputScript>
       <h:form id="aaaaaaa">
 
         <h:commandButton value="aaaa" onclick="getItems('bbbb')" />
         <h:commandButton value="aaaaa" onclick="getItems('#{imageService.imageNames}')" /> 
+        
       </h:form>
+      
     </div>
+     
   </ui:define>
 
 </ui:composition>

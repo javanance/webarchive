@@ -20,6 +20,7 @@ import com.eugenefe.converter.LazyModelMarketVariable;
 import com.eugenefe.entities.MarketVariable;
 import com.eugenefe.enums.EMarketVariableType;
 import com.eugenefe.qualifiers.DefaultEm;
+import com.eugenefe.qualifiers.SecondEm;
 
 @Named
 @SessionScoped
@@ -29,7 +30,8 @@ public class MarketVariableInit implements Serializable {
 	@Inject 	private Logger logger;
 	
 	@Inject
-	@DefaultEm
+//	@DefaultEm
+	@SecondEm
 	private EntityManager entityManager;
 	
 //	@RequestParameter  

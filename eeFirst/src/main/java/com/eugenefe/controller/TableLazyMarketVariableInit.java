@@ -19,13 +19,15 @@ import org.slf4j.Logger;
 import com.eugenefe.converter.LazyModelMarketVariable;
 import com.eugenefe.entities.MarketVariable;
 import com.eugenefe.qualifiers.DefaultEm;
+import com.eugenefe.qualifiers.SecondEm;
 
 @Named("tableLazyMarketVariableInit")
 @SessionScoped
 public class TableLazyMarketVariableInit implements Serializable {
 	@Inject 	private Logger logger;
 	@Inject
-	@DefaultEm
+//	@DefaultEm
+	@SecondEm
 	private EntityManager entityManager;
 	
 //	@RequestParameter  

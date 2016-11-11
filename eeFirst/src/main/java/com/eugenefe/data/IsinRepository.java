@@ -32,8 +32,8 @@ import com.eugenefe.qualifiers.SecondEm;
 public class IsinRepository {
 
     @Inject 
-    @DefaultEm
-//    @SecondEm
+//    @DefaultEm
+    @SecondEm
     private EntityManager em;
     
 //    @Inject

@@ -22,13 +22,14 @@
           <p:panelGrid id="pg1" columns="2" cellpadding="50">
 
             <p:outputLabel id="themeLabel" for="themeSwitcher" value="#{msg.theme}" style="width:200px" />
-            <p:themeSwitcher id="themeSwitcher" value="#{themeSwitcher.selectedTheme}" var="t" converter="omnifaces.SelectItemsConverter" style="width:200px">
-              <!-- <p:themeSwitcher id="themeSwitcher" value="#{themeSwitcher.selectedTheme}" var="t" converter="selectThemeConverter" style="width:200px"> -->
+           
+              <p:themeSwitcher id="themeSwitcher" value="#{themeSwitcher.selectedTheme}" var="t" converter="selectThemeConverter" style="width:200px">
+           <!--  <p:themeSwitcher id="themeSwitcher" value="#{themeSwitcher.selectedTheme}" var="t" converter="omnifaces.SelectItemsConverter" style="width:200px"> -->
               <f:selectItems value="#{themeSwitcher.themeList}" var="_theme" itemLabel="#{_theme.id}-#{_theme.displayName}" itemValue="#{_theme}" />
-              <p:column>
-                <p:outputLabel id="selectedThemeLabel" value="#{t.id}-#{t.displayName} " />
-              </p:column>
-              <p:ajax listener="#{themeSwitcher.saveTheme()}" update="growl1" />
+                <p:column>
+                  <p:outputLabel id="selectedThemeLabel" value="#{t.id}-#{t.displayName} " />
+                </p:column>
+                <p:ajax listener="#{themeSwitcher.saveTheme()}" update="growl1" />
             </p:themeSwitcher>
 
 

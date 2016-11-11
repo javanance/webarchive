@@ -43,7 +43,9 @@ public class IsinProducer {
     @Inject
     private IsinRepository isinRepository;
     
-    @Inject @DefaultEm
+    @Inject 
+//    @DefaultEm
+    @SecondEm
     private EntityManager em;
 
     private OdsIsinMaster isinMaster;

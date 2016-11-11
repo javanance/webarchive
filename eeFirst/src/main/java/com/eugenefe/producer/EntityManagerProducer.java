@@ -14,9 +14,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.eugenefe.util;
+package com.eugenefe.producer;
 
-import java.io.Serializable;
 import java.util.logging.Logger;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -45,34 +44,20 @@ import com.eugenefe.qualifiers.SecondEm;
  * </pre>
  */
 @ApplicationScoped
-public class EntityManagerFactoryProducer implements Serializable{
+public class EntityManagerProducer {
 
 //    @Produces
 //    @PersistenceContext(unitName="primary")
 //    @DefaultEm
 //    private EntityManager em;
-//
-//   
-//    @Produces
-//    @PersistenceContext(unitName="secondary")
-//    @SecondEm   
-//    private EntityManager emRel;
+
+   
+    @Produces
+    @PersistenceContext(unitName="secondary")
+    @SecondEm   
+    private EntityManager emRel;
     	
-//    @PersistenceUnit(unitName ="primary")
-//    private EntityManagerFactory emf;
-//    
-//    @PersistenceUnit(unitName="secondary")
-//    private EntityManagerFactory emfrel;
     
-//    @Produces   @DefaultEm  
-//    public EntityManager getDefaultEm() {  
-//       return emf.createEntityManager();
-//    }  
-//    
-//    @Produces   @SecondEm   
-//    public EntityManager getSecondEm() {  
-//      return emfrel.createEntityManager();
-//    }  
     
 
 }

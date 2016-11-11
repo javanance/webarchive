@@ -36,7 +36,7 @@ import org.junit.runner.RunWith;
 import com.eugenefe.data.IsinProducer;
 import com.eugenefe.data.IsinRepository;
 import com.eugenefe.entities.OdsIsinMaster;
-import com.eugenefe.util.EntityManagerProducer;
+import com.eugenefe.producer.EntityManagerProducer;
 import com.eugenefe.util.Resources;
 
 @RunWith(Arquillian.class)

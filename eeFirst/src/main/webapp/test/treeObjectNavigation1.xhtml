@@ -1,0 +1,34 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:p="http://primefaces.org/ui" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:o="http://omnifaces.org/ui" xmlns:of="http://omnifaces.org/functions">
+
+
+  <h:form id="formObjectNavigation">
+      <p:growl id="messages" showDetail="true" />
+      
+      <!-- <p:selectOneMenu value="#{flagBean.vcvMethod}" style="width:100px">
+        <s:selectItems value="#{}" var="_vol" label="#{_vol}" />
+        <p:ajax event="change" process="@this" update="@(form)"  listener="#{tableRfVcvMatrixInit.loadVcvMatrix()}" />
+        <p:ajax event="valueChange" update="@(form)"  listener="#{tableRfVcvMatrixInit.loadVcvMatrix()}"/>  
+      </p:selectOneMenu> -->
+      
+      <!-- <p:selectOneMenu value="#{flagBean.navigationData}" style="width:100%">
+        <s:selectItems value="#{flagBean.navigationList}" var="_combo" label="#{_combo}" noSelectionLabel="#{messages.noSelectionLabel}" />
+        <s:convertEnum />
+        <p:ajax event="valueChange" update="@(form)"  listener="#{treeObjectNavigationInit.create}"/>
+      </p:selectOneMenu> -->
+      
+     
+        
+                
+         <!-- <p:commandButton value="#{messages.submitButton}" actionListener="#{treeObjectNavigationInit.afterSelection1}" 
+          style="float:right" /> -->
+        
+        <!-- onclick="wgDlgRfSelect.hide()" update=":tabViewVcv:formVcvMatrix:tableVcvMatrix" --> 
+        
+        <!-- <p:commandButton value="#{messages.submitButton}" action="#{tableDynamicModelInit.columeChange}" update="@(form)" 
+          style="float:left" /> -->
+        
+  </h:form>
+</ui:composition>

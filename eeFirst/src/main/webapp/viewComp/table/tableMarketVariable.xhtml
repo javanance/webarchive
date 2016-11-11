@@ -3,11 +3,13 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
   xmlns:p="http://primefaces.org/ui" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:o="http://omnifaces.org/ui" xmlns:of="http://omnifaces.org/functions">
 
-  <h:form id="marketVariableForm">
+  <!-- <h:form id="marketVariableForm"> -->
     <p:dataTable id="marketVariableTable" var="_var" value="#{marketVariableInit.marketVariables}" widgetVar="wgMvTable" 
       emptyMessage="#{msg.noDataFound}"
       selection="#{marketVariableInit.selectedMv}" rowKey="#{_var.mvId}" selectionMode="multiple"
-      resizableColumns="true" sortMode="multiple" liveResize="false" 
+      resizableColumns="true" sortMode="multiple" liveResize="false"
+      editable="true"
+      editMode="cell" 
       draggableColumns="true" paginator="true"
       paginatorTemplate="{FirstPageLink} {PreviousPageLink} {JumpToPageDropdown} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" paginatorPosition="bottom" rows="15"
       style="height : 90%; width:auto; border-top-left-radius: 8px ;border-top-right-radius: 8px; "
@@ -26,12 +28,16 @@
         <f:facet name="header"  >
           <h:outputText value="#{msg.mvName}" style="font-weight: bold ; font-size : 100%"/>
         </f:facet>
-        <h:outputText value="#{_var.mvName}" />
+            <!-- <h:outputText value="#{_var.mvName}" /> -->
+        <p:cellEditor id="celleditor1">
+          <f:facet name="output"><h:outputText  value="#{_var.mvName}" /></f:facet>
+          <f:facet name="input"><p:inputText id="inputtext1" value="#{_var.mvName}" /></f:facet>
+        </p:cellEditor>
       </p:column>
 
     </p:dataTable>
     
     
     <!-- <h:outputLabel value="#{msg[marketVariableInit.selectedMarketVariable.mvName]}"  /> -->
-  </h:form>
+  <!-- </h:form> -->
 </ui:composition>
