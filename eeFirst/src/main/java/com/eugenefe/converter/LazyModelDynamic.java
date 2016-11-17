@@ -218,8 +218,7 @@ public class LazyModelDynamic extends LazyDataModel<Map<String, String>> {
 //	}
 
 	
-	public List<Map<String, String>> load(int first, int pageSize, String sortField, SortOrder sortOrder,
-			Map<String, Object> filters) {
+	public List<Map<String, String>> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, Object> filters) {
 		// throw new
 		// UnsupportedOperationException("Lazy loading is not implemented.");
 
@@ -271,8 +270,7 @@ public class LazyModelDynamic extends LazyDataModel<Map<String, String>> {
 
 
 	@Override
-	public List<Map<String, String>> load(int first, int pageSize, List<SortMeta> multiSortMeta,
-			Map<String, Object> filters) {
+	public List<Map<String, String>> load(int first, int pageSize, List<SortMeta> multiSortMeta,Map<String, Object> filters) {
 		// throw new
 		// UnsupportedOperationException("Lazy loading is not implemented.");
 

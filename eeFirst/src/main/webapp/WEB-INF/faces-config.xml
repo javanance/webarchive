@@ -25,7 +25,11 @@
 			<base-name>columns</base-name>
 			<var>column</var>
 		</resource-bundle>
-
+		<resource-bundle>
+			<base-name>query</base-name>
+			<var>query</var>
+		</resource-bundle>
+		
 		<resource-bundle>
 			<base-name>messages</base-name>
 			<var>msg</var>

@@ -21,6 +21,7 @@ import com.eugenefe.qualifiers.AnnoMethodTree;
  */
 @Entity
 @Table(name = "NCM_LV1_PRODUCT", schema = "NCM")
+
 public class NcmLv1Product implements java.io.Serializable {
 
 	private String finProdId;
@@ -66,7 +67,6 @@ public class NcmLv1Product implements java.io.Serializable {
 	}
 
 	@Id
-
 	@Column(name = "FIN_PROD_ID", unique = true, nullable = false, length = 50)
 	@AnnoMethodTree(order=10, init=true)
 	public String getFinProdId() {

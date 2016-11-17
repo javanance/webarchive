@@ -14,6 +14,7 @@ import java.util.ResourceBundle;
 import java.util.Set;
 
 import javax.annotation.PostConstruct;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -33,10 +34,11 @@ import com.eugenefe.qualifiers.ColumHeaderResource;
 import com.eugenefe.qualifiers.SecondEm;
 
 @Named("treeObjectNavigationInit")
-@ViewScoped
+//@ViewScoped
+@RequestScoped
 //@SessionScoped
-public class TreeObjectNavigationInit implements Serializable{
-	private static final long serialVersionUID = 1L;
+public class TreeObjectNavigationInit {
+//	private static final long serialVersionUID = 1L;
 
 	@Inject 	
 	private Logger logger;
@@ -44,8 +46,8 @@ public class TreeObjectNavigationInit implements Serializable{
 	@Inject	@SecondEm
 	private EntityManager entityManager;
 	
-	@Inject @ColumHeaderResource
-	private ResourceBundle messages;
+//	@Inject @ColumHeaderResource
+	private ResourceBundle messages;	
 
 	@Param
 	private String navigation;

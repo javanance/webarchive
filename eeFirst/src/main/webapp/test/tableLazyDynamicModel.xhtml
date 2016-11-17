@@ -5,10 +5,11 @@
   xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
 
   <h:form id="formDynamicModel">
-    <p:dataTable id="tableDynamicModel" value="#{tableLazyDynamicModelInit.lazyModelDynamic}" var="_dynModel"
+    <p:dataTable id="tableDynamicModel" value="#{tableLazyDynamicModelBean.lazyModelDynamic}" var="_dynModel"
       emptyMessage="No History Data found with given criteria. Change the Dates"
       editable="true" editMode="cell"
-      selection="#{tableLazyDynamicModelInit.selectedDynamicModel}" selectionMode="single"    
+      selection="#{tableLazyDynamicModelBean.selectedDynamicModel}" 
+      selectionMode="single"    
       rowKey="#{_dynModel}"
       lazy="true"
       sortMode="multiple"
@@ -20,47 +21,15 @@
       rowsPerPageTemplate="10,15,25,50" 
       style="margin: 0.5em; border-top-left-radius: 8px; border-top-right-radius: 8px">
      
-      <p:ajax event="rowSelect" listener="#{tableLazyDynamicModelInit.selectDynamicModel}" update="@(.dynamicTableId)"/>
+      <!-- <p:ajax event="rowSelect" listener="#{tableLazyDynamicModelBean.selectDynamicModel}" update="@(.dynamicTableId)"/> -->
      
-      <p:columns  value="#{tableLazyDynamicModelInit.pivotTableHeader}" var="column" columnIndexVar="colIndex" width="80"
+      <p:columns  value="#{tableLazyDynamicModelBean.pivotTableHeader}" var="column" columnIndexVar="colIndex" width="80"
        filterBy="#{_dynModel[column.columnId]}"   sortBy="#{_dynModel[column.columnId]}"  filterStyle="width:100%"    >
         <f:facet name="header">  
                 <h:outputText value="#{column.columnName}" />
          </f:facet>
-    <!--      <p:cellEditor>
-            <f:facet name="output">
-            <h:outputText value="#{_dynModel[column.columnId]}" style="#{column.alignFormat}"  />
-            </f:facet>
-            <f:facet name="input"><p:inputText value="#{_dynModel[column.columnId]}" /> </f:facet>
-         </p:cellEditor> -->
           <h:outputText value="#{_dynModel[column.columnId]}" style="#{column.alignFormat}"  />
-          <!-- <f:convertNumber  type="currency" currencySymbol="$" pattern="#0.000" /> -->
-          <!-- <f:convertNumber  type="currency" locale="ko_KR"  /> -->
-          <!-- <f:convertNumber   pattern="#0.000" /> -->
-        <!-- <h:outputText value="#{contentMap[column.colName].stringValue}" style="float:right" > -->
-        
       </p:columns>
-      
-      
     </p:dataTable>
-    
-   <p:contextMenu for="formDynamicModel">
-      <p:menuitem value="#{messages.showChart}" id="qqqa" onclick="PF('wgDialogDataNavigation').show()"/>
-      <p:menuitem value="#{messages.fxCash}" includeViewParams="true" >
-       <h:commandLink value="#{messages.exportToExcel}" styleClass="ui-menuitem-link ui-corner-all">
-        <p:dataExporter type="xls" target="tableDynamicModel" fileName="#{messages.dataNavigation}" />
-       </h:commandLink>
-              <f:param name="navigation" value="FxCash"></f:param>
-       </p:menuitem>
-      
-       
-<!--        <s:link value="#{messages.exportToExcel}" styleClass="ui-menuitem-link ui-corner-all" conversationName="">
-        <p:graphicImage value="/img/primefaces/excel.png" />
-        <p:dataExporter type="xls" target="tableDynamicModel" fileName="#{messages.dataNavigation}" />
-      </s:link>
-      </p:menuitem> -->
-    </p:contextMenu>
-        
-      
   </h:form>
 </ui:composition>

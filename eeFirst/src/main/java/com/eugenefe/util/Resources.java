@@ -54,7 +54,7 @@ public class Resources {
 //    @SecondEm
 //    private EntityManager emRel;
 //    
-    @Produces
+    @Produces 
     public Logger produceLog(InjectionPoint injectionPoint) {
         return LoggerFactory.getLogger(injectionPoint.getMember().getDeclaringClass().getName());
     }
@@ -65,10 +65,6 @@ public class Resources {
         return FacesContext.getCurrentInstance();
     }
     
-    @Produces @MessageBundle
-    public ResourceBundle getBundle() {
-           FacesContext context = FacesContext.getCurrentInstance();
-           return context.getApplication().getResourceBundle(context, "msg");
-   }
+   
 
 }
