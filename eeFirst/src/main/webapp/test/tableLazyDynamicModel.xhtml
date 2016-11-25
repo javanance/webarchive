@@ -4,32 +4,27 @@
   xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
   xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
 
+
+
   <h:form id="formDynamicModel">
-    <p:dataTable id="tableDynamicModel" value="#{tableLazyDynamicModelBean.lazyModelDynamic}" var="_dynModel"
+    
+    
+   <p:dataTable id="tableDynamicModel" value="#{tableList}" var="_dynModel"
       emptyMessage="No History Data found with given criteria. Change the Dates"
-      editable="true" editMode="cell"
-      selection="#{tableLazyDynamicModelBean.selectedDynamicModel}" 
-      selectionMode="single"    
       rowKey="#{_dynModel}"
-      lazy="true"
-      sortMode="multiple"
-      resizableColumns="true" 
-      stickyHeader="false"
-      paginatorAlwaysVisible="true"
       paginator="true" paginatorPosition="bottom" rows="10"
       paginatorTemplate="{FirstPageLink} {PreviousPageLink} {JumpToPageDropdown} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
       rowsPerPageTemplate="10,15,25,50" 
       style="margin: 0.5em; border-top-left-radius: 8px; border-top-right-radius: 8px">
      
-      <!-- <p:ajax event="rowSelect" listener="#{tableLazyDynamicModelBean.selectDynamicModel}" update="@(.dynamicTableId)"/> -->
-     
-      <p:columns  value="#{tableLazyDynamicModelBean.pivotTableHeader}" var="column" columnIndexVar="colIndex" width="80"
-       filterBy="#{_dynModel[column.columnId]}"   sortBy="#{_dynModel[column.columnId]}"  filterStyle="width:100%"    >
+      <p:columns id="tableColumns" value="#{columnList}" var="_column" columnIndexVar="colIndex" width="80"   >
         <f:facet name="header">  
-                <h:outputText value="#{column.columnName}" />
+                <h:outputText value="#{_column.camelColumnName}" />
          </f:facet>
-          <h:outputText value="#{_dynModel[column.columnId]}" style="#{column.alignFormat}"  />
+         
+         <h:outputText value="#{_dynModel[_column.camelColumnName]}"  /> 
+            
       </p:columns>
-    </p:dataTable>
+    </p:dataTable> 
   </h:form>
 </ui:composition>

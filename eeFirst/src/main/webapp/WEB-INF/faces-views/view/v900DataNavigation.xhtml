@@ -13,7 +13,11 @@
   </ui:define>
 
   <ui:define name="layoutCenter">
-    <!-- <ui:include src="/test/tableLazyDynamicModel.xhtml" /> -->
+    <ui:include src="/test/tableLazyDynamicModel.xhtml" >
+      <ui:param name="tableList"     value="#{tableLazyDynamicModelBean.lazyModelDynamic}" />
+      <ui:param name="columnList"    value="#{tableLazyDynamicModelBean.tableColumns}" />
+    </ui:include>
+   
   </ui:define>
 
 </ui:composition>

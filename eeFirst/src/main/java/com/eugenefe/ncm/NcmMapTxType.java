@@ -2,11 +2,11 @@ package com.eugenefe.ncm;
 // Generated Nov 1, 2016 1:37:21 PM by Hibernate Tools 4.3.1.Final
 
 import java.util.Date;
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
+
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -16,9 +16,14 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "NCM_MAP_TX_TYPE", schema = "NCM")
+@IdClass(value= NcmMapTxTypePk.class)
 public class NcmMapTxType implements java.io.Serializable {
 
-	private NcmMapTxTypeId id;
+//	private NcmMapTxTypeId id;
+	private String srcTable;
+	private String srcProdTypeCd;
+	private String srcTradeTypeCd;
+	
 	private String srcProdTypeNm;
 	private String srcTradeTypeNm;
 	private String txTypeCd;
@@ -28,7 +33,7 @@ public class NcmMapTxType implements java.io.Serializable {
 	public NcmMapTxType() {
 	}
 
-	public NcmMapTxType(NcmMapTxTypeId id) {
+	/*public NcmMapTxType(NcmMapTxTypeId id) {
 		this.id = id;
 	}
 
@@ -54,7 +59,38 @@ public class NcmMapTxType implements java.io.Serializable {
 
 	public void setId(NcmMapTxTypeId id) {
 		this.id = id;
+	}*/
+	@Id
+	@Column(name = "SRC_TABLE", length = 100)
+	public String getSrcTable() {
+		return srcTable;
 	}
+	
+	public void setSrcTable(String srcTable) {
+		this.srcTable = srcTable;
+	}
+
+	@Id
+	@Column(name = "SRC_PROD_TYPE_CD", length = 100)
+	public String getSrcProdTypeCd() {
+		return srcProdTypeCd;
+	}
+
+	public void setSrcProdTypeCd(String srcProdTypeCd) {
+		this.srcProdTypeCd = srcProdTypeCd;
+	}
+
+	@Id
+	@Column(name = "SRC_TRADE_TYPE_CD")
+	public String getSrcTradeTypeCd() {
+		return srcTradeTypeCd;
+	}
+
+	public void setSrcTradeTypeCd(String srcTradeTypeCd) {
+		this.srcTradeTypeCd = srcTradeTypeCd;
+	}
+
+	
 
 	@Column(name = "SRC_PROD_TYPE_NM", length = 100)
 	public String getSrcProdTypeNm() {
@@ -64,6 +100,8 @@ public class NcmMapTxType implements java.io.Serializable {
 	public void setSrcProdTypeNm(String srcProdTypeNm) {
 		this.srcProdTypeNm = srcProdTypeNm;
 	}
+
+	
 
 	@Column(name = "SRC_TRADE_TYPE_NM", length = 100)
 	public String getSrcTradeTypeNm() {

@@ -1,62 +1,56 @@
 package com.eugenefe.bean;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
-import java.lang.reflect.TypeVariable;
-import java.util.ArrayList;
-import java.util.Collections;
+import java.io.Serializable;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.Dependent;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.persistence.EntityManager;
 
-import org.omnifaces.cdi.Param;
+import org.apache.commons.lang3.text.WordUtils;
 import org.primefaces.component.datatable.DataTable;
 import org.primefaces.event.NodeSelectEvent;
-import org.primefaces.event.SelectEvent;
-import org.primefaces.model.TreeNode;
 import org.slf4j.Logger;
 
 import com.eugenefe.converter.LazyModelDynamic;
 import com.eugenefe.converter.TableDynamicColumn;
-import com.eugenefe.qualifiers.AnnoMethodTree;
-import com.eugenefe.qualifiers.SecondEm;
+import com.eugenefe.model.TableColumn;
+import com.eugenefe.producer.DataProducer;
 
 //import org.jboss.seam.framework.Query;
 
 @Named
-public class TableLazyDynamicModelBean<T> {
+public class TableLazyDynamicModelBean<T> implements Serializable{
 	@Inject 	
 	private Logger logger;
 	
-	@Inject	@SecondEm
-	private EntityManager entityManager;
-	
 	@Inject
+	private DataProducer dataSource;
+	
+//	@Inject
 	private BaseDateBean basedateBean;
 
-	@Param
+//	@Param
 	private String navigation;
 
 	private String savedNavigation;
 
+	
+//	@Inject
+//	@SelectedTable
+//	Event<String> selectEvent;
+	
+//	@Inject
+	private List<TableColumn> tableColumns;
+	
 	private List<T> dynamicModelList;
 
 	private Map<String, String> selectedDynamicModel;
 
-//	@Inject
-	private List<TableDynamicColumn> initPivotTableHeader;
-	
 	
 	private List<TableDynamicColumn> pivotTableHeader;
 
@@ -67,7 +61,7 @@ public class TableLazyDynamicModelBean<T> {
 
 
 	public TableLazyDynamicModelBean() {
-		System.out.println("Construction TableLazyDynamicModelInit");
+		System.out.println("Construction TableLazyDynamicModelBean");
 	}
 	
 	private FacesContext context;
@@ -87,11 +81,15 @@ public class TableLazyDynamicModelBean<T> {
 		if (navigation != null) {
 			savedNavigation = navigation;
 		}
-		pivotTableHeader = initPivotTableHeader;
 //		loadDynamicModel();
 
 		context = FacesContext.getCurrentInstance();
 		String aaaa = FacesContext.getCurrentInstance().getViewRoot().getViewId();
+		dynamicModelList =dataSource.getDynamicTable("NcmMapTxType");
+		tableColumns = dataSource.getColumnList("NCM_MAP_TX_TYPE");
+		logger.info("post Cons: {},{}", dynamicModelList.size());
+		logger.info("post Cons: {},{}", dynamicModelList.size(), tableColumns.get(0).getCamelColumnName());
+		loadTable(savedNavigation);
 		
 	}
 
@@ -99,21 +97,82 @@ public class TableLazyDynamicModelBean<T> {
 	// ******************************************
 
 	
+	private void loadTable(String selectedTable){
+		dynamicModelList = dataSource.getDynamicTable(selectedTable);
+	}
+	
+	
+	
 	public void onNodeSelect(NodeSelectEvent event){
+		String selectedTable = WordUtils.capitalizeFully(event.getTreeNode().getData().toString(), new char[]{'_'}).replaceAll("_", "");
+		savedNavigation= selectedTable;
+//		String selectedTable = event.getTreeNode().getData().toString();
+//		String converteName = ENamingConvention.SNAKE_CASE.convertToCamelCase(selectedTable);
+//		selectedTable = WordUtils.capitalizeFully(selectedTable, new char[]{'_'}).replaceAll("_", "");
+		tableColumns = dataSource.getColumnList(event.getTreeNode().getData().toString());
 		
-		logger.info("On the Selection : {}", event.getTreeNode().getData().toString());
+		logger.info("On the Selection : {},{}", selectedTable, event.getTreeNode().getData().toString());
+		logger.info("On the Selection : {},{}", dataSource.getTableList(), dataSource.getAllColumnList().size());
+		
+//		logger.info("On the Selection1 : {},{}", columns.get(0).getTableName(), columns.get(0).getColumnName());
+		
+		for( TableColumn zz : dataSource.getColumnList(event.getTreeNode().getData().toString())){
+			logger.info("On the Selection1 : {},{}", zz.getColumnName(), zz.getCamelColumnName());
+		}
+		
+		dynamicModelList = dataSource.getDynamicTable(selectedTable);
+		
+		logger.info("On the Selection2 : {},{}", dynamicModelList.size());
+		
+//		logger.info("On the Selection1 : {},{}", dataSource.getColumnList(event.getTreeNode().getData().toString()));
+//		selectEvent.fire(event.getTreeNode().getData().toString());
 		
 	}
 	private void loadDynamicModel() {
-/*		Filter filter = session.enableFilter("filterBtwnDate").setParameter("stBssd", basedateBean.getStBssd())
+	/*  
+	    Filter filter = session.enableFilter("filterBtwnDate").setParameter("stBssd", basedateBean.getStBssd())
 				.setParameter("endBssd", basedateBean.getEndBssd());
 		String query = "from " + savedNavigation;
 		dynamicModelList = session.createQuery(query).list();
-		*/
+	*/
 		
-		String query = "from " + savedNavigation;
-		dynamicModelList = entityManager.createQuery(query).getResultList();
+//		String query = "from " + savedNavigation;
+//		dynamicModelList = entityManager.createQuery(query).getResultList();
 		// logger.info("Query Result size:#0", dynamicModelList.size());
+		
+		
+		/*for (T dyn : dynamicModelList) {
+//			dynamicModelMap.put(dyn.getId(), dyn);
+			tempContentMap = new HashMap<String, String>();
+			tempListContentMap = new HashMap<String, List<Map<String, String>>>();
+
+			for (TableDynamicColumn header : pivotTableHeader) {
+				navi = dyn;
+				try {
+					for (String prop : header.getFullColumns()) {
+						Method temp = navi.getClass().getDeclaredMethod(prop);
+						// Field temp = navi.getClass().getDeclaredField(prop);
+						// temp.setAccessible(true);
+						// navi = temp.get(navi);
+						// if(temp!=null){
+
+						rtnType = temp.getReturnType();
+
+						navi = temp.invoke(navi);
+
+						tempContentMap.put(header.getColumnId(), String.valueOf(navi));
+						}
+				} catch (Exception e) {
+					logger.info("Method Call Exception :#0", header.getFullColumns());
+				}
+
+			}
+			tempContentMap.put("getStringId", dyn.toString());
+			pivotTableContent.add(tempContentMap);
+			filterPivotTableContent = pivotTableContent;
+		}
+		lazyModelDynamic = new LazyModelDynamic(pivotTableContent);*/
+//		logger.info("Load Table:#0", pivotTableContent);
 	}
 
 
@@ -154,8 +213,6 @@ public class TableLazyDynamicModelBean<T> {
 		this.pivotTableContent = pivotTableContent;
 	}
 
-	
-
 
 	public Map<String, String> getSelectedDynamicModel() {
 		return selectedDynamicModel;
@@ -166,7 +223,6 @@ public class TableLazyDynamicModelBean<T> {
 	}
 
 
-	
 
 	private DataTable dataTable;
 
@@ -224,7 +280,6 @@ public class TableLazyDynamicModelBean<T> {
 	}
 	
 	
-
 	
 	
 //	private List<Map<String, String>> detailTableModel;
@@ -239,12 +294,6 @@ public class TableLazyDynamicModelBean<T> {
 
 //	private Map<String,T> dynamicModelMap;
 	
-	
-	
-
-	
-	
-
 	
 	private String defSortField = "getId";
 
@@ -265,6 +314,23 @@ public class TableLazyDynamicModelBean<T> {
 	
 	
 	private Map<String, Object> contents = new HashMap<String, Object>();
+
+
+	public List<TableColumn> getTableColumns() {
+		return tableColumns;
+	}
+
+	public void setTableColumns(List<TableColumn> tableColumns) {
+		this.tableColumns = tableColumns;
+	}
+
+	public List<T> getDynamicModelList() {
+		return dynamicModelList;
+	}
+
+	public void setDynamicModelList(List<T> dynamicModelList) {
+		this.dynamicModelList = dynamicModelList;
+	}
 
 	
 	

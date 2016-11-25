@@ -1,5 +1,6 @@
 package com.eugenefe.producer;
 
+import java.io.Serializable;
 import java.util.ResourceBundle;
 
 import javax.enterprise.context.RequestScoped;
@@ -12,14 +13,14 @@ import com.eugenefe.qualifiers.ColumHeaderResource;
 import com.eugenefe.qualifiers.MessageBundle;
 import com.eugenefe.qualifiers.QueryResource;
 
-@RequestScoped
-public class ResourceProducer {
+//@RequestScoped
+public class ResourceProducer implements Serializable{
 	
 	@Inject
     FacesContext facesContext;
 	
-	 @Produces @MessageBundle
-//   @RequestScoped
+	 @Produces 
+	 @MessageBundle
    public ResourceBundle getBundle() {
           FacesContext context = FacesContext.getCurrentInstance();
           return context.getApplication().getResourceBundle(context, "msg");
@@ -32,8 +33,6 @@ public class ResourceProducer {
    }*/
 	
 	@Produces 
-//	@SessionScoped
-//	@RequestScoped
 	@QueryResource
     public ResourceBundle getQueryBundle() {
        /*if (bundle == null) {

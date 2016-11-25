@@ -6,7 +6,7 @@
 
   <h:form id="formDataNavigation">
     <p:growl id="messages" showDetail="true" />
-    <p:accordionPanel id="accoPanel" multiple="true" style="padding : 0px">
+    <p:accordionPanel id="accoPanel" multiple="true" style="padding : 0px" >
       <p:tab id="loginTab" title="User">
         <ui:include src="/fragment/login.xhtml" />
       </p:tab>
@@ -17,9 +17,9 @@
 
       <p:tab id="treeTab" title="Tables">
         <p:scrollPanel id="treeOutPanel" mode="native" style="height : 600px">
-          <p:tree id="treeObjectNavigation2" value="#{dataNavigationListBean.rootNode}" var="node" animate="true" highlight="true" orientation="vertical" selectionMode="single"
+          <p:tree id="treeObjectNavigation2" value="#{dataNavigationBean.rootNode}" var="node" animate="true" highlight="true" orientation="vertical" selectionMode="single"
             draggable="false" droppable="false">
-            <p:ajax event="select" listener="#{tableLazyDynamicModelBean.onNodeSelect}" />
+            
             <p:treeNode expandedIcon="fa fa-folder-open" collapsedIcon="fa fa-folder">
               <h:outputText value="#{node}" />
             </p:treeNode>
