@@ -19,6 +19,7 @@ public class LazySorterTxIfr implements Comparator<NcmErpTxIfr> {
         this.sortField = sortField;
         this.sortOrder = sortOrder;
     }
+    
     public int compare(NcmErpTxIfr car1, NcmErpTxIfr car2) {
         try {
             Object value1 = NcmErpTxIfr.class.getField(this.sortField).get(car1);

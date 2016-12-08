@@ -26,9 +26,7 @@
             draggable="false" droppable="false">
             
             <p:ajax event="select" update="@(form)"  listener="#{listenerBean.onChangeEvent}">
-            	<!-- <f:param value="#{node}" name="selectedNode" /> -->
             </p:ajax>
-            
             
             <p:treeNode expandedIcon="fa fa-folder-open" collapsedIcon="fa fa-folder">
               <h:outputText value="#{node}" />

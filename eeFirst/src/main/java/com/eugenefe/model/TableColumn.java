@@ -28,6 +28,7 @@ public class TableColumn implements Serializable{
 	private String columnName;
 	private String camelColumnName;
 	private String owner;
+	private Integer columnId;
     private String columnType;
     private Integer columnLenght;
     private Integer columnPrecision;
@@ -77,6 +78,15 @@ public class TableColumn implements Serializable{
 
 	public void setOwner(String owner) {
 		this.owner = owner;
+	}
+	
+	@Column(name = "COLUMN_ID")
+	public Integer getColumnId() {
+		return columnId;
+	}
+
+	public void setColumnId(Integer columnId) {
+		this.columnId = columnId;
 	}
 
 	@Column(name = "DATA_TYPE")
@@ -128,3 +138,4 @@ public class TableColumn implements Serializable{
 		this.alignFormat = alignFormat;
 	}
 }
+

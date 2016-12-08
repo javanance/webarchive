@@ -1,8 +1,9 @@
 package com.eugenefe.ncm;
-// Generated Dec 7, 2016 4:47:20 PM by Hibernate Tools 5.2.0.Beta1 with Custom Template_takion!!!!!! 
+// Generated Dec 8, 2016 3:49:34 PM by Hibernate Tools 5.2.0.Beta1 with Custom Template_takion!!!!!! 
 
 import javax.persistence.Id;
 import javax.persistence.Transient;
+import com.eugenefe.util.Navigatable;
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -17,7 +18,7 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "NCM_MST_PROD_TYPE", schema = "NCM")
-public class NcmMstProdType implements java.io.Serializable {
+public class NcmMstProdType implements java.io.Serializable, Navigatable {
 
 	private String prodTypeCd;
 	private String prodTypeNm;

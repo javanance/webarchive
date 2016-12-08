@@ -12,7 +12,7 @@ import org.primefaces.model.SortOrder;
 
 import com.eugenefe.ncm.NcmErpTxIfr;
 
-public class LazyModelTxIfr  extends LazyDataModel<NcmErpTxIfr>{
+public class LazyModelTxIfr  extends LazyDataModel<NcmErpTxIfr> {
 	
 //	@Logger
 //	private Log log;
@@ -41,8 +41,8 @@ public class LazyModelTxIfr  extends LazyDataModel<NcmErpTxIfr>{
     @Override
     public List<NcmErpTxIfr> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String,Object> filters) {
         List<NcmErpTxIfr> data = new ArrayList<NcmErpTxIfr>();
- 
         //filter
+       
         for(NcmErpTxIfr car : datasource) {
             boolean match = true;
  
@@ -55,11 +55,11 @@ public class LazyModelTxIfr  extends LazyDataModel<NcmErpTxIfr>{
  
                         if(filterValue == null || fieldValue.startsWith(filterValue.toString())) {
                             match = true;
-                    }
-                    else {
-                            match = false;
-                            break;
-                        }
+	                    }
+	                    else {
+	                            match = false;
+	                            break;
+	                        }
                     } catch(Exception e) {
                         match = false;
                     }

@@ -1,8 +1,9 @@
 package com.eugenefe.ncm;
-// Generated Dec 7, 2016 4:47:20 PM by Hibernate Tools 5.2.0.Beta1 with Custom Template_takion!!!!!! 
+// Generated Dec 8, 2016 3:49:34 PM by Hibernate Tools 5.2.0.Beta1 with Custom Template_takion!!!!!! 
 
 import javax.persistence.Id;
 import javax.persistence.Transient;
+import com.eugenefe.util.Navigatable;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -18,7 +19,7 @@ import javax.persistence.Table;
 @Entity
 @IdClass(value = NcmMstBmcompositeTmpId.class)
 @Table(name = "NCM_MST_BMCOMPOSITE_TMP", schema = "NCM")
-public class NcmMstBmcompositeTmp implements java.io.Serializable {
+public class NcmMstBmcompositeTmp implements java.io.Serializable, Navigatable {
 
 	private String bmId;
 	private String bmAppoint;

@@ -1,8 +1,9 @@
 package com.eugenefe.ncm;
-// Generated Dec 7, 2016 4:47:20 PM by Hibernate Tools 5.2.0.Beta1 with Custom Template_takion!!!!!! 
+// Generated Dec 8, 2016 3:49:34 PM by Hibernate Tools 5.2.0.Beta1 with Custom Template_takion!!!!!! 
 
 import javax.persistence.Id;
 import javax.persistence.Transient;
+import com.eugenefe.util.Navigatable;
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -19,7 +20,7 @@ import javax.persistence.TemporalType;
 @Entity
 @IdClass(value = NcmErpAccountIfrId.class)
 @Table(name = "NCM_ERP_ACCOUNT_IFR", schema = "NCM")
-public class NcmErpAccountIfr implements java.io.Serializable {
+public class NcmErpAccountIfr implements java.io.Serializable, Navigatable {
 
 	private long eaiSeqNo;
 	private String acctNo;
@@ -241,6 +242,7 @@ public class NcmErpAccountIfr implements java.io.Serializable {
 	 * @return String
 	 */
 	@Transient
+	@Override
 	public String idString() {
 		StringBuffer buffer = new StringBuffer();
 		buffer.append("#").append(getEaiSeqNo());

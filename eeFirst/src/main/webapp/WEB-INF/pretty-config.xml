@@ -25,6 +25,12 @@
 	<view-id value="/view/v900DataNavigation.xhtml" />
 </url-mapping>
 
+<url-mapping id="v901DataNavigation1">
+	<pattern value="/v901DataNavigation" />
+	<view-id value="/view/v901DataNavigation.xhtml" />
+</url-mapping>
+
+
 </pretty-config>
 
 

@@ -138,9 +138,9 @@ public class DataBaseService implements Serializable {
 	}
 	
 	public List<NcmErpTxIfr> generateTableLazyContents1(String tableName) {
-		logger.info("DataBaseService_entity Name : {}",ENamingConvention.SNAKE_CASE.convertToCamelCase(tableName));
 		String entityName = WordUtils.capitalizeFully(tableName, new char[] { '_' }).replaceAll("_", "");
 		String queryString = "from " + entityName;
+		logger.info("DataBaseService_entity Name : {}, {}",entityName, ENamingConvention.SNAKE_CASE.convertToCamelCase(tableName));
 		List<Object> aaa = entityManager.createQuery("from " + entityName).getResultList();
 		
 		logger.info("DataBaseService_generateTableLazyContents : {}", aaa.size());

@@ -18,6 +18,7 @@ import com.eugenefe.converter.LazyModelTxIfr;
 import com.eugenefe.ncm.NcmErpTxIfr;
 import com.eugenefe.qualifiers.SelectedTable;
 import com.eugenefe.service.DataBaseService;
+import com.eugenefe.util.Navigatable;
 
 //import org.jboss.seam.framework.Query;
 
@@ -37,13 +38,13 @@ public class DataViewerLazyBean implements Serializable{
 	@Inject @Param(pathIndex=1)
 	private TreeNode selectedNode;
 	
-	private LazyModelNavigatable navi;
+	private LazyDataModel<Navigatable> navi;
 //	private LazyModelTxIfr txIfr;
 	
 	private LazyDataModel<NcmErpTxIfr> txIfr;
 	
 	public DataViewerLazyBean() {
-		System.out.println("Construction DataViewerBean_" );
+		System.out.println("Construction DataViewerLazyBean_" );
 	}
 	
 //	@PostConstruct
@@ -64,6 +65,7 @@ public class DataViewerLazyBean implements Serializable{
 		}
 		dbService.setTableColumns(dbService.generateColumns("NCM_ERP_TX_IFR"));
 		txIfr = new LazyModelTxIfr(dbService.generateTableLazyContents1("NCM_ERP_TX_IFR"));
+		logger.info("PostConstruct 1:{}", txIfr);
 	}
 	
 	public void testPretty(){	
@@ -85,8 +87,8 @@ public class DataViewerLazyBean implements Serializable{
 	}	
 		
 	
-//	public void onChangeEvent(String selectedTableName){
-	public void onChangeEvent(@Observes @SelectedTable String selectedTableName){	
+	public void onChangeEvent(String selectedTableName){
+//	public void onChangeEvent(@Observes @SelectedTable String selectedTableName){	
 //		this.selectedTableName = selectedTableName;
 		dbService.getSelectedTable().setTableName(selectedTableName);
 //		logger.info("Selected Table: {},{}", dbService.getSelectedTable().getTableName());
@@ -129,11 +131,11 @@ public class DataViewerLazyBean implements Serializable{
 		this.selectedTableName = selectedTableName;
 	}
 
-	public LazyModelNavigatable getNavi() {
+	public LazyDataModel<Navigatable> getNavi() {
 		return navi;
 	}
 
-	public void setNavi(LazyModelNavigatable navi) {
+	public void setNavi(LazyDataModel<Navigatable> navi) {
 		this.navi = navi;
 	}
 
