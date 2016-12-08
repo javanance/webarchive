@@ -4,5 +4,6 @@ public interface Navigatable {
 	
 	public String idString();
 	
+	
 
 }

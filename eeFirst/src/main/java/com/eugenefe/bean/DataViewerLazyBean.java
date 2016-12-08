@@ -32,10 +32,10 @@ public class DataViewerLazyBean implements Serializable{
 	@Inject
 	private DataBaseService dbService;
 	
-	@Inject @Param(pathIndex=0)
+//	@Inject @Param(pathIndex=0)
 	private String selectedTableName;
 	
-	@Inject @Param(pathIndex=1)
+//	@Inject @Param(pathIndex=1)
 	private TreeNode selectedNode;
 	
 	private LazyDataModel<Navigatable> navi;
@@ -63,9 +63,11 @@ public class DataViewerLazyBean implements Serializable{
 			dbService.getSelectedTable().setTableName(selectedNode.getData().toString());
 			onChangeEvent(selectedNode.getData().toString());
 		}
-		dbService.setTableColumns(dbService.generateColumns("NCM_ERP_TX_IFR"));
-		txIfr = new LazyModelTxIfr(dbService.generateTableLazyContents1("NCM_ERP_TX_IFR"));
-		logger.info("PostConstruct 1:{}", txIfr);
+//		dbService.setTableColumns(dbService.generateColumns("NCM_ERP_TX_IFR"));
+//		txIfr = new LazyModelTxIfr(dbService.generateTableLazyContents1("NCM_ERP_TX_IFR"));
+		dbService.setTableColumns(dbService.generateColumns("NCM_MST_SAA_CODE"));
+		navi = new LazyModelNavigatable<Navigatable>(dbService.generateTableLazyContents("NCM_MST_SAA_CODE"));
+		logger.info("PostConstruct 1:{}, {}", navi, txIfr);
 	}
 	
 	public void testPretty(){	
@@ -94,12 +96,12 @@ public class DataViewerLazyBean implements Serializable{
 //		logger.info("Selected Table: {},{}", dbService.getSelectedTable().getTableName());
 		logger.info("Selected Tableaaaaaaaaaaaaaaaaaaaaa: {},{}", selectedTableName, dbService.getSelectedTable().getTableName());
 		dbService.setTableColumns(dbService.generateColumns(selectedTableName));
-		dbService.setTableContents(dbService.generateTableContents(selectedTableName));
+//		dbService.setTableContents(dbService.generateTableContents(selectedTableName));
 
-		navi = new LazyModelNavigatable(dbService.generateTableLazyContents(selectedTableName));
 		logger.info("Selected Naviiiiiiiiiiiiiiiiiiiiiii: {},{}", dbService.generateTableLazyContents(selectedTableName).size(), navi.getPageSize());
 		
-		txIfr = new LazyModelTxIfr(dbService.generateTableLazyContents1(selectedTableName));
+//		txIfr = new LazyModelTxIfr(dbService.generateTableLazyContents1(selectedTableName));
+		navi = new LazyModelNavigatable<Navigatable>(dbService.generateTableLazyContents(selectedTableName));
 		
 	}
 	

@@ -13,47 +13,49 @@ import com.eugenefe.entities.MarketVariable;
 import com.eugenefe.enums.ENamingConvention;
 import com.eugenefe.util.Navigatable;
 
-public class LazyModelNavigatable  extends LazyDataModel<Navigatable>{
+public class LazyModelNavigatable<T extends Navigatable>  extends LazyDataModel<T>{
 	
 //	@Logger
 //	private Log log;
 	
-	private List<Navigatable> datasource;  
+	private List<T> datasource;  
     
     
-	public LazyModelNavigatable(List<Navigatable> datasource) {  
+	public LazyModelNavigatable(List<T> datasource) {  
         this.datasource = datasource;  
     }  
       
     @Override  
-    public Navigatable getRowData(String rowKey) {  
+    public T getRowData(String rowKey) {  
         for(Navigatable aa : datasource) {  
             if(aa.idString().equals(rowKey))  
-                return aa;  
+                return (T)aa;  
         }  
         return null;  
     }  
   
     @Override  
-    public Object getRowKey(Navigatable navi) {  
+    public Object getRowKey(T navi) {  
         return navi.idString();  
     }  
     
     
     @Override
     /*public List<MarketVariable> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String,String> filters) {*/    
-    public List<Navigatable> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String,Object> filters) {  
-        List<Navigatable> data = new ArrayList<Navigatable>();  
+    public List<T> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String,Object> filters) {  
+        List<T> data = new ArrayList<T>();  
                 
         //filter  
-        System.out.println("Before in the filter Market :"+ filters.keySet().size());
+//        System.out.println("Before in the filter Market :"+ filters.keySet().size());
         for(Navigatable navi : datasource) {  
-        	System.out.println("In the Loop");
+//        	System.out.println("In the Loop");
         	boolean match = true;
         	
             for(String it: filters.keySet()){	
             	try {  
-                    String filterProperty = ENamingConvention.SNAKE_CASE.convertToCamelCase(it);
+//                    String filterProperty = ENamingConvention.SNAKE_CASE.convertToCamelCase(it);
+                    String filterProperty = it;
+                    
                     Field filterField = navi.getClass().getDeclaredField(filterProperty);
                     filterField.setAccessible(true);
                     
@@ -77,7 +79,7 @@ public class LazyModelNavigatable  extends LazyDataModel<Navigatable>{
             }  
   
             if(match) {  
-                data.add(navi);  
+                data.add((T)navi);  
             }  
         }  
         //sort  
