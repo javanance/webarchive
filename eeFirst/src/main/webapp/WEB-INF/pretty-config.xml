@@ -6,32 +6,26 @@
 
 <url-mapping id="home">
 	<pattern value="/home" />
-	<view-id value="/view/home.gof" />
+	<view-id value="/view/home.xhtml" />
 </url-mapping>
-<!-- 
-<url-mapping id="viewCategory">
-	<pattern value="/navi" />
-	<view-id value="/view/v900DataNavigation.xhtml" />
-	<action>#{navigationBean.goToDataViewer}</action>
-	<query-param name="selectedTableName"> #{dataViewerBean.selectedTableName}</query-param>
-</url-mapping> -->
 
-<!-- <url-mapping id="viewCategory1">
-	<pattern value="/navi/#{ selectedTableName:dataViewerBean.selectedTableName}" />
-	<view-id value="/view/v900DataNavigation.xhtml" />
-</url-mapping> -->
+<url-mapping id="v800Settings1">
+	<pattern value="/v800Settings" />
+	<view-id value="/view/v800Settings.xhtml" />
+</url-mapping>
 
-<url-mapping id="viewCategory12">
-	<pattern value="/store12/#{selectedTableName1}" />
-	<view-id value="/view/login.xhtml" />
+<url-mapping id="v900DataNavigation1">
+	<pattern value="/v900DataNavigation" />
+	<view-id value="/view/v900DataNavigation.xhtml" />
 </url-mapping>
 
 
-<!-- <url-mapping id="login">
-	<pattern value="/login/#{ selectedTableName : dataViewerBean.selectedTableName }" />
-	<view-id value="/view/v900DataNavigation.gof" />
-	<action> #{dataViewerBean.onChangeEvent(dataViewerBean.selectedTableName)}</action>
-</url-mapping> -->
+<url-mapping id="v900DataNavigation2">
+	<pattern value="/v900DataNavigation/#{selectedTableName}" />
+	<view-id value="/view/v900DataNavigation.xhtml" />
+</url-mapping>
+
 </pretty-config>
+
 
 
