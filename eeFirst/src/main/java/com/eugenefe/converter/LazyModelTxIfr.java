@@ -39,70 +39,13 @@ public class LazyModelTxIfr  extends LazyDataModel<NcmErpTxIfr> {
     }  
     
     @Override
-    public List<NcmErpTxIfr> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String,Object> filters) {
-        List<NcmErpTxIfr> data = new ArrayList<NcmErpTxIfr>();
-        //filter
-       
-        for(NcmErpTxIfr car : datasource) {
-            boolean match = true;
- 
-            if (filters != null) {
-                for (Iterator<String> it = filters.keySet().iterator(); it.hasNext();) {
-                    try {
-                        String filterProperty = it.next();
-                        Object filterValue = filters.get(filterProperty);
-                        String fieldValue = String.valueOf(car.getClass().getField(filterProperty).get(car));
- 
-                        if(filterValue == null || fieldValue.startsWith(filterValue.toString())) {
-                            match = true;
-	                    }
-	                    else {
-	                            match = false;
-	                            break;
-	                        }
-                    } catch(Exception e) {
-                        match = false;
-                    }
-                }
-            }
- 
-            if(match) {
-                data.add(car);
-            }
-        }
- 
-        //sort
-        if(sortField != null) {
-            Collections.sort(data, new LazySorterTxIfr(sortField, sortOrder));
-        }
- 
-        //rowCount
-        int dataSize = data.size();
-        this.setRowCount(dataSize);
- 
-        //paginate
-        if(dataSize > pageSize) {
-            try {
-                return data.subList(first, first + pageSize);
-            }
-            catch(IndexOutOfBoundsException e) {
-                return data.subList(first, first + (dataSize % pageSize));
-            }
-        }
-        else {
-            return data;
-        }
-    }
-    
-//    @Override
-    /*public List<MarketVariable> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String,String> filters) {*/    
-    public List<NcmErpTxIfr> load1(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String,Object> filters) {  
+    public List<NcmErpTxIfr> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String,Object> filters) {  
         List<NcmErpTxIfr> data = new ArrayList<NcmErpTxIfr>();  
                 
         //filter  
-        System.out.println("Before in the filter Market :"+ filters.keySet().size());
+//        System.out.println("Before in the filter Market :"+ filters.keySet().size());
         for(NcmErpTxIfr navi : datasource) {  
-        	System.out.println("In the Loop");
+//        	System.out.println("In the Loop");
         	boolean match = true;
         	
             for(String it: filters.keySet()){	

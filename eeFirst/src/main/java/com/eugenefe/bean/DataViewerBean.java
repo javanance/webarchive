@@ -73,8 +73,8 @@ public class DataViewerBean implements Serializable{
 		dbService.setTableContents(dbService.generateTableContents(selectedTableName));
 	}
 	
-//	public void onChangeEvent(String selectedTableName){
-	public void onChangeEvent(@Observes @SelectedTable String selectedTableName){	
+	public void onChangeEvent(String selectedTableName){
+//	public void onChangeEvent(@Observes @SelectedTable String selectedTableName){	
 //		this.selectedTableName = selectedTableName;
 		dbService.getSelectedTable().setTableName(selectedTableName);
 //		logger.info("Selected Table: {},{}", dbService.getSelectedTable().getTableName());

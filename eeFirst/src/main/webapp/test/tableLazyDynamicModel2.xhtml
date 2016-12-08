@@ -11,24 +11,41 @@
   <h:form id="formDynamicModel">
      <h:outputText value="Model2" />
     
-    <p:dataTable id="tableDynamicModel" value="#{dataViewerLazyBean.txIfr}" var="_dynModel"
+    <p:dataTable id="tableDynamicModel" value="#{dataViewerLazyBean.txIfr}" var="_row"
       emptyMessage="No History Data found with given criteria. Change the Dates"
-      rowKey="#{_dynModel}"
+      rowKey="#{_row.idString}"
       lazy="true"
-      sortMode="multiple"
+      sortMode="single"
       resizableColumns="true" resizeMode="expand"
+      paginatorAlwaysVisible="true"
       paginator="true" paginatorPosition="bottom" rows="10"
       paginatorTemplate="{FirstPageLink} {PreviousPageLink} {JumpToPageDropdown} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
       rowsPerPageTemplate="10,15,25,50" 
      
-      style="margin: 0.5em; border-top-left-radius: 8px; border-top-right-radius: 8px">
+      style="margin: 0.5em; border-top-left-radius: 8px; border-top-right-radius: 8px" >
      
-     <p:column id="co1" headerText="baseDate" sortBy="#{_dynModel.baseDate}" filterBy="#{_dynModel.baseDate}">
-     	<h:outputLabel value="#{_dynModel.baseDate}" />
+     <p:column id="co1" headerText="baseDate" sortBy="#{_row.baseDate}" filterBy="#{_row.baseDate}" filterMatchMode="contains">
+     	<h:outputLabel value="#{_row.baseDate}" />
      </p:column>
-     <p:column id="co2" headerText="prodNm"  sortBy="#{_dynModel.prodNm}" filterBy="#{_dynModel.prodNm}">
-     	<h:outputLabel value="#{_dynModel.prodNm}" />
+     <p:column id="co2" headerText="prodNm"  sortBy="#{_row.prodNm}" filterBy="#{_row.prodNm}">
+     	<h:outputLabel value="#{_row.prodNm}" />
      </p:column>
+     
+     <p:column id="co3" headerText="acctCode"  >
+     	<h:outputLabel value="#{_row.acctCode}" />
+     </p:column>
+     
+     <p:column id="co4" headerText="bizDivNm"  >
+     	<h:outputLabel value="#{_row.bizDivNm}" />
+     </p:column>
+     
+     <p:column id="co5" headerText="captDivNm" >
+     	<h:outputLabel value="#{_row.captDivNm}" />
+     </p:column>
+     <p:column id="co6" headerText="id" >
+     	<h:outputLabel value="#{_row.idString()}" />
+     </p:column>
+     
     </p:dataTable> 
    
   </h:form>

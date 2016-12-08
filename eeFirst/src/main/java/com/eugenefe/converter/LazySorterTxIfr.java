@@ -22,9 +22,16 @@ public class LazySorterTxIfr implements Comparator<NcmErpTxIfr> {
     
     public int compare(NcmErpTxIfr car1, NcmErpTxIfr car2) {
         try {
-            Object value1 = NcmErpTxIfr.class.getField(this.sortField).get(car1);
-            Object value2 = NcmErpTxIfr.class.getField(this.sortField).get(car2);
- 
+            Field field1 = NcmErpTxIfr.class.getDeclaredField(this.sortField);
+    		field1.setAccessible(true);
+    		Object value1 = field1.get(car1);
+    		Object value2 = field1.get(car2);
+    		if(value1 ==null  ){
+    			value1 = "";
+    		}
+    		if(value2 ==null){
+    			value2="";
+    		}
             int value = ((Comparable)value1).compareTo(value2);
              
             return SortOrder.ASCENDING.equals(sortOrder) ? value : -1 * value;
