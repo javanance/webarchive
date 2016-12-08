@@ -8,20 +8,27 @@
 	xmlns:o="http://omnifaces.org/ui"  xmlns:of="http://omnifaces.org/functions">
 
 
-    <p:growl id="messages" showDetail="true" />
-    <p:accordionPanel id="accoPanel" multiple="true" style="padding : 0px" >
+      <p:growl id="messages" showDetail="true" />
+    <p:accordionPanel id="accoPanel" multiple="true" activeIndex="0,1,2" style="padding : 0px" >
       <p:tab id="loginTab" title="User">
         <ui:include src="/fragment/login.xhtml" />
       </p:tab>
 
       <p:tab id="zzzzzzzTab" title="My Menu">
+      			<h:outputText value="aaaa"/>
       </p:tab>
 
 
       <p:tab id="treeTab" title="Tables">
-        <!-- <p:scrollPanel id="treeOutPanel" mode="native" style="height : 600px">
+        <p:scrollPanel id="treeOutPanel" mode="native" style="height : 50%">
           <p:tree id="treeObjectNavigation2" value="#{dataNavigationBean.rootNode}" var="node" animate="true" highlight="true" orientation="vertical" selectionMode="single"
+            selection="#{dataNavigationBean.selectedNode}"
             draggable="false" droppable="false">
+            
+            <p:ajax event="select" update="@(form)"  listener="#{listenerBean.onChangeEvent}">
+            	<!-- <f:param value="#{node}" name="selectedNode" /> -->
+            </p:ajax>
+            
             
             <p:treeNode expandedIcon="fa fa-folder-open" collapsedIcon="fa fa-folder">
               <h:outputText value="#{node}" />
@@ -32,9 +39,8 @@
             </p:treeNode>
 
           </p:tree>
-        </p:scrollPanel> -->
+        </p:scrollPanel>
       </p:tab>
-
     </p:accordionPanel>
 
 

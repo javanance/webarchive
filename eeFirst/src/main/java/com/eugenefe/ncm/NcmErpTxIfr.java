@@ -4,6 +4,8 @@ package com.eugenefe.ncm;
 import javax.persistence.Id;
 import javax.persistence.Transient;
 
+import com.eugenefe.util.Navigatable;
+
 import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.Column;
@@ -20,7 +22,7 @@ import javax.persistence.TemporalType;
 @Entity
 @IdClass(value = NcmErpTxIfrId.class)
 @Table(name = "NCM_ERP_TX_IFR", schema = "NCM")
-public class NcmErpTxIfr implements java.io.Serializable {
+public class NcmErpTxIfr implements java.io.Serializable, Navigatable {
 
 	private long eaiSeqNo;
 	private String baseDate;
