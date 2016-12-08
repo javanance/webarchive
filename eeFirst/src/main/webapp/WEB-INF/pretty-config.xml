@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<pretty-config xmlns="http://ocpsoft.org/schema/rewrite-config-prettyfaces" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xsi:schemaLocation="http://ocpsoft.org/schema/rewrite-config-prettyfaces
+                      http://ocpsoft.org/xml/ns/prettyfaces/rewrite-config-prettyfaces.xsd">
+
+<url-mapping id="home">
+	<pattern value="/home" />
+	<view-id value="/view/home.gof" />
+</url-mapping>
+<!-- 
+<url-mapping id="viewCategory">
+	<pattern value="/navi" />
+	<view-id value="/view/v900DataNavigation.xhtml" />
+	<action>#{navigationBean.goToDataViewer}</action>
+	<query-param name="selectedTableName"> #{dataViewerBean.selectedTableName}</query-param>
+</url-mapping> -->
+
+<!-- <url-mapping id="viewCategory1">
+	<pattern value="/navi/#{ selectedTableName:dataViewerBean.selectedTableName}" />
+	<view-id value="/view/v900DataNavigation.xhtml" />
+</url-mapping> -->
+
+<url-mapping id="viewCategory12">
+	<pattern value="/store12/#{selectedTableName1}" />
+	<view-id value="/view/login.xhtml" />
+</url-mapping>
+
+
+<!-- <url-mapping id="login">
+	<pattern value="/login/#{ selectedTableName : dataViewerBean.selectedTableName }" />
+	<view-id value="/view/v900DataNavigation.gof" />
+	<action> #{dataViewerBean.onChangeEvent(dataViewerBean.selectedTableName)}</action>
+</url-mapping> -->
+</pretty-config>
+
+

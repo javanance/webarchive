@@ -2,38 +2,47 @@ package com.eugenefe.bean;
 
 import java.io.Serializable;
 
-import javax.enterprise.context.SessionScoped;
+import javax.annotation.PostConstruct;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.primefaces.model.TreeNode;
 import org.slf4j.Logger;
 
-import com.eugenefe.qualifiers.TableNode;
+import com.eugenefe.service.TableNameTreeService;
 
 @Named
-//@ViewScoped
+@ViewScoped
 //@RequestScoped
- @SessionScoped
+// @SessionScoped
 public class DataNavigationBean implements Serializable{
 	 private static final long serialVersionUID = 1L;
 
 	@Inject
 	private Logger logger;
 
-
-	@Inject
-	@TableNode
 	private TreeNode rootNode;
+	
+	private TreeNode selectedNode;
+	
+	@Inject
+	private TableNameTreeService treeService;
 
 	public DataNavigationBean() {
 		System.out.println("Construction DataNavigationListBean");
-
+	}
+	
+	@PostConstruct
+	public void create(){
+		logger.info("Construction Post Construct :{}", treeService.getRootNode().getChildCount());
+		rootNode = treeService.getRootNode();
 	}
 
 	// ***********************************Getter and Setter*********************
 
 	public TreeNode getRootNode() {
+//		logger.info("rootNode children size: {},{}", treeService.getRootNode().getChildCount(), rootNode.getChildren().size());
 		return rootNode;
 	}
 
@@ -41,5 +50,12 @@ public class DataNavigationBean implements Serializable{
 		this.rootNode = rootNode;
 	}
 
+	public TreeNode getSelectedNode() {
+		return selectedNode;
+	}
+
+	public void setSelectedNode(TreeNode selectedNode) {
+		this.selectedNode = selectedNode;
+	}
 
 }

@@ -1,23 +1,22 @@
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
-  xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions" xmlns:o="http://omnifaces.org/ui" xmlns:of="http://omnifaces.org/functions"
-  template="/templates/templatePrimeMain.xhtml">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" 
+	xmlns:f="http://xmlns.jcp.org/jsf/core" 
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:o="http://omnifaces.org/ui" xmlns:of="http://omnifaces.org/functions"
+	template="/templates/templatePrimeMain.xhtml">
+	<f:metadata>
+		<f:viewParam name="selectedTableName" value="#{dataViewerBean.selectedTableName}"></f:viewParam>
+		<f:viewAction  action="#{layoutBean.initLayout('/view/v900DataNavigation')}"></f:viewAction>/>
+	</f:metadata>
 
-  <f:metadata>
-    <f:viewAction action="#{layoutInit.initLayout('/view/v900DataNavigation')}"></f:viewAction>/>
-  </f:metadata>
-    
-  <ui:define name="layoutLeft">
-    <ui:include src="/test/treeObjectNavigation2.xhtml" />
-  </ui:define>
+	<ui:define name="layoutLeft">
+		<ui:include src="/test/treeObjectNavigation.xhtml" />
+	</ui:define>
 
-  <ui:define name="layoutCenter">
-    <ui:include src="/test/tableLazyDynamicModel.xhtml" >
-      <ui:param name="tableList"     value="#{tableLazyDynamicModelBean.lazyModelDynamic}" />
-      <ui:param name="columnList"    value="#{tableLazyDynamicModelBean.tableColumns}" />
-    </ui:include>
-   
-  </ui:define>
-
+	<ui:define name="layoutCenter">
+		<!-- <ui:include src="/test/tableLazyDynamicModel.xhtml" /> -->
+	</ui:define>
 </ui:composition>

@@ -1,19 +1,18 @@
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" 
-  xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
-  xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions" xmlns:o="http://omnifaces.org/ui" xmlns:of="http://omnifaces.org/functions"
-  template="/templates/templatePrimeMain.xhtml">
-
-  <f:metadata>
-    <!-- <f:viewParam name="isin" value="#{geoChartController.lable}"></f:viewParam> -->
-    <f:viewAction action="#{layoutInit.initLayout('/home')}"></f:viewAction>/>
-  </f:metadata>
-  <ui:define name="layoutLeft">
-      <ui:include src="/fragment/login.xhtml" />
-      <!-- <ui:include src="/fragment/tableLazyMarketVariables.xhtml" /> -->
-      <!-- <f:param name="lazyModels" value="#{lazyMarketVariables}"/> -->
-   </ui:define>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" 
+	xmlns:f ="http://xmlns.jcp.org/jsf/core" 
+	xmlns:h ="http://xmlns.jcp.org/jsf/html"
+	xmlns:p ="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions" 
+	xmlns:o ="http://omnifaces.org/ui"  xmlns:of="http://omnifaces.org/functions"
+	template="/templates/templatePrimeMain.xhtml">
+	
+	<f:metadata>
+		<f:viewAction  action="#{layoutBean.initLayout('/view/home')}"></f:viewAction>/>
+	</f:metadata>
+	
+	
   
   <ui:define name="layoutCenter">
     <p:panel id="homePenel" >
@@ -24,12 +23,31 @@
       <p:commandButton id="testButton" value="#{p:component('registerDlg')}" actionListener="#{sampleDialog.view()}" />
       <p:commandButton id="testButto1" value="View login" actionListener="#{sampleDialog.viewLogin()}" /> 
       <p:commandButton id="testButto2" value="Show" type="button" onclick="PF('registerDlg').show()"  />
-      <!-- <p:commandButton id="testButto2" value="Show" type="button" onclick="#{p:widgetVar('dlgCollection:registerDlg')}.show()"  /> -->
+  
+      <p:link outcome="/view/v900DataNavigation" value="linkToNavigation">
+      	<f:param name="selectedTableName" value="NCM_BAT_LOG"></f:param>
+      </p:link>
+       <p/>
+      <p:link outcome="/login" value="login1">
+       	<f:param name="selectedTableName1" value="NCM_BAT_LOG"></f:param>
+      </p:link>
+      <p/>
+      <p:link outcome="/view/v900DataNavigation" value="linkToNaviWithOutParam">
+      </p:link>
       
-      
+      <p:commandLink id="adfasdfasdf" action="pretty:viewCategory"  value="commandLinkToNavi"  shape="rect">
+      	<f:param name="selectedTableName" value="NCM_BAT_LOG"></f:param>
+      </p:commandLink>
+       <p/>
+      <p:commandLink id="adfasdfasdf12" action="#{navigationBean.goToDataViewer}"  value="commandLinkToNaviAction"  shape="rect">
+      </p:commandLink>
+       <p/>
+      <p:commandLink id="adfasdfasdf12111" action="/view/home"  value="commandLinkToNavi111"  shape="rect">
+      	<f:param name="selectedTableName1" value="NCM_BAT_LOG"></f:param>
+      </p:commandLink>
       
       <p:galleria id="galleria" value="#{imageService.imageNames}" var="image"  style="border : none">
-      <p:graphicImage id="homeImage" value="/img/adv/#{image}" />
+     	 <p:graphicImage id="homeImage" value="/img/adv/#{image}" />
       </p:galleria>
       </h:form> 
 
@@ -63,3 +81,4 @@
 
 
 </ui:composition>
+

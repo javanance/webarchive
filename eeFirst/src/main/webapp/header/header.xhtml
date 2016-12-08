@@ -7,14 +7,13 @@
   <!-- <p:layout collapseTitle="close" resizeTitle="resize" widgetVar="innerLayout"> -->
   <p:layout id="headerLayout" >
     <p:layoutUnit id="headerLeftLayoutUnit" position="west" size="200" gutter="4"   >
-      <h:form id="logoForm" >
-        <p:commandLink id="logoLink"  action="http://localhost:8080/eeFirt/home}">
+      
+        <p:link id="logoLink"  outcome="/view/home.xhtml">
         <!-- <p:commandLink id="logoLink"  action="#{viewNavigation.getRedirectUrl('Home')}"> -->
           <p:graphicImage id="logoImage" title="#{msg.goToHome}" library="img" name="Gof_conv_margin_grey.png" width="90%" height="90%"  style="margin: 1em 2em"/>
           <div align="center">
           </div>
-        </p:commandLink>
-      </h:form>
+        </p:link>
 
     </p:layoutUnit>
 
@@ -22,13 +21,14 @@
       <ui:include src="/fragment/login.xhtml" />
     </p:layoutUnit>
 
-    <p:layoutUnit id="headerCentorLayoutUnit" position="center" resizable="false" gutter="4" >
+    <p:layoutUnit id="headerCenterLayoutUnit" position="center" resizable="false" gutter="4" >
       <p:graphicImage id="topCenterImage" value="/img/adv/vienna-171444.jpg" height="70%" width="100%" />
-      <ui:include src="/menubar/primeMegaMenu.xhtml" />
+      <ui:include src="menubar/primeMegaMenu.xhtml" />
     </p:layoutUnit>
   </p:layout>
   <ui:include src="/fragment/dialogCollection.xhtml" />
 </ui:composition>
+
 
 
 

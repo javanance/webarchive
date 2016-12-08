@@ -1,58 +1,59 @@
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" 
-  xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
-  xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions" xmlns:o="http://omnifaces.org/ui" xmlns:of="http://omnifaces.org/functions"
+  xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html"
+  xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions" 
+  xmlns:o="http://omnifaces.org/ui" xmlns:of="http://omnifaces.org/functions"
   template="/templates/templatePrimeMain.xhtml">
   
-   <f:metadata>
-    <f:viewAction action="#{layoutInit.initLayout('/view/v800Settings')}"></f:viewAction>/>
-    </f:metadata>
-  <ui:define name="layoutCenter">
-    <h:form id="settingsForm">
-      <p:tabView id="tabView" widgetVar="settingsTabview" >
-        <p:tab id="registerTab" title="#{msg.register}" rendered="#{not userLoginView.loggedIn}" titleStyleClass="takion">
-          <ui:include src="/fragment/register.xhtml" />
-          <!-- <p:commandLink id="com111" onclick="PF('settingsTabview').select(2)"  value="aaa"></p:commandLink> -->
+<f:metadata>
+  <f:viewAction action="#{layoutInit.initLayout('/view/v800Settings')}"></f:viewAction>/>
+</f:metadata>
+<ui:define name="layoutCenter">
+    <p:tabView id="tabView" widgetVar="settingsTabview" >
+      <p:tab id="registerTab" title="#{msg.register}" rendered="#{not userLoginView.loggedIn}" titleStyleClass="takion">
+        <ui:include src="/fragment/register.xhtml" />
+        <!-- <p:commandLink id="com111" onclick="PF('settingsTabview').select(2)"  value="aaa"></p:commandLink> -->
 
-        </p:tab>
+      </p:tab>
 
-        <p:tab id="generalSettingTab" title="#{msg.themeAndLanguage}" titleStyleClass="takion">
-          <p:growl id="growl1" showDetail="true" />
-          <p:panelGrid id="pg1" columns="2" cellpadding="50">
+      <p:tab id="generalSettingTab" title="#{msg.themeAndLanguage}" titleStyleClass="takion">
+		<h:form id="settingsForm">
+			<p:growl id="growl1" showDetail="true" />
+			<p:panelGrid id="pg1" columns="2" cellpadding="50">
 
-            <p:outputLabel id="themeLabel" for="themeSwitcher" value="#{msg.theme}" style="width:200px" />
-           
-              <p:themeSwitcher id="themeSwitcher" value="#{themeSwitcher.selectedTheme}" var="t" converter="selectThemeConverter" style="width:200px">
-           <!--  <p:themeSwitcher id="themeSwitcher" value="#{themeSwitcher.selectedTheme}" var="t" converter="omnifaces.SelectItemsConverter" style="width:200px"> -->
-              <f:selectItems value="#{themeSwitcher.themeList}" var="_theme" itemLabel="#{_theme.id}-#{_theme.displayName}" itemValue="#{_theme}" />
-                <p:column>
-                  <p:outputLabel id="selectedThemeLabel" value="#{t.id}-#{t.displayName} " />
-                </p:column>
-                <p:ajax listener="#{themeSwitcher.saveTheme()}" update="growl1" />
-            </p:themeSwitcher>
+				<p:outputLabel id="themeLabel" for="themeSwitcher" value="#{msg.theme}" style="width:200px" />
 
-
-
-            <p:outputLabel id="localeSelecterLabel" for="localeSelecter" value="#{msg.language}" style="width:200px" />
-            <p:selectOneMenu id="localeSelecter" value="#{localeSelector.language}" style="width:200px">
-              <f:selectItems value="#{localeSelector.availableLanguages}" />
-              <!-- <p:ajax listener="#{localeSelector.language}" update="@(form)" /> -->
-              <p:ajax listener="#{localeSelector.select()}" update="@(form)" />
-            </p:selectOneMenu>
-
-            <f:facet name="footer">
-              <!-- <p:commandButton id="settingSaveButton" value="#{msg.save}" icon="ui-icon-check" action="#{localeSelector.select()}" /> -->
-              <p:commandButton id="settingSaveButton" value="#{msg.save}" icon="fa fa-check" action="#{localeSelector.select()}" />
-              
-               
-            </f:facet>
-          </p:panelGrid>
+				<p:themeSwitcher id="themeSwitcher" value="#{themeSwitcher.selectedTheme}" var="t" converter="selectThemeConverter" style="width:200px">
+					<!--  <p:themeSwitcher id="themeSwitcher" value="#{themeSwitcher.selectedTheme}" var="t" converter="omnifaces.SelectItemsConverter" style="width:200px"> -->
+					<f:selectItems value="#{themeSwitcher.themeList}" var="_theme" itemLabel="#{_theme.id}-#{_theme.displayName}" itemValue="#{_theme}" />
+					<p:column>
+						<p:outputLabel id="selectedThemeLabel" value="#{t.id}-#{t.displayName} " />
+					</p:column>
+					<p:ajax listener="#{themeSwitcher.saveTheme()}" update="growl1" />
+				</p:themeSwitcher>
 
 
-        </p:tab>
 
-      </p:tabView>
-    </h:form>
-  </ui:define>
+				<p:outputLabel id="localeSelecterLabel" for="localeSelecter" value="#{msg.language}" style="width:200px" />
+				<p:selectOneMenu id="localeSelecter" value="#{localeSelector.language}" style="width:200px">
+					<f:selectItems value="#{localeSelector.availableLanguages}" />
+					<!-- <p:ajax listener="#{localeSelector.language}" update="@(form)" /> -->
+					<p:ajax listener="#{localeSelector.select()}" update="@(form)" />
+				</p:selectOneMenu>
+
+				<f:facet name="footer">
+					<!-- <p:commandButton id="settingSaveButton" value="#{msg.save}" icon="ui-icon-check" action="#{localeSelector.select()}" /> -->
+					<p:commandButton id="settingSaveButton" value="#{msg.save}" icon="fa fa-check" action="#{localeSelector.select()}" />
+
+
+				</f:facet>
+			</p:panelGrid>
+
+		</h:form>
+
+	</p:tab>
+
+    </p:tabView>
+ </ui:define>
 </ui:composition>

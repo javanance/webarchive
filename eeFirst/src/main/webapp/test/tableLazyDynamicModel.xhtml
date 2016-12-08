@@ -1,0 +1,44 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+
+
+  <h:form id="formDynamicModel">
+     <h:outputText value="Model2" />
+    <h:outputText value="#{dataViewerBean.dbService.selectedTable.tableName}" />
+    
+    <h:commandLink id="comandlink" value="cmmmasdfasdfasd" />  
+    <h:link id="link" value="PROD_TYPE_LINK" title="linkToProd">
+    	<f:param name="selectedTableName" value="NCM_MST_PROD_TYPE"/>
+    	
+    </h:link>
+
+    
+    <p:dataTable id="tableDynamicModel" value="#{dataViewerBean.dbService.tableContents}" var="_dynModel"
+      emptyMessage="No History Data found with given criteria. Change the Dates"
+      rowKey="#{_dynModel}"
+      sortMode="multiple"
+      resizableColumns="true" resizeMode="expand"
+      tableStyle="display: table; min-width: 500px;  table-layout: auto ! important"
+      paginator="true" paginatorPosition="bottom" rows="10"
+      paginatorTemplate="{FirstPageLink} {PreviousPageLink} {JumpToPageDropdown} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+      rowsPerPageTemplate="10,15,25,50" 
+     
+      style="margin: 0.5em; border-top-left-radius: 8px; border-top-right-radius: 8px">
+     
+      <p:columns id="tableColumns" value="#{dataViewerBean.dbService.tableColumns}" var="_column" columnIndexVar="colIndex"    
+        sortBy="#{_dynModel[_column.camelColumnName]}"  filterBy="#{_dynModel[_column.camelColumnName]}"  filterMatchMode="contains" filterStyle="width:100%" >
+        <f:facet name="header">  
+                <h:outputText value="#{colMsg[_column.columnName]}" />
+         </f:facet>
+         
+        <h:outputText value="#{_dynModel[_column.camelColumnName]}"  /> 
+            
+      </p:columns>
+    </p:dataTable> 
+   
+  </h:form>
+</ui:composition>

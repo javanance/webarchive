@@ -1,30 +1,23 @@
-package com.eugenefe.initializer;
+package com.eugenefe.bean;
 
 import java.io.Serializable;
-import java.util.Map;
 
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.RequestScoped;
-import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.persistence.PostPersist;
-import javax.servlet.http.HttpServletRequest;
 
-import org.omnifaces.cdi.ViewScoped;
-import org.primefaces.context.RequestContext;
 import org.slf4j.Logger;
 
 import com.eugenefe.enums.EViewNew;
 
 
 @Named
-@SessionScoped
-//@ViewScoped
-public class LayoutInit implements Serializable{
-	@Inject	private Logger log;
+//@SessionScoped
+@ViewScoped
+public class LayoutBean implements Serializable{
+	@Inject	private Logger logger;
 	 
 //	@Inject
 //	private SimpleMessage smpMsg;
@@ -48,8 +41,8 @@ public class LayoutInit implements Serializable{
 //	private Map<String, Renderer> rendererMap =new HashMap<String, Renderer>();
 //	private Renderer renderer;
 
-	public LayoutInit() {
-		System.out.println("LayoutInit Construction");
+	public LayoutBean() {
+		System.out.println("LayoutBean Construction");
 	}
 
 	public String getViewId() {
@@ -115,7 +108,15 @@ public class LayoutInit implements Serializable{
 	}
 
 	//***********************************************************************
+//	@PostConstruct
+	public void initLayout1(){
+		System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+		logger.info("start layout initialize : /view/home");
+    	
+    }
+	
 	public void initLayout(String url){
+		logger.info("start layout initialize : {}", url);
     	EViewNew temp = EViewNew.getTypeFromUrl(url);
     	renderBottom = temp.isRenderBottom();
     	renderLeft = temp.isRenderLeft();
@@ -126,12 +127,12 @@ public class LayoutInit implements Serializable{
     	
     	viewUrl = temp.getUrl();
     	leftSize  = "200";
-    	log.info("Layout : {}, {}", url, temp.getUrl());
+    	logger.info("Layout : {}, {}", url, temp.getUrl());
     }
 	
 	
     public void extractViewId(ActionEvent evt){
-    	log.info("Layout : {}", evt.getComponent().getId());
+    	logger.info("Layout : {}", evt.getComponent().getId());
     	viewId =evt.getComponent().getId();
     }
 }

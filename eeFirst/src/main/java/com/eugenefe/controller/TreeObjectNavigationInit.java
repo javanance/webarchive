@@ -1,6 +1,5 @@
 package com.eugenefe.controller;
 
-import java.io.Serializable;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
@@ -15,7 +14,6 @@ import java.util.Set;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
-import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
@@ -30,7 +28,6 @@ import com.eugenefe.enums.EColumnType;
 import com.eugenefe.ncm.NcmLv1Product;
 import com.eugenefe.qualifiers.AnnoMethodTree;
 import com.eugenefe.qualifiers.AnnoNavigationFilter;
-import com.eugenefe.qualifiers.ColumHeaderResource;
 import com.eugenefe.qualifiers.SecondEm;
 
 @Named("treeObjectNavigationInit")
