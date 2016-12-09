@@ -31,6 +31,12 @@
 </url-mapping>
 
 
+<url-mapping id="v902DataNavigation1">
+	<pattern value="/v902DataNavigation" />
+	<view-id value="/view/v902DataNavigation.xhtml" />
+</url-mapping>
+
+
 </pretty-config>
 
 

@@ -5,7 +5,6 @@
 
 
 	<h:form id="formDynamicModel">
-		
 		<h:commandLink>
 			<p:graphicImage id="imgExcel" name="/img/primefaces/excel.png" />
 			<p:dataExporter type="xls" target="tableDynamicModel" fileName="#{dataViewerLazyBean.selectedTableName}" postProcessor="#{excelProcessBean.postProcessXLS}" />

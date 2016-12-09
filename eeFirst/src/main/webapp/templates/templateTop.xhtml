@@ -12,16 +12,17 @@
 	</h:head>
 	<h:body style="background:tan">
 		<p:layout id="mainLayout" fullPage="true">
-			<p:layoutUnit id="centerLayoutUnit" position="center" resizable="true" gutter="4" style="background:Gainsboro">
+			<p:layoutUnit id="centerLayoutUnit" position="center" resizable="true" gutter="4" style="background:Gainsboro ;" >
 				<ui:insert name="layoutCenter" />
 			</p:layoutUnit>
-
+		
 		<p:layoutUnit id="topLayoutUnit" position="north" size="116" collapsible="true" gutter="4" styleClass="ui-layout-pane-north-outer" style="background:tan">
 			<ui:include src="/header/header2Column.xhtml" />
 			<ui:insert name="layoutTop" />
 			
 		</p:layoutUnit>
 		</p:layout>
+		
 	</h:body>
 </f:view>
 	</h:html>
