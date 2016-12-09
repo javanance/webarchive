@@ -1,23 +1,27 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<f:view xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
-  xmlns:p="http://primefaces.org/ui" xmlns:s="http://jboss.org/schema/seam/taglib" contentType="text/html" locale="#{localeSelector.language}">
-  <h:html>
-  <h:head>
-    <ui:include src="/fragment/headerFacet.xhtml" />
-  </h:head>
+<h:html  xmlns:ui="http://xmlns.jcp.org/jsf/facelets" 
+	xmlns:f="http://xmlns.jcp.org/jsf/core" 
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:o="http://omnifaces.org/ui" xmlns:of="http://omnifaces.org/functions"
+ >
+<f:view  locale="#{localeSelector.language}">
+	<h:head id="head">
+		<ui:include src="/header/headerFacet.xhtml" />
+	</h:head>
+	<h:body style="background:tan">
+		<p:layout id="mainLayout" fullPage="true">
+			<p:layoutUnit id="centerLayoutUnit" position="center" resizable="true" gutter="4" style="background:Gainsboro">
+				<ui:insert name="layoutCenter" />
+			</p:layoutUnit>
 
-  <h:body style="background:tan">
-    <p:layout id="mainLayout" fullPage="true" >
-      <p:layoutUnit id="centerLayoutUnit" position="center" resizable="true" gutter="4" style="background:Gainsboro" >
-        <ui:insert name="layoutCenter" />
-      </p:layoutUnit>
-
-      <p:layoutUnit id="topLayoutUnit" position="north" size="116" collapsible="true" gutter="4" styleClass="ui-layout-pane-north-outer" style="background:tan">
-        <ui:include src="/fragment/header.xhtml" />
-        <ui:insert name="layoutTop" />
-      </p:layoutUnit>
-    </p:layout>
-  </h:body>
-  </h:html>
+		<p:layoutUnit id="topLayoutUnit" position="north" size="116" collapsible="true" gutter="4" styleClass="ui-layout-pane-north-outer" style="background:tan">
+			<ui:include src="/header/header2Column.xhtml" />
+			<ui:insert name="layoutTop" />
+			
+		</p:layoutUnit>
+		</p:layout>
+	</h:body>
 </f:view>
+	</h:html>

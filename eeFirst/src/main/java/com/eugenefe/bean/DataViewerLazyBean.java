@@ -32,10 +32,10 @@ public class DataViewerLazyBean implements Serializable{
 	@Inject
 	private DataBaseService dbService;
 	
-//	@Inject @Param(pathIndex=0)
+	@Inject @Param(pathIndex=0)
 	private String selectedTableName;
 	
-//	@Inject @Param(pathIndex=1)
+	@Inject @Param(pathIndex=1)
 	private TreeNode selectedNode;
 	
 	private LazyDataModel<Navigatable> navi;
@@ -58,6 +58,7 @@ public class DataViewerLazyBean implements Serializable{
 	
 	@PostConstruct
 	public void init(){
+		selectedTableName ="NCM_MST_SAA_CODE";
 		logger.info("PostConstruct :{}", selectedNode);
 		if(selectedNode!=null){
 			dbService.getSelectedTable().setTableName(selectedNode.getData().toString());
@@ -65,8 +66,8 @@ public class DataViewerLazyBean implements Serializable{
 		}
 //		dbService.setTableColumns(dbService.generateColumns("NCM_ERP_TX_IFR"));
 //		txIfr = new LazyModelTxIfr(dbService.generateTableLazyContents1("NCM_ERP_TX_IFR"));
-		dbService.setTableColumns(dbService.generateColumns("NCM_MST_SAA_CODE"));
-		navi = new LazyModelNavigatable<Navigatable>(dbService.generateTableLazyContents("NCM_MST_SAA_CODE"));
+		dbService.setTableColumns(dbService.generateColumns(selectedTableName));
+		navi = new LazyModelNavigatable<Navigatable>(dbService.generateTableLazyContents(selectedTableName));
 		logger.info("PostConstruct 1:{}, {}", navi, txIfr);
 	}
 	
@@ -80,7 +81,7 @@ public class DataViewerLazyBean implements Serializable{
 	}
 	
 	public void onChangeEvent1(TreeNode selectedTabl){	
-		String selectedTableName = selectedTabl.getData().toString();
+		String selectedselectedTableNameTableName = selectedTabl.getData().toString();
 		dbService.getSelectedTable().setTableName(selectedTableName);
 //		logger.info("Selected Table: {},{}", dbService.getSelectedTable().getTableName());
 		logger.info("Selected Table: {},{}", selectedTableName, dbService.getSelectedTable().getTableName());
@@ -91,7 +92,7 @@ public class DataViewerLazyBean implements Serializable{
 	
 //	public void onChangeEvent(String selectedTableName){
 	public void onChangeEvent(@Observes @SelectedTable String selectedTableName){	
-//		this.selectedTableName = selectedTableName;
+		this.selectedTableName = selectedTableName;
 		dbService.getSelectedTable().setTableName(selectedTableName);
 //		logger.info("Selected Table: {},{}", dbService.getSelectedTable().getTableName());
 		logger.info("Selected Tableaaaaaaaaaaaaaaaaaaaaa: {},{}", selectedTableName, dbService.getSelectedTable().getTableName());

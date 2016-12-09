@@ -6,18 +6,22 @@
 	xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions"
 	xmlns:o="http://omnifaces.org/ui" xmlns:of="http://omnifaces.org/functions"
  >
-<f:view  locale="#{localeSelector.language}" >
-  <h:head>
+<f:view  locale="#{localeSelector.language}">
+  <h:head id="head">
     <ui:include src="/header/headerFacet.xhtml" />
   </h:head>
 
   <h:body styleClass="takion">
     <p:layout id="mainLayout" fullPage="true" resizeTitle="#{msg.resizeTitle}"    >
       <p:layoutUnit id="centerLayoutUnit" position="center" resizable="true" gutter="4" styleClass="takion">
+   		<p:ajaxStatus id="ajaxStatus1" onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+        <p:dialog id="dlgAjaxStatus" modal="true" widgetVar="statusDialog"  header="Loading..." draggable="false" closable="false" showHeader="false">
+              <p:graphicImage id="ajaxStatus" value="/img/loading/loading45.gif" />
+        </p:dialog>
         <ui:include src="/templates/templatePrimeInner.xhtml" />
       </p:layoutUnit>
-
-      <p:layoutUnit id="bottomLayoutUnit" position="south" resizable="true" collapsible="true" size="300" gutter="4" rendered="#{layoutBean.renderBottom}">
+    
+    <p:layoutUnit id="bottomLayoutUnit" position="south" resizable="true" collapsible="true" size="300" gutter="4" rendered="#{layoutBean.renderBottom}">
         <ui:insert name="layoutBottom" />
       </p:layoutUnit>
 
@@ -35,10 +39,8 @@
         <ui:include src="/header/header2Column.xhtml" />
         <!-- <ui:include src="/header/header3Column.xhtml" /> -->
         <ui:insert name="layoutTop" />
-      </p:layoutUnit>
+      </p:layoutUnit> 
     </p:layout> 
-    
-     
  </h:body>
 </f:view>
  </h:html>
