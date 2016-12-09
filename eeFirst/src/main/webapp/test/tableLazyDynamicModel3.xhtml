@@ -11,7 +11,7 @@
   <h:form id="formDynamicModel">
      <h:outputText value="Model2" />
     
-    <p:dataTable id="tableDynamicModel" value="#{dataViewerLazyBean.txIfr}" var="_row"
+    <p:dataTable id="tableDynamicModel" value="#{dataViewerLazyBean.navi}" var="_row"
       emptyMessage="No History Data found with given criteria. Change the Dates"
       rowKey="#{_row.idString}"
       lazy="true"
@@ -22,9 +22,11 @@
       paginator="true" paginatorPosition="bottom" rows="10"
       paginatorTemplate="{FirstPageLink} {PreviousPageLink} {JumpToPageDropdown} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
       rowsPerPageTemplate="10,15,25,50" 
+     
       style="margin: 0.5em; border-top-left-radius: 8px; border-top-right-radius: 8px" >
-     <p:columns id="tableColumns" value="#{dataViewerLazyBean.dbService.tableColumns}" var="_column" columnIndexVar="colIndex"    
-        sortBy="#{_row[_column.camelColumnName]}"  filterBy="#{_row[_column.camelColumnName]}"  filterMatchMode="contains"  >
+     
+      <p:columns id="tableColumns" value="#{dataViewerLazyBean.dbService.tableColumns}" var="_column" columnIndexVar="colIndex"    
+        sortBy="#{_row[_column.camelColumnName]}"  filterBy="#{_row[_column.camelColumnName]}"  filterMatchMode="contains" >
         <f:facet name="header">  
                 <h:outputText value="#{colMsg[_column.columnName]}" />
          </f:facet>
@@ -32,7 +34,6 @@
         <h:outputText value="#{_row[_column.camelColumnName]}"  /> 
             
       </p:columns>
-      
      
     </p:dataTable> 
    
