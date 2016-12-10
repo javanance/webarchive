@@ -9,20 +9,20 @@ import com.eugenefe.entities.MarketVariable;
 import com.eugenefe.ncm.NcmErpTxIfr;
 import com.eugenefe.util.Navigatable;
 
-public class LazySorterTxIfr implements Comparator<NcmErpTxIfr> {
+public class LazySingleSortNavigatable<T extends Navigatable> implements Comparator<T> {
 
     private String sortField;
     
     private SortOrder sortOrder;
     
-    public LazySorterTxIfr(String sortField, SortOrder sortOrder) {
+    public LazySingleSortNavigatable(String sortField, SortOrder sortOrder) {
         this.sortField = sortField;
         this.sortOrder = sortOrder;
     }
-    
-    public int compare(NcmErpTxIfr car1, NcmErpTxIfr car2) {
+
+    public int compare(T car1, T car2) {
         try {
-            Field field1 = NcmErpTxIfr.class.getDeclaredField(this.sortField);
+            Field field1 = car1.getClass().getDeclaredField(this.sortField);
     		field1.setAccessible(true);
     		Object value1 = field1.get(car1);
     		Object value2 = field1.get(car2);

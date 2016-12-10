@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.primefaces.model.LazyDataModel;
+import org.primefaces.model.SortMeta;
 import org.primefaces.model.SortOrder;
 
 import com.eugenefe.entities.MarketVariable;
@@ -41,7 +42,6 @@ public class LazyModelNavigatable<T extends Navigatable>  extends LazyDataModel<
     
     
     @Override
-    /*public List<MarketVariable> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String,String> filters) {*/    
     public List<T> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String,Object> filters) {  
         List<T> data = new ArrayList<T>();  
                 
@@ -86,10 +86,74 @@ public class LazyModelNavigatable<T extends Navigatable>  extends LazyDataModel<
 //        System.out.println("Before in the sort");
         if(sortField != null) {  
 //        	System.out.println("in the sort1 :"+ data.size()+sortField +":" + sortOrder.toString());
-        	Collections.sort(data, new LazySorterNavigatable(sortField, sortOrder));  
+        	Collections.sort(data, new LazySingleSortNavigatable(sortField, sortOrder));  
 //            System.out.println("in the sort2");
         }  
 //        System.out.println("After in the sort");
+        //rowCount  
+        int dataSize = data.size();  
+        this.setRowCount(dataSize);  
+  
+        //paginate  
+        if(dataSize > pageSize) {  
+//        	System.out.println("in the pagination" + dataSize);
+            try {  
+                return data.subList(first, first + pageSize);  
+            }  
+            catch(IndexOutOfBoundsException e) {  
+                return data.subList(first, first + (dataSize % pageSize));  
+            }  
+        }  
+        else {  
+            return data;  
+        }  
+    }
+    
+    @Override
+    public List<T> load(int first, int pageSize, List<SortMeta> sortMeta, Map<String,Object> filters) {  
+        List<T> data = new ArrayList<T>();  
+                
+        //filter  
+//        System.out.println("Before in the filter Market :"+ filters.keySet().size());
+        for(Navigatable navi : datasource) {  
+//        	System.out.println("In the Loop");
+        	boolean match = true;
+        	
+            for(String it: filters.keySet()){	
+            	try {  
+//                    String filterProperty = ENamingConvention.SNAKE_CASE.convertToCamelCase(it);
+                    String filterProperty = it;
+                    
+                    Field filterField = navi.getClass().getDeclaredField(filterProperty);
+                    filterField.setAccessible(true);
+                    
+                    String fieldValue = String.valueOf(filterField.get(navi));
+                    String filterValue = (String)filters.get(it);  
+//                    String fieldValue = String.valueOf(aa.getClass().getField(filterProperty).get(aa));  
+  
+//                    System.out.println("LazyFilter:" + filterValue +"_" + fieldValue);
+                    
+                    if(filterValue == null || fieldValue.toLowerCase().contains(filterValue.toLowerCase())) {	
+                        match = true;  
+//                        System.out.println("LazyFilter:match" + filterValue +"_" + fieldValue);
+                    }  
+                    else {  
+                        match = false;  
+                        break;  
+                    }  
+                } catch(Exception e) {  
+                    match = false;  
+                }   
+            }  
+  
+            if(match) {  
+                data.add((T)navi);  
+            }  
+        }  
+        //sort  
+        if(sortMeta != null && sortMeta.size()>0) {  
+        	Collections.sort(data, new LazyMultiSortNavigatable<>(sortMeta));  
+        }  
         //rowCount  
         int dataSize = data.size();  
         this.setRowCount(dataSize);  
@@ -132,70 +196,5 @@ public class LazyModelNavigatable<T extends Navigatable>  extends LazyDataModel<
         }    
     }
     
-    
-  /*  @Override  
-    public List<MarketVariable> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String,Object> filters) {  
-        List<MarketVariable> data = new ArrayList<MarketVariable>();  
-                
-        //filter  
-//        System.out.println("Before in the filter Market :"+ filters.keySet().size());
-        for(MarketVariable aa : datasource) {  
-//        	System.out.println("In the Loop");
-        	boolean match = true;
-        	
-            for(String it: filters.keySet()){	
-            	try {  
-//                    String filterProperty = it;
-                    Field filterField = aa.getClass().getDeclaredField(it);
-                    filterField.setAccessible(true);
-                    
-                    String fieldValue = String.valueOf(filterField.get(aa));
-                    String filterValue = (String)filters.get(it);  
-//                    String fieldValue = String.valueOf(aa.getClass().getField(filterProperty).get(aa));  
-  
-//                    System.out.println("LazyFilter:" + filterValue +"_" + fieldValue);
-                    
-                    if(filterValue == null || fieldValue.toLowerCase().contains(filterValue.toLowerCase())) {	
-                        match = true;  
-//                        System.out.println("LazyFilter:match" + filterValue +"_" + fieldValue);
-                    }  
-                    else {  
-                        match = false;  
-                        break;  
-                    }  
-                } catch(Exception e) {  
-                    match = false;  
-                }   
-            }  
-  
-            if(match) {  
-                data.add(aa);  
-            }  
-        }  
-        //sort  
-//        System.out.println("Before in the sort");
-        if(sortField != null) {  
-//        	System.out.println("in the sort1 :"+ data.size()+sortField +":" + sortOrder.toString());
-        	Collections.sort(data, new LazySorterMarketVariable(sortField, sortOrder));  
-//            System.out.println("in the sort2");
-        }  
-//        System.out.println("After in the sort");
-        //rowCount  
-        int dataSize = data.size();  
-        this.setRowCount(dataSize);  
-  
-        //paginate  
-        if(dataSize > pageSize) {  
-//        	System.out.println("in the pagination" + dataSize);
-            try {  
-                return data.subList(first, first + pageSize);  
-            }  
-            catch(IndexOutOfBoundsException e) {  
-                return data.subList(first, first + (dataSize % pageSize));  
-            }  
-        }  
-        else {  
-            return data;  
-        }  
-    }*/    
+ 
 }

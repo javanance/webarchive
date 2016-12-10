@@ -14,7 +14,6 @@ import org.primefaces.model.TreeNode;
 import org.slf4j.Logger;
 
 import com.eugenefe.converter.LazyModelNavigatable;
-import com.eugenefe.converter.LazyModelTxIfr;
 import com.eugenefe.ncm.NcmErpTxIfr;
 import com.eugenefe.qualifiers.SelectedTable;
 import com.eugenefe.service.DataBaseService;

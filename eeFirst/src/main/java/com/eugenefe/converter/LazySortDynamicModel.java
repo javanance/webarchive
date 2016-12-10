@@ -5,13 +5,13 @@ import java.util.Map;
 
 import org.primefaces.model.SortOrder;
 
-public class LazySorterDynamicModel implements Comparator<Map<String,String>> {
+public class LazySortDynamicModel implements Comparator<Map<String,String>> {
 
     private String sortField;
     private SortOrder sortOrder;
     
     
-    public LazySorterDynamicModel(String sortField, SortOrder sortOrder) {
+    public LazySortDynamicModel(String sortField, SortOrder sortOrder) {
     	this.sortField =sortField;
     	this.sortOrder = sortOrder;
 //        sortFieldList.add(sortField);

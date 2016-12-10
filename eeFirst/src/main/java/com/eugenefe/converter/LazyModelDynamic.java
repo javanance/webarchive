@@ -245,7 +245,7 @@ public class LazyModelDynamic extends LazyDataModel<Map<String, String>> {
 		}
 
 		if (sortField != null) {
-			Collections.sort(data, new LazySorterDynamicModel(sortField, sortOrder));
+			Collections.sort(data, new LazySortDynamicModel(sortField, sortOrder));
 			// System.out.println("in the sort1 :"+ data.size()+sortField +":" +
 			// sortOrder.toString());
 			// Collections.sort(data);
@@ -301,7 +301,7 @@ public class LazyModelDynamic extends LazyDataModel<Map<String, String>> {
 
 		if (multiSortMeta != null && !multiSortMeta.isEmpty()) {
 			for (int i = multiSortMeta.size() - 1; i >= 0; i--) {
-				Collections.sort(data, new LazySorterDynamicModel(multiSortMeta.get(i).getSortField(), multiSortMeta
+				Collections.sort(data, new LazySortDynamicModel(multiSortMeta.get(i).getSortField(), multiSortMeta
 						.get(i).getSortOrder()));
 				// LazySorterVolatilityHis(multiSortMeta.get(i).getSortField(),
 				// multiSortMeta.get(i).getSortOrder()));
