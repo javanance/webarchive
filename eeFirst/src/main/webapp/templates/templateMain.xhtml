@@ -15,7 +15,7 @@
     <p:layout id="mainLayout" fullPage="true" resizeTitle="#{msg.resizeTitle}"    >
       <p:layoutUnit id="centerLayoutUnit" position="center" resizable="true" gutter="4" styleClass="takion">
    		<p:ajaxStatus id="ajaxStatus1" onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
-        <p:dialog id="dlgAjaxStatus" modal="true" widgetVar="statusDialog"  header="Loading..." draggable="false" closable="false" showHeader="false">
+        <p:dialog id="dlgAjaxStatus" modal="false" widgetVar="statusDialog"  header="Loading..." draggable="false" closable="false" showHeader="false">
               <p:graphicImage id="ajaxStatus" value="/img/loading/loading45.gif" />
         </p:dialog>
         <ui:include src="/templates/templateInner.xhtml" />

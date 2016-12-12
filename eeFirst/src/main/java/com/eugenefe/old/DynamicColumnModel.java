@@ -1,4 +1,4 @@
-package com.eugenefe.model;
+package com.eugenefe.old;
 
 public class DynamicColumnModel implements Comparable<DynamicColumnModel>{
 	private String header;

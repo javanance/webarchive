@@ -6,34 +6,48 @@ xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/c
 
 
 	<h:form id="formDynamicModel">
-		<p:scrollPanel id="penelDynamicModel" style="position: absolute;width: 100%; height: 100%;" mode="native">
-		<h:commandLink>
-			<p:graphicImage id="imgExcel" name="/img/primefaces/excel.png" />
-			<p:dataExporter type="xls" target="tableDynamicModel" fileName="#{dataViewerLazyBean.selectedTableName}" postProcessor="#{excelProcessBean.postProcessXLS}" />
-		</h:commandLink>
-		<h:commandLink>
-			<p:graphicImage id="imgPdf" name="/img/primefaces/pdf.png" />
-			<p:dataExporter type="pdf" target="tableDynamicModel" fileName="#{dataViewerLazyBean.selectedTableName}" pageOnly="true" />
-		</h:commandLink>
-		<p:dataTable id="tableDynamicModel" value="#{dataViewerLazyBean.navi}" var="_row" 
+		
+		<p:scrollPanel id="penelNavigation" style="position: absolute;width: 100%; height: 100%;" mode="native">
+		<p:dataTable id="tableNavigation" value="#{dataViewerLazyBean.navi}" var="_row" widgetVar="wgTbNavi"
 			emptyMessage="No History Data found with given criteria. Change the Dates"
 			rowKey="#{_row.idString}" lazy="true" 
+			
 			sortMode="multiple" resizableColumns="true" resizeMode="expand"
-			tableStyle="display: table; min-width: 500px;  table-layout: auto ! important" paginatorAlwaysVisible="true" paginator="true" paginatorPosition="bottom" rows="20"
-			paginatorTemplate="{FirstPageLink} {PreviousPageLink} {JumpToPageDropdown} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="20,50,100"
-			style="margin: 0.5em; border-top-left-radius: 8px; border-top-right-radius: 8px">
+			tableStyle="display: table; min-width: 500px;  table-layout: auto ! important" 
+			paginatorAlwaysVisible="true" paginator="true"
+			paginatorTemplate="{FirstPageLink} {PreviousPageLink} {JumpToPageDropdown} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}" 
+			paginatorPosition="bottom" rows="20"
+			rowsPerPageTemplate="20,50,100"
+			style="margin: 0.5em;">
 
 			<p:columns id="tableColumns" value="#{dataViewerLazyBean.dbService.tableColumns}" var="_column" columnIndexVar="colIndex" sortBy="#{_row[_column.camelColumnName]}"
-				filterBy="#{_row[_column.camelColumnName]}" filterMatchMode="contains">
+				filterBy="#{_row[_column.camelColumnName]}" filterMatchMode="contains" visible="#{dataViewerLazyBean.visibleColumns[colIndex]}" >
 				<f:facet name="header">
 					<h:outputText value="#{colMsg[_column.columnName]}" />
 				</f:facet>
 
-				<h:outputText value="#{_row[_column.camelColumnName]}" />
-
+				<h:outputText value="#{_row[_column.camelColumnName]}" style="#{_column.alignFormat}" >
+				</h:outputText>
 			</p:columns>
+			
+			<f:facet name="{Exporters}">
+				<h:commandLink >
+				<p:graphicImage id="imgExcel" name="/img/primefaces/excel.png"   />
+				<p:dataExporter type="xls" target="tableNavigation" fileName="#{dataViewerLazyBean.selectedTableName}" postProcessor="#{excelProcessBean.postProcessXLS}"  />
+				</h:commandLink>
+				<p:commandButton id="toggler" type="button" value="Columns" style="float:left" icon="fa fa-user" />
+				<p:columnToggler datasource="tableNavigation" trigger="toggler" >
+					<p:ajax event="toggle" listener="#{dataViewerLazyBean.onToggle}" />
+	            </p:columnToggler>
+			</f:facet>
+			
 
 		</p:dataTable>
+		
 	</p:scrollPanel>
+	<p:contextMenu for="penelNavigation" >
+			<p:menuitem value="#{msg.addToMyMenu}" action="#{myMenuBean.addMyMenu}" update="@(.ui-accordion)"/>
+	    </p:contextMenu>
+	
 	</h:form>
 </ui:composition>

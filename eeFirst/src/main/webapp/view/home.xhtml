@@ -11,16 +11,14 @@
 	<f:metadata>
 		<f:viewAction  action="#{layoutBean.initLayout('/view/home')}"></f:viewAction>/>
 	</f:metadata>
-	
-	
   
   <ui:define name="layoutCenter">
     <p:panel id="homePenel" >
       <h:form id="homeForm" >
      
       <p:commandButton id="testButton" value="#{p:component('registerDlg')}" actionListener="#{sampleDialog.view()}" />
-      <p:commandButton id="testButto1" value="View login" actionListener="#{sampleDialog.viewLogin()}" /> 
-      <p:commandButton id="testButto2" value="Show" type="button" onclick="PF('registerDlg').show()"  />
+      <p:commandButton id="testButton1" value="View login" actionListener="#{sampleDialog.viewLogin()}" /> 
+      <p:commandButton id="testButton2" value="Show" type="button" onclick="PF('registerDlg').show()"  />
   
       <p:link outcome="/view/v900DataNavigation" value="linkToNavigation">
       	<f:param name="selectedTableName" value="NCM_BAT_LOG"></f:param>

@@ -1,6 +1,8 @@
 package com.eugenefe.bean;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.event.Observes;
@@ -9,11 +11,14 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.omnifaces.cdi.Param;
+import org.primefaces.event.ToggleEvent;
 import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.TreeNode;
+import org.primefaces.model.Visibility;
 import org.slf4j.Logger;
 
-import com.eugenefe.converter.LazyModelNavigatable;
+import com.eugenefe.model.LazyModelNavigatable;
+import com.eugenefe.model.TableColumn;
 import com.eugenefe.ncm.NcmErpTxIfr;
 import com.eugenefe.qualifiers.SelectedTable;
 import com.eugenefe.service.DataBaseService;
@@ -34,13 +39,18 @@ public class DataViewerLazyBean implements Serializable{
 	@Inject @Param(pathIndex=0)
 	private String selectedTableName;
 	
-	@Inject @Param(pathIndex=1)
+//	@Inject @Param(pathIndex=1)
 	private TreeNode selectedNode;
 	
 	private LazyDataModel<Navigatable> navi;
 //	private LazyModelTxIfr txIfr;
 	
 	private LazyDataModel<NcmErpTxIfr> txIfr;
+	
+	private Navigatable selectedRow;
+	
+	
+	private List<Boolean> visibleColumns ;
 	
 	public DataViewerLazyBean() {
 		System.out.println("Construction DataViewerLazyBean_" );
@@ -57,7 +67,9 @@ public class DataViewerLazyBean implements Serializable{
 	
 	@PostConstruct
 	public void init(){
-		selectedTableName ="NCM_MST_SAA_CODE";
+		if(selectedTableName ==null){
+			selectedTableName ="NCM_MST_SAA_CODE";
+		}
 		logger.info("PostConstruct :{}", selectedNode);
 		if(selectedNode!=null){
 			dbService.getSelectedTable().setTableName(selectedNode.getData().toString());
@@ -68,6 +80,8 @@ public class DataViewerLazyBean implements Serializable{
 		dbService.setTableColumns(dbService.generateColumns(selectedTableName));
 		navi = new LazyModelNavigatable<Navigatable>(dbService.generateTableLazyContents(selectedTableName));
 		logger.info("PostConstruct 1:{}, {}", navi, txIfr);
+		setVisible();
+//		
 	}
 	
 	public void testPretty(){	
@@ -80,7 +94,7 @@ public class DataViewerLazyBean implements Serializable{
 	}
 	
 	public void onChangeEvent1(TreeNode selectedTabl){	
-		String selectedselectedTableNameTableName = selectedTabl.getData().toString();
+		String selectedTableName = selectedTabl.getData().toString();
 		dbService.getSelectedTable().setTableName(selectedTableName);
 //		logger.info("Selected Table: {},{}", dbService.getSelectedTable().getTableName());
 		logger.info("Selected Table: {},{}", selectedTableName, dbService.getSelectedTable().getTableName());
@@ -97,13 +111,26 @@ public class DataViewerLazyBean implements Serializable{
 		logger.info("Selected Tableaaaaaaaaaaaaaaaaaaaaa: {},{}", selectedTableName, dbService.getSelectedTable().getTableName());
 		dbService.setTableColumns(dbService.generateColumns(selectedTableName));
 //		dbService.setTableContents(dbService.generateTableContents(selectedTableName));
-
+		
 		logger.info("Selected Naviiiiiiiiiiiiiiiiiiiiiii: {},{}", dbService.generateTableLazyContents(selectedTableName).size(), navi.getPageSize());
 		
 //		txIfr = new LazyModelTxIfr(dbService.generateTableLazyContents1(selectedTableName));
 		navi = new LazyModelNavigatable<Navigatable>(dbService.generateTableLazyContents(selectedTableName));
-		
+		setVisible();
 	}
+	
+	
+	 public void onToggle(ToggleEvent e) {
+		 visibleColumns.set((Integer) e.getData(), e.getVisibility() == Visibility.VISIBLE);
+	 }
+	 
+	 private void setVisible(){
+		 visibleColumns = new ArrayList<Boolean>();
+		 for(TableColumn aa : dbService.getTableColumns()){
+				visibleColumns.add(true);
+			}
+	 }
+	 
 	
 //	*************************getter and setter***********************************************
 	public DataBaseService getDbService() {
@@ -149,6 +176,20 @@ public class DataViewerLazyBean implements Serializable{
 		this.txIfr = txIfr;
 	}
 
-	
+	public List<Boolean> getVisibleColumns() {
+		return visibleColumns;
+	}
+
+	public void setVisibleColumns(List<Boolean> visibleColumns) {
+		this.visibleColumns = visibleColumns;
+	}
+
+	public Navigatable getSelectedRow() {
+		return selectedRow;
+	}
+
+	public void setSelectedRow(Navigatable selectedRow) {
+		this.selectedRow = selectedRow;
+	}
 	
 }

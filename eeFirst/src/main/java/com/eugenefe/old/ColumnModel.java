@@ -1,4 +1,4 @@
-package com.eugenefe.model;
+package com.eugenefe.old;
 
 import java.io.Serializable;
 

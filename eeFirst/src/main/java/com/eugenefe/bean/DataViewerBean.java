@@ -27,10 +27,10 @@ public class DataViewerBean implements Serializable{
 	@Inject
 	private DataBaseService dbService;
 	
-	@Inject @Param(pathIndex=0)
+//	@Inject @Param(pathIndex=0)
 	private String selectedTableName;
 	
-	@Inject @Param(pathIndex=1)
+//	@Inject @Param(pathIndex=1)
 	private TreeNode selectedNode;
 	
 	public DataViewerBean() {

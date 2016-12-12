@@ -23,7 +23,7 @@
     </p:panelGrid>
 
     <p:panelGrid id="logoutPg" columns="2" rendered="#{userLoginView.loggedIn}">
-      <h:outputFormat value="#{msg.loggedInAs}">
+      <h:outputFormat value="#{msg.loggedInAs}" >
         <f:param value="#{userLoginView.username}" />
       </h:outputFormat>
       <!-- <p:outputLabel id="remoteUser" value="#{p:remoteUser()}"></p:outputLabel> -->

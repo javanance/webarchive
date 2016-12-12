@@ -128,7 +128,7 @@ public class TableColumn implements Serializable{
 
 	@Transient
 	public String getAlignFormat() {
-		if(getColumnType()=="NUMBER"){
+		if("NUMBER".equals(getColumnType())){
 			return "float : right";
 		}
 		return "float : left";

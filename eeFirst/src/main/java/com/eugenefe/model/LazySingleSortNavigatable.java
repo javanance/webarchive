@@ -1,4 +1,4 @@
-package com.eugenefe.converter;
+package com.eugenefe.model;
 
 import java.lang.reflect.Field;
 import java.util.Comparator;

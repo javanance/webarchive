@@ -14,8 +14,8 @@ import javax.persistence.EntityManager;
 
 import org.slf4j.Logger;
 
-import com.eugenefe.model.ColumnModel;
 import com.eugenefe.ncm.NcmLv1Product;
+import com.eugenefe.old.ColumnModel;
 import com.eugenefe.qualifiers.SecondEm;
 
 @Named
@@ -23,7 +23,7 @@ import com.eugenefe.qualifiers.SecondEm;
 //@javax.faces.bean.ViewScoped
 //@SessionScoped 
 //@RequestScoped
-public class ncmProductBean implements Serializable{
+public class NcmProductBean implements Serializable{
 	
 	
 	@Inject 	private Logger logger;
