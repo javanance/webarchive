@@ -8,26 +8,18 @@
   <p:layout id="headerLayout" >
     <p:layoutUnit id="headerLeftLayoutUnit" position="west" size="200" gutter="4"   >
       <h:form id="logoForm" >
-        <p:commandLink id="logoLink"  action="#{viewNavigation.getRedirectUrl('Home')}">
-          <p:graphicImage id="logoImage" title="#{msg.goToHome}" library="img" name="Gof_conv_margin_grey.png" width="100%" height="100%"/>
-          <!-- <p:graphicImage id="logoImage" title="#{msg.goToHome}" library="img" name="Gof_conv_margin_grey.png" width="90%" height="90%"  style="margin: 1em 2em"/> -->
-          <!-- <div align="center">
-          </div> -->
-        </p:commandLink>
+      	<p:commandLink id="loginLClink" action="#{viewNavigation.getRedirectUrl('Home')}">
+			 <p:graphicImage id="logoImage" title="#{msg.goToHome}" library="img" name="Gof_conv_margin_grey.png" width="100%" height="100%"/>
+		</p:commandLink>
       </h:form>
 
     </p:layoutUnit>
-
-   <!--  <p:layoutUnit id="headerRightLayoutUnit" position="east" size="200" gutter="4" >
-      <ui:include src="/fragment/login.xhtml" />
-    </p:layoutUnit> -->
 
     <p:layoutUnit id="headerCentorLayoutUnit" position="center" resizable="false" gutter="4" >
       <p:graphicImage id="topCenterImage" value="/img/adv/vienna-171444.jpg" height="70%" width="100%" />
       <ui:include src="menubar/megaMenu.xhtml" />
     </p:layoutUnit>
   </p:layout>
-  <ui:include src="/fragment/dialogCollection.xhtml" />
 </ui:composition>
 
 

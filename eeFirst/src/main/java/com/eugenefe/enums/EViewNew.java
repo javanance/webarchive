@@ -58,6 +58,7 @@ public enum EViewNew  {
 	,v800("/view/v800Settings", 							false, 	false, 	false,	false, 	false, 	false)
 	,LimitManagement("v700Limit", true, true, true, false,false, false)
 	,v900("/view/v900DataNavigation", 					true, 	false, 	false,	false, 	false,	true)
+	,v902("/view/v902DataNavigation", 					true, 	false, 	false,	false, 	false,	true)
 	,vv100("vv100View",			 					false, 	false, 	false,	false, 	false,	false)
 	,vv200("vv200View",			 					true, 	false, 	false,	false, 	false,	true)
 	,vv300("vv300View",			 					true, 	true, 	false,	false, 	false,	true)

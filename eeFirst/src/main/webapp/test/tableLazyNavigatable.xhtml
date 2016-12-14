@@ -6,12 +6,12 @@ xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/c
 
 
 	<h:form id="formDynamicModel">
-		
+		#{dataViewerLazyBean.selectedTableName}
 		<p:scrollPanel id="penelNavigation" style="position: absolute;width: 100%; height: 100%;" mode="native">
 		<p:dataTable id="tableNavigation" value="#{dataViewerLazyBean.navi}" var="_row" widgetVar="wgTbNavi"
 			emptyMessage="No History Data found with given criteria. Change the Dates"
-			rowKey="#{_row.idString}" lazy="true" 
-			
+			rowKey="#{_row.idString()}" lazy="true" 
+			selectionMode="multiple" selection="#{dataViewerLazyBean.selectedRows}"
 			sortMode="multiple" resizableColumns="true" resizeMode="expand"
 			tableStyle="display: table; min-width: 500px;  table-layout: auto ! important" 
 			paginatorAlwaysVisible="true" paginator="true"
@@ -21,7 +21,7 @@ xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/c
 			style="margin: 0.5em;">
 
 			<p:columns id="tableColumns" value="#{dataViewerLazyBean.dbService.tableColumns}" var="_column" columnIndexVar="colIndex" sortBy="#{_row[_column.camelColumnName]}"
-				filterBy="#{_row[_column.camelColumnName]}" filterMatchMode="contains" visible="#{dataViewerLazyBean.visibleColumns[colIndex]}" >
+				filterBy="#{_row[_column.camelColumnName]}" filterMatchMode="contains" visible="#{dataViewerLazyBean.visibleColumns[colIndex]}" filterStyle="width:90%">
 				<f:facet name="header">
 					<h:outputText value="#{colMsg[_column.columnName]}" />
 				</f:facet>
@@ -43,9 +43,12 @@ xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/c
 			
 
 		</p:dataTable>
-		
 	</p:scrollPanel>
-	<p:contextMenu for="penelNavigation" >
+		<p:contextMenu id="ctxTable" for="tableNavigation" >
+			<p:menuitem value="#{msg.addToMyMenu}" action="#{myMenuBean.addMyMenu}" update="@(.ui-datatable)"/>
+	    </p:contextMenu>
+	    
+	    <p:contextMenu id="ctxPanel" for="penelNavigation" >
 			<p:menuitem value="#{msg.addToMyMenu}" action="#{myMenuBean.addMyMenu}" update="@(.ui-accordion)"/>
 	    </p:contextMenu>
 	

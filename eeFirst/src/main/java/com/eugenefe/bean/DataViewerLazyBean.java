@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.event.Observes;
+import javax.faces.event.ValueChangeEvent;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -36,10 +37,30 @@ public class DataViewerLazyBean implements Serializable{
 	@Inject
 	private DataBaseService dbService;
 	
-	@Inject @Param(pathIndex=0)
+	@Inject @Param
 	private String selectedTableName;
 	
-//	@Inject @Param(pathIndex=1)
+	private String changeName;
+	private String testName;
+	
+	
+	public String getChangeName() {
+		return changeName;
+	}
+
+	public void setChangeName(String changeName) {
+		this.changeName = changeName;
+	}
+
+	public String getTestName() {
+		return testName;
+	}
+
+	public void setTestName(String testName) {
+		this.testName = testName;
+	}
+
+	//	@Inject @Param(pathIndex=1)
 	private TreeNode selectedNode;
 	
 	private LazyDataModel<Navigatable> navi;
@@ -48,6 +69,8 @@ public class DataViewerLazyBean implements Serializable{
 	private LazyDataModel<NcmErpTxIfr> txIfr;
 	
 	private Navigatable selectedRow;
+	
+	private List<Navigatable> selectedRows;
 	
 	
 	private List<Boolean> visibleColumns ;
@@ -67,10 +90,16 @@ public class DataViewerLazyBean implements Serializable{
 	
 	@PostConstruct
 	public void init(){
+		logger.info("PostConstruct0 :{},{}", testName, selectedTableName);
 		if(selectedTableName ==null){
+			if(testName ==null){
 			selectedTableName ="NCM_MST_SAA_CODE";
+			}
+			else{
+				selectedTableName = testName;
+			}
 		}
-		logger.info("PostConstruct :{}", selectedNode);
+		logger.info("PostConstruct :{}", selectedTableName);
 		if(selectedNode!=null){
 			dbService.getSelectedTable().setTableName(selectedNode.getData().toString());
 			onChangeEvent(selectedNode.getData().toString());
@@ -101,7 +130,7 @@ public class DataViewerLazyBean implements Serializable{
 		dbService.setTableColumns(dbService.generateColumns(selectedTableName));
 		dbService.setTableContents(dbService.generateTableContents(selectedTableName));
 	}	
-		
+	
 	
 //	public void onChangeEvent(String selectedTableName){
 	public void onChangeEvent(@Observes @SelectedTable String selectedTableName){	
@@ -131,6 +160,10 @@ public class DataViewerLazyBean implements Serializable{
 			}
 	 }
 	 
+	 public void onValueChange(ValueChangeEvent aa){
+		 changeName = selectedTableName;
+		 logger.info("valueChange :{}", aa);
+	 }
 	
 //	*************************getter and setter***********************************************
 	public DataBaseService getDbService() {
@@ -190,6 +223,14 @@ public class DataViewerLazyBean implements Serializable{
 
 	public void setSelectedRow(Navigatable selectedRow) {
 		this.selectedRow = selectedRow;
+	}
+
+	public List<Navigatable> getSelectedRows() {
+		return selectedRows;
+	}
+
+	public void setSelectedRows(List<Navigatable> selectedRows) {
+		this.selectedRows = selectedRows;
 	}
 	
 }

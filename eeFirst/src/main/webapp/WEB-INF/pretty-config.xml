@@ -37,6 +37,11 @@
 </url-mapping>
 
 
+<!-- <url-mapping id="v902DataNavigation2">
+	<pattern value="/v902DataNavigation/#{selectedTableName}" />
+	<view-id value="/view/v902DataNavigation.xhtml" />
+</url-mapping>
+ -->
 
 
 </pretty-config>
