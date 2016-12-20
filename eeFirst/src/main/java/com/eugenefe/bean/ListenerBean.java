@@ -9,6 +9,7 @@ import javax.inject.Named;
 
 import org.primefaces.event.NodeSelectEvent;
 
+import com.eugenefe.enums.EViewNew;
 import com.eugenefe.qualifiers.SelectedTable;
 
 @Named
@@ -26,11 +27,24 @@ public class ListenerBean implements Serializable {
 	private Event<String> selectEvent;
 	
 	public void onChangeEvent(NodeSelectEvent event){
+		System.out.println("Event Fire");
 		if(event.getTreeNode().getType().equals("Leaf")){
 			String tableName = event.getTreeNode().getData().toString();
 			System.out.println("ListenerBean_onChangeEvent_"+ tableName);
 			selectEvent.fire(tableName);
 			System.out.println("End of select event");
+			
 		}
+	}
+	
+	public String onChangeEvent1(NodeSelectEvent event){
+		if(event.getTreeNode().getType().equals("Leaf")){
+			String tableName = event.getTreeNode().getData().toString();
+			System.out.println("ListenerBean_onChangeEvent_"+ tableName);
+			selectEvent.fire(tableName);
+			System.out.println("End of select event");
+			
+		}
+		return EViewNew.v902.getUrl() + "?faces-redirect=true";
 	}
 }

@@ -9,10 +9,10 @@
 	<view-id value="/view/home.xhtml" />
 </url-mapping>
 
-<url-mapping id="v800Settings1">
+<!-- <url-mapping id="v800Settings1">
 	<pattern value="/v800Settings" />
 	<view-id value="/view/v800Settings.xhtml" />
-</url-mapping>
+</url-mapping> -->
 
 <url-mapping id="v900DataNavigation1">
 	<pattern value="/v900DataNavigation" />
@@ -37,11 +37,11 @@
 </url-mapping>
 
 
-<!-- <url-mapping id="v902DataNavigation2">
+<url-mapping id="v902DataNavigation2">
 	<pattern value="/v902DataNavigation/#{selectedTableName}" />
 	<view-id value="/view/v902DataNavigation.xhtml" />
 </url-mapping>
- -->
+
 
 
 </pretty-config>

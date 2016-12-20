@@ -2,6 +2,7 @@ package com.eugenefe.bean;
 
 import java.io.Serializable;
 
+import javax.annotation.PostConstruct;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.view.ViewScoped;
@@ -115,7 +116,22 @@ public class LayoutBean implements Serializable{
     	
     }
 	
-	public void initLayout(String url){
+	public void initLayout(String viewId){
+		logger.info("start layout initialize : {}", viewId);
+    	EViewNew temp = EViewNew.valueOf(viewId);
+    	renderBottom = temp.isRenderBottom();
+    	renderLeft = temp.isRenderLeft();
+    	renderRight = temp.isRenderRight();
+    	renderInnerTop = temp.isRenderInnerTop();
+    	renderInnerRight =temp.isRenderInnerRight();
+    	renderInnerBottom =temp.isRenderInnerBottom();
+    	
+    	viewUrl = temp.getUrl();
+    	leftSize  = "200";
+    	logger.info("Layout : {}, {}", viewId, temp.getUrl());
+    }
+	
+	/*public void initLayout(String url){
 		logger.info("start layout initialize : {}", url);
     	EViewNew temp = EViewNew.getTypeFromUrl(url);
     	renderBottom = temp.isRenderBottom();
@@ -128,8 +144,21 @@ public class LayoutBean implements Serializable{
     	viewUrl = temp.getUrl();
     	leftSize  = "200";
     	logger.info("Layout : {}, {}", url, temp.getUrl());
-    }
+    }*/
 	
+	
+	public void initLayout(EViewNew eView){
+    	EViewNew temp = eView;
+    	renderBottom = temp.isRenderBottom();
+    	renderLeft = temp.isRenderLeft();
+    	renderRight = temp.isRenderRight();
+    	renderInnerTop = temp.isRenderInnerTop();
+    	renderInnerRight =temp.isRenderInnerRight();
+    	renderInnerBottom =temp.isRenderInnerBottom();
+    	
+    	viewUrl = temp.getUrl();
+    	leftSize  = "200";
+    }
 	
     public void extractViewId(ActionEvent evt){
     	logger.info("Layout : {}", evt.getComponent().getId());

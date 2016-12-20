@@ -22,8 +22,7 @@
     <p:dataTable id="tableDynamicModel" value="#{reportViewerBean.rptData}" var="_row"
       emptyMessage="No History Data found with given criteria. Change the Dates"
       rowKey="#{_row}"
-      selectionMode="single"
-      sortMode="multiple" 
+      sortMode="multiple"
       resizableColumns="true" resizeMode="expand"
       tableStyle="display: table; min-width: 500px;  table-layout: auto ! important"
 	  paginatorAlwaysVisible="true"
@@ -31,19 +30,15 @@
       paginatorTemplate="{FirstPageLink} {PreviousPageLink} {JumpToPageDropdown} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
       rowsPerPageTemplate="10,15,25,50" 
       style="margin: 0.5em; border-top-left-radius: 8px; border-top-right-radius: 8px">
-     <p:columnGroup type="header">
-			<p:row>
-				<p:column rowspan="2" headerText="Manufacturer"  sortBy="#{_row[0]}" filterBy="#{_row[0]}" filterMatchMode="contains"  filterStyle="width:100%"/>
-				<p:column colspan="2" headerText="Sales" />
-			</p:row>
-			<p:row rendered="false"></p:row>
-			<p:row >
-				<p:column headerText="Last Year"  sortBy="#{_row[1]}" filterBy="#{_row[1]}" filterMatchMode="contains" filterStyle="width:100%" />
-				<p:column headerText="This Year"  sortBy="#{_row[2]}" filterBy="#{_row[2]}" filterMatchMode="contains" filterStyle="width:100%"/>
-			</p:row>
-	</p:columnGroup>
-      <p:columns  id="tableColumns" value="#{reportViewerBean.tableColumn}" var="_column" columnIndexVar="i" >
+     
+      <p:columns id="tableColumns" value="#{reportViewerBean.tableColumn}" var="_column" columnIndexVar="i"    
+        sortBy="#{_row[i]}"  filterBy="#{_row[i]}"  filterMatchMode="contains" filterStyle="width:100%" >
+        <f:facet name="header">  
+                <h:outputText value="#{colMsg[_column.columnName]}" />
+         </f:facet>
+         
         <h:outputText value="#{_row[i]}"  /> 
+            
       </p:columns>
     </p:dataTable> 
    

@@ -1,23 +1,24 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" 
-  xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+  xmlns:ui="http://xmlns.jcp.org/jsf/facelets" 
+  xmlns:f="http://xmlns.jcp.org/jsf/core" 
+  xmlns:h="http://xmlns.jcp.org/jsf/html"
   xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions" 
   xmlns:o="http://omnifaces.org/ui"  xmlns:of="http://omnifaces.org/functions"
   >
 
-  <!-- <p:layout collapseTitle="close" resizeTitle="resize" widgetVar="innerLayout"> -->
   <p:layout id="headerLayout" >
     <p:layoutUnit id="headerLeftLayoutUnit" position="west" size="200" gutter="4"   >
       <h:form id="logoForm" >
-      	<p:commandLink id="loginLClink" action="#{viewNavigation.getRedirectUrl('Home')}">
+      	<p:link id="loginLClink" outcome="#{viewNavigation.getUrl('Home')}"  >
 			 <p:graphicImage id="logoImage" title="#{msg.goToHome}" library="img" name="Gof_conv_margin_grey.png" width="100%" height="100%"/>
-		</p:commandLink>
+		</p:link>
       </h:form>
 
     </p:layoutUnit>
 
     <p:layoutUnit id="headerCentorLayoutUnit" position="center" resizable="false" gutter="4" >
       <p:graphicImage id="topCenterImage" value="/img/adv/vienna-171444.jpg" height="70%" width="100%" />
-      <ui:include src="menubar/megaMenu.xhtml" />
+      <ui:include src="/header/menubar/megaMenu.xhtml" />
     </p:layoutUnit>
   </p:layout>
 </ui:composition>

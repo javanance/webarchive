@@ -2,6 +2,7 @@ package com.eugenefe.dataholder;
 
 import java.io.Serializable;
 
+import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 
@@ -19,7 +20,7 @@ public class SelectedTableNameHolder implements Serializable {
 	}
 	
 	
-//	@PostConstruct
+	@PostConstruct
 	public void create(){
 		tableName = "NCM_MST_PROD_TYPE";
 	}

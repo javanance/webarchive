@@ -19,7 +19,7 @@ import com.eugenefe.enums.ENamingConvention;
 import com.eugenefe.ncm.NcmBatLogId;
 
 @Entity
-@Table(name = "ALL_TAB_COLUMNS")
+@Table(name = "MST_NAVIGATION")
 @IdClass(value= TableColumnPk.class)
 public class TableColumn implements Serializable{
 	
@@ -28,11 +28,13 @@ public class TableColumn implements Serializable{
 	private String columnName;
 	private String camelColumnName;
 	private String owner;
+	private String tableGroup;
 	private Integer columnId;
     private String columnType;
     private Integer columnLenght;
     private Integer columnPrecision;
     private Integer columnScale;
+    private String alingType;
     private String alignFormat;
     
 
@@ -69,7 +71,7 @@ public class TableColumn implements Serializable{
 		this.camelColumnName = camelColumnName;
 	}
 
-	@Column(name = "OWNER")
+	@Column(name = "TABLE_OWNER")
 	public String getOwner() {
 		return owner;
 	}
@@ -80,7 +82,16 @@ public class TableColumn implements Serializable{
 		this.owner = owner;
 	}
 	
-	@Column(name = "COLUMN_ID")
+	@Column(name = "TABLE_GROUP")
+	public String getTableGroup() {
+		return tableGroup;
+	}
+
+	public void setTableGroup(String tableGroup) {
+		this.tableGroup = tableGroup;
+	}
+
+	@Column(name = "COLUMN_ORDER")
 	public Integer getColumnId() {
 		return columnId;
 	}
@@ -89,7 +100,7 @@ public class TableColumn implements Serializable{
 		this.columnId = columnId;
 	}
 
-	@Column(name = "DATA_TYPE")
+	@Column(name = "COLUMN_TYPE")
 	public String getColumnType() {
 		return columnType;
 	}
@@ -100,7 +111,7 @@ public class TableColumn implements Serializable{
 	}
 
 	
-	@Column(name = "DATA_LENGTH")
+	@Column(name = "COLUMN_LENGTH")
 	public Integer getColumnLenght() {
 		return columnLenght;
 	}
@@ -109,7 +120,7 @@ public class TableColumn implements Serializable{
 		this.columnLenght = columnLenght;
 	}
 
-	@Column(name = "DATA_PRECISION")
+	@Column(name = "COLUMN_PRECISION")
 	public Integer getColumnPrecision() {
 		return columnPrecision;
 	}
@@ -117,7 +128,7 @@ public class TableColumn implements Serializable{
 	public void setColumnPrecision(Integer columnPrecision) {
 		this.columnPrecision = columnPrecision;
 	}
-	@Column(name = "DATA_SCALE")
+	@Column(name = "COLUMN_SCALE")
 	public Integer getColumnScale() {
 		return columnScale;
 	}
@@ -125,6 +136,16 @@ public class TableColumn implements Serializable{
 	public void setColumnScale(Integer columnScale) {
 		this.columnScale = columnScale;
 	}
+	
+	@Column(name = "ALIGN_TYPE")
+	public String getAlingType() {
+		return "float :" + alingType;
+	}
+
+	public void setAlingType(String alingType) {
+		this.alingType = alingType;
+	}
+
 
 	@Transient
 	public String getAlignFormat() {

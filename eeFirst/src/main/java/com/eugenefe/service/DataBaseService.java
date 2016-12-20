@@ -50,6 +50,7 @@ public class DataBaseService implements Serializable {
 
 	@PostConstruct
 	public void create() {
+		logger.info("DataBaseService PostConstruct0 : {},{}", selectedTable.getTableName());
 		if (selectedTable.getTableName() != null) {
 			logger.info("DataBaseService PostConstruct : {},{}", selectedTable.getTableName());
 			// this.tableColumns = getColumnList(selectedTable.getTableName());

@@ -4,12 +4,12 @@ import javax.inject.Named;
 
 
 public enum EViewNew  {
-	 Home("/view/home", 									true, 	false, 	false, 	false,	false, 	false)
+	 Home("/view/home", 									true, 	false, 	false, 	false,	false, 	true)
 //	 Home("/home", 									false, 	false, 	false, 	false,	false, 	false)
 //	,MarketVariable("v100MarketVariable")
 	
-	,MarketOverview("/view/v101MarketOverview"		, 	true, 	false, 	false, 	false,	false, 	false)
-	,ViewHistoryData("/view/v102ViewHistoryData"	, 	true, 	false, 	false, 	false,	true, 	true)
+	,v101("/view/v101MarketOverview"		, 	true, 	false, 	false, 	false,	false, 	false)
+	,v102("/view/v102ViewHistoryData"	, 	true, 	false, 	false, 	false,	true, 	true)
 //	,ViewRfHistoryData("v102ViewRfHistoryData")
 //	,ViewProdHistoryData("v103ViewProdHistoryData")
 //	,MarketVariableSelect("v100MarketVariable")
@@ -116,7 +116,7 @@ public enum EViewNew  {
 	
 	public static EViewNew getTypeFromUrl(String url){
 		for(EViewNew  aa : EViewNew.values()){
-			if(url.contains(aa.getUrl())){
+			if(aa.getUrl().contains(url)){
 				return aa;
 			}
 		}

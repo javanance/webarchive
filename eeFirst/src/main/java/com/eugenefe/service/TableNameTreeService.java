@@ -14,6 +14,7 @@ import org.primefaces.model.DefaultTreeNode;
 import org.primefaces.model.TreeNode;
 import org.slf4j.Logger;
 
+import com.eugenefe.model.TableColumn;
 import com.eugenefe.qualifiers.QueryResource;
 import com.eugenefe.qualifiers.SecondEm;
 
@@ -44,9 +45,8 @@ public class TableNameTreeService implements Serializable{
 		this.rootNode = rootNode;
 	}
 	
-	@PostConstruct
+//	@PostConstruct
 	public void create(){
-		
 		List<String> tableList = getTableList();
 		logger.info("db result :{}", tableList.size());
 		String[] tableNameToken;
@@ -136,14 +136,52 @@ public class TableNameTreeService implements Serializable{
 	}
 	*/
 	
+	@PostConstruct
+	public void create1(){
+		List<TableColumn> tables = getTables();
+		TableColumn temp = new TableColumn();
+		TreeNode ownerNode = new DefaultTreeNode("", rootNode);
+		TreeNode groupNode = new DefaultTreeNode("", ownerNode);
+		TreeNode treeNode;
+		Map<String, TreeNode> treeNodeMap = new HashMap<String, TreeNode>();
+
+		
+		rootNode = new DefaultTreeNode("Root", null);
+		rootNode.setExpanded(true);
+		
+		
+		for (TableColumn aa : tables) {
+			if( temp!= null && !aa.getTableName().equals(temp.getTableName())){
+				
+				if(!treeNodeMap.containsKey(aa.getOwner())){
+					ownerNode = new DefaultTreeNode(aa.getOwner(), rootNode);
+					ownerNode.setExpanded(true);
+					treeNodeMap.put(aa.getOwner(), ownerNode);
+					
+				}
+				if(!treeNodeMap.containsKey(aa.getTableGroup())){
+					ownerNode = treeNodeMap.get(aa.getOwner());
+					groupNode = new DefaultTreeNode(aa.getTableGroup(), ownerNode);
+					treeNodeMap.put(aa.getTableGroup(), groupNode);
+				}
+				treeNode = new DefaultTreeNode("Leaf", aa.getTableName(), groupNode);
+				temp = aa;
+			}
+		}
+	}
+	
 	private List<String> getTableList(){
-		return  entityManager.createNativeQuery(queries.getString("tableList"))
-				    	     .setParameter("owner", "NCM")
-							 .getResultList();
+//		return  entityManager.createNativeQuery(queries.getString("tableList1"))
+//				    	     .setParameter("owner", "NCM")
+//							 .getResultList();
 //		return  entityManager.createNativeQuery("select distinct a.table_name from all_tab_columns a where a.owner = :owner order by a.table_name")
 //	    	     .setParameter("owner", "NCM")
 //				 .getResultList();
+		return entityManager.createQuery("select distinct a.tableName from TableColumn a").getResultList();
 	}
 
+	private List<TableColumn> getTables(){
+		return entityManager.createQuery("from TableColumn a order by a.tableName").getResultList();
+	}
 	
 }

@@ -37,7 +37,7 @@ public class DataViewerLazyBean implements Serializable{
 	@Inject
 	private DataBaseService dbService;
 	
-	@Inject @Param
+//	@Inject @Param
 	private String selectedTableName;
 	
 	private String changeName;
@@ -79,21 +79,24 @@ public class DataViewerLazyBean implements Serializable{
 		System.out.println("Construction DataViewerLazyBean_" );
 	}
 	
-//	@PostConstruct
-//	public void init(){
-//		logger.info("PostConstruct :{}", selectedTableName);
-//		if(selectedTableName!=null){
-//			dbService.getSelectedTable().setTableName(selectedTableName);
-//			onChangeEvent(selectedTableName);
-//		}
-//	}
-	
 	@PostConstruct
+	public void init1(){
+		logger.info("PostConstruct1111 :{}", selectedTableName);
+		if(selectedTableName!=null){
+			dbService.getSelectedTable().setTableName(selectedTableName);
+			onChangeEvent(selectedTableName);
+		}
+		selectedTableName = dbService.getSelectedTable().getTableName();
+		navi = new LazyModelNavigatable<Navigatable>(dbService.generateTableLazyContents(selectedTableName));
+		setVisible();
+	}
+	
+//	@PostConstruct
 	public void init(){
 		logger.info("PostConstruct0 :{},{}", testName, selectedTableName);
 		if(selectedTableName ==null){
 			if(testName ==null){
-			selectedTableName ="NCM_MST_SAA_CODE";
+				selectedTableName ="NCM_MST_SAA_CODE";
 			}
 			else{
 				selectedTableName = testName;

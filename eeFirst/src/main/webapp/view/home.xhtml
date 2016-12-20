@@ -9,7 +9,7 @@
 	template="/templates/templateMain.xhtml">
 	
 	<f:metadata>
-		<f:viewAction  action="#{layoutBean.initLayout('/view/home')}"></f:viewAction>/>
+		<f:viewAction  action="#{layoutBean.initLayout('Home')}"></f:viewAction>/>
 	</f:metadata>
   
   <ui:define name="layoutCenter">
@@ -24,6 +24,8 @@
       	<f:param name="selectedTableName" value="NCM_BAT_LOG"></f:param>
       </p:link>
        <p/>
+        <p:commandLink action="/view/v902DataNavigation"  value="clink" />
+      
       <p:link outcome="/login" value="login1">
        	<f:param name="selectedTableName1" value="NCM_BAT_LOG"></f:param>
       </p:link>

@@ -46,7 +46,7 @@ public class TreeObjectNavigationInit {
 //	@Inject @ColumHeaderResource
 	private ResourceBundle messages;	
 
-	@Param
+//	@Param
 	private String navigation;
 	
 	private TreeNode testNode;

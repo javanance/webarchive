@@ -11,11 +11,11 @@
     <p:growl id="messages" showDetail="true" />
     <h:form>
     <p:dataList value="#{myMenuBean.myMenuList}" var="_item" type="unordered" >
-        	<p:link update="@(.ui-datatable)"  value="#{_item}"  action="/view/v902DataNavigation" >
-        		<f:param name="selectedTableName" value="#{_item}" />
-	        </p:link>
-	       
-	    </p:dataList>
+       	<p:link  value="#{_item}"  outcome="#{viewNavigation.getUrl('v902')}" >
+       		<f:param name="selectedTableName" value="#{_item}" />
+        </p:link>
+        
+    </p:dataList>
     </h:form>
     <p:accordionPanel id="accoPanel" multiple="true" activeIndex="0,1,2" style="padding : 0px" >
       <p:tab id="loginTab" title="User">
@@ -37,7 +37,7 @@
             selection="#{dataNavigationBean.selectedNode}"
             draggable="false" droppable="false">
             
-            <p:ajax  event="select" update="@(form)"  listener="#{listenerBean.onChangeEvent}" onstart="PF('wgTbNavi').clearFilters()" disabled="false">
+            <p:ajax  event="select" update="@(form)"  listener="#{listenerBean.onChangeEvent}" onstart="PF('wgTbNavi').clearFilters()"  >
             </p:ajax>
             
             <p:treeNode expandedIcon="fa fa-folder-open" collapsedIcon="fa fa-folder">
