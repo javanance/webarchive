@@ -18,9 +18,9 @@ import org.primefaces.model.TreeNode;
 import org.primefaces.model.Visibility;
 import org.slf4j.Logger;
 
+import com.eugenefe.entity.ncm.NcmErpTxIfr;
 import com.eugenefe.model.LazyModelNavigatable;
 import com.eugenefe.model.TableColumn;
-import com.eugenefe.ncm.NcmErpTxIfr;
 import com.eugenefe.qualifiers.SelectedTable;
 import com.eugenefe.service.DataBaseService;
 import com.eugenefe.util.Navigatable;

@@ -14,7 +14,7 @@ import javax.persistence.EntityManager;
 
 import org.slf4j.Logger;
 
-import com.eugenefe.ncm.NcmLv1Product;
+import com.eugenefe.entity.ncm.NcmLv1Product;
 import com.eugenefe.old.ColumnModel;
 import com.eugenefe.qualifiers.SecondEm;
 

@@ -11,7 +11,7 @@ import org.primefaces.model.SortMeta;
 import org.primefaces.model.SortOrder;
 
 import com.eugenefe.entities.MarketVariable;
-import com.eugenefe.enums.ENamingConvention;
+import com.eugenefe.enums.model.ENamingConvention;
 import com.eugenefe.util.Navigatable;
 
 public class LazyModelNavigatable<T extends Navigatable>  extends LazyDataModel<T>{

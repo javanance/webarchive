@@ -14,7 +14,6 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "ods_krx_option_price", catalog = "eugenefe")
-
 public class OdsKrxOptionPrice implements java.io.Serializable {
 
 	private OdsKrxOptionPriceId id;
@@ -53,7 +52,7 @@ public class OdsKrxOptionPrice implements java.io.Serializable {
 	}
 
 	@EmbeddedId
-
+	
 	@AttributeOverrides({
 			@AttributeOverride(name = "workDt", column = @Column(name = "WORK_DT", nullable = false, length = 8) ),
 			@AttributeOverride(name = "isuCd", column = @Column(name = "ISU_CD", nullable = false, length = 20) ) })

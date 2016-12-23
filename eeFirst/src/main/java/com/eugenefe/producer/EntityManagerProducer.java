@@ -29,6 +29,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceUnit;
 
 import com.eugenefe.qualifiers.DefaultEm;
+import com.eugenefe.qualifiers.OraTakionEm;
 import com.eugenefe.qualifiers.SecondEm;
 
 /**
@@ -56,7 +57,12 @@ public class EntityManagerProducer {
     @PersistenceContext(unitName="secondary")
     @SecondEm   
     private EntityManager emRel;
-    	
+    
+    
+    @Produces
+    @PersistenceContext(unitName="takion79")
+    @OraTakionEm   
+    private EntityManager emTakion;
     
     
 

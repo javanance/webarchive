@@ -162,6 +162,14 @@ table .ui-menuitem-text{
 	color:white/*{fcHeader}*/;
 	}
 
+.ui-diagram-element {
+        border:0.1em dotted #d4e06b;    
+        width:14em; 
+        height:4em;     
+        line-height:4em;
+        text-align: center;
+    }
+    
 /* Interaction states----------------------------------*/
 .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default{
 	border:0px solid #d3d3d3/*{borderColorDefault}*/;

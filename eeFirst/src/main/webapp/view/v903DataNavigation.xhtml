@@ -17,5 +17,47 @@
 	</ui:define>
 
 	<ui:define name="layoutCenter">
+		<h:form>
+		<p:commandButton action="#{testBean.save}" value="Save"/>
+		</h:form>
+		<!-- <p:outputLabel value="#{testBean.bondList.size()}"></p:outputLabel> -->
+		
+		<!--  <p:outputLabel value="#{testBean.sceList.get(0).scenarioId}"></p:outputLabel>
+		 <p/>
+		 <ui:repeat  var="var"  value="#{testBean.sceList.get(0).aaa.entrySet().toArray()}" >
+		 	<p:outputLabel value="#{var.key.mvId}"></p:outputLabel>
+		 	<p:outputLabel value="#{var.key.compoundMtd}"></p:outputLabel>
+		 	<p/>
+		 	<p:outputLabel value="#{var.value.shockType}"></p:outputLabel>
+		 	<p/>
+		 	<p:outputLabel value="#{var.value.shockValue}"></p:outputLabel>
+		 	<p/>
+		 </ui:repeat> -->
+		 
+		 
+	
+		<!--  <ui:repeat  var="var"  value="#{testBean.bondList}" >
+		 	<p:outputLabel value="#{var.mvId}"></p:outputLabel>
+		 	<p/>
+		 	<p:outputLabel value="#{var.mvId}"></p:outputLabel>
+		 	<p:outputLabel value="#{var.mVari.mvId}"></p:outputLabel>
+		 	
+		 	<p/>
+		 </ui:repeat> -->
+		 
+		 
+		  <ui:repeat  var="var"  value="#{testBean.mvList}" >
+		 	<p:outputLabel value="#{var.mvId}"></p:outputLabel>
+		 	<p/>
+		 	<p:outputLabel value="#{var.mvId}"></p:outputLabel>
+		 	
+		 	<p:outputLabel value="#{var.stock.mvId}"></p:outputLabel>
+		 	<!-- <p:outputLabel value="#{var.bd.mvId}"></p:outputLabel> -->
+		 	<p:outputLabel value="#{var.etf.etfId}"></p:outputLabel>
+		 	<p/>
+		 </ui:repeat>
+		
+		<!-- <p:outputLabel  value="#{testBean.sceDetailTestList.get(0).marketVariable.mvId}"></p:outputLabel> -->
+		
 	</ui:define>
 </ui:composition>

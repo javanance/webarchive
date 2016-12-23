@@ -6,7 +6,7 @@ import java.util.Comparator;
 import org.primefaces.model.SortOrder;
 
 import com.eugenefe.entities.MarketVariable;
-import com.eugenefe.ncm.NcmErpTxIfr;
+import com.eugenefe.entity.ncm.NcmErpTxIfr;
 import com.eugenefe.util.Navigatable;
 
 public class LazySingleSortNavigatable<T extends Navigatable> implements Comparator<T> {

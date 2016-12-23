@@ -35,4 +35,13 @@
 		<!-- <jta-data-source>java:jboss/datasources/MysqlRelDS</jta-data-source> -->
 		
 	</persistence-unit>
+	
+	<persistence-unit name="takion79" transaction-type="JTA">
+		<jta-data-source>java:jboss/datasources/OracleDST</jta-data-source>
+		<properties>
+            <property name="hibernate.ejb.use_class_enhancer" value="true" />
+           <!--  <property name="hibernate.enhance.enable" value="true"/> -->
+        </properties>
+	</persistence-unit>
+	
 </persistence>

@@ -12,7 +12,7 @@ import javax.persistence.EntityManager;
 
 import org.slf4j.Logger;
 
-import com.eugenefe.enums.EMaturity;
+import com.eugenefe.enums.model.EMaturity;
 import com.eugenefe.qualifiers.SecondEm;
 import com.eugenefe.util.FnCalendar;
 

@@ -11,7 +11,7 @@
     <p:growl id="messages" showDetail="true" />
     <h:form>
     <p:dataList value="#{myMenuBean.myMenuList}" var="_item" type="unordered" >
-       	<p:link  value="#{_item}"  outcome="#{viewNavigation.getUrl('v902')}" >
+       	<p:link  value="#{_item}"  outcome="#{viewUrlBean.getUrl('v902')}" >
        		<f:param name="selectedTableName" value="#{_item}" />
         </p:link>
         

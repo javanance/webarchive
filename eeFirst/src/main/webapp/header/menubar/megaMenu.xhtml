@@ -10,8 +10,8 @@
    <p:submenu id="marketVariableSubmenu" label="#{msg.marketVariables}" icon="img_markget_variable">
     <p:column>
      <p:submenu style="display: none;">
-      <p:menuitem id="menuitem111" value="#{msg.marketOverview}"  action="#{viewNavigation.getRedirectUrl('v101')}"  />
-      <p:menuitem id="menuitem112" value="#{msg.marketSearch}"  action="#{viewNavigation.getRedirectUrl('v102')}" />
+      <p:menuitem id="menuitem111" value="#{msg.marketOverview}"  action="#{viewUrlBean.getRedirectUrl('v101')}"  />
+      <p:menuitem id="menuitem112" value="#{msg.marketSearch}"  action="#{viewUrlBean.getRedirectUrl('v102')}" />
      </p:submenu>
     </p:column>
    </p:submenu>
@@ -53,11 +53,12 @@
 
    </p:submenu>
 
-   <p:menuitem id="menuitem601" value="#{msg.settings}" icon="img_setting"  outcome="#{viewNavigation.getRedirectUrl('v800')}"  />
+   <p:menuitem id="menuitem601" value="#{msg.settings}" icon="img_setting"  outcome="#{viewUrlBean.getRedirectUrl('v800')}"  />
    
-   <p:menuitem id="menuitem903" value="#{msg.navigation}" icon="img_setting"  outcome="#{viewNavigation.getUrl('v902')}" />
+   <p:menuitem id="menuitem903" value="#{msg.navigation}" icon="img_setting"  outcome="#{viewUrlBean.getUrl('v902')}" />
    <p:menuitem id="menuitem905" value="#{msg.indexColumns}" icon="img_setting"  outcome="/view/v904DataNavigation"  />
    <p:menuitem id="menuitem904" value="#{msg.test}" icon="img_setting"  outcome="/view/v903DataNavigation"  />
+   <p:menuitem id="menuitem910" value="#{msg.diagram}" icon="img_setting"  outcome="/view/v910Diagram"  />
 
   </p:megaMenu>
  </h:form>

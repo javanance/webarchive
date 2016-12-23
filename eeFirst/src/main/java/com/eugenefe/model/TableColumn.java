@@ -15,8 +15,8 @@ import javax.persistence.Transient;
 
 import org.apache.commons.lang3.text.WordUtils;
 
-import com.eugenefe.enums.ENamingConvention;
-import com.eugenefe.ncm.NcmBatLogId;
+import com.eugenefe.entity.ncm.NcmBatLogId;
+import com.eugenefe.enums.model.ENamingConvention;
 
 @Entity
 @Table(name = "MST_NAVIGATION")

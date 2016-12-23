@@ -8,7 +8,7 @@
   <p:layout id="headerLayout" >
     <p:layoutUnit id="headerLeftLayoutUnit" position="west" size="200" gutter="4"   >
       <h:form id="logoForm" >
-        <p:commandLink id="logoLink"  action="#{viewNavigation.getRedirectUrl('Home')}">
+        <p:commandLink id="logoLink"  action="#{viewUrlBean.getRedirectUrl('Home')}">
           <p:graphicImage id="logoImage" title="#{msg.goToHome}" library="img" name="Gof_conv_margin_grey.png" width="90%" height="90%"  style="margin: 1em 2em"/>
           <div align="center">
           </div>

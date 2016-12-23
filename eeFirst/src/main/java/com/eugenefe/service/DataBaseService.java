@@ -8,14 +8,14 @@ import java.util.ResourceBundle;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 
 import org.apache.commons.lang3.text.WordUtils;
 import org.slf4j.Logger;
 
 import com.eugenefe.dataholder.SelectedTableNameHolder;
-import com.eugenefe.enums.ENamingConvention;
+import com.eugenefe.enums.model.ENamingConvention;
 import com.eugenefe.model.TableColumn;
-import com.eugenefe.ncm.NcmErpTxIfr;
 import com.eugenefe.qualifiers.QueryResource;
 import com.eugenefe.qualifiers.SecondEm;
 import com.eugenefe.util.Navigatable;
@@ -62,6 +62,14 @@ public class DataBaseService implements Serializable {
 			logger.info("DataBaseService PostConstruct1 : {},{}", tableColumns.size(), tableContents.size());
 		}
 	}
+	
+	public <T extends Navigatable> void save(T  mv){
+		EntityTransaction t = entityManager.getTransaction();
+		t.begin();
+		entityManager.persist(mv);
+		t.commit();
+		
+	}
 
 	// *****************************************getter and setter*******************************************
 	public List<TableColumn> getTableColumns() {
@@ -107,8 +115,8 @@ public class DataBaseService implements Serializable {
 		// }
 		// logger.info("DataBaseService_getDynamicTable : {}", tableName);
 		String entityName = WordUtils.capitalizeFully(tableName, new char[] { '_' }).replaceAll("_", "");
-		String queryString = "from " + entityName;
-		return entityManager.createQuery("from " + entityName).getResultList();
+		String queryString = "from Navi" + entityName;
+		return entityManager.createQuery(queryString).getResultList();
 	}
 
 	public List<TableColumn> generateColumns(String tableName) {
@@ -124,10 +132,11 @@ public class DataBaseService implements Serializable {
 	}
 	
 	public List<Navigatable> generateTableLazyContents(String tableName) {
-		String entityName = WordUtils.capitalizeFully(tableName, new char[] { '_' }).replaceAll("_", "");
-		String queryString = "from " + entityName;
-		logger.info("DataBaseService_entity Name1111 : {},{}", entityName, ENamingConvention.SNAKE_CASE.convertToCamelCase(tableName));
-		List<Object> aaa = entityManager.createQuery("from " + entityName).getResultList();
+//		String entityName = WordUtils.capitalizeFully(tableName, new char[] { '_' }).replaceAll("_", "");
+		String entityName = ENamingConvention.SCREAMING_SNAKE_CASE.convertToPascalCase(tableName);
+		String queryString = "from Navi" + entityName;
+		logger.info("DataBaseService_entity Name1111 : {},{}", entityName, ENamingConvention.SCREAMING_SNAKE_CASE.convertToPascalCase(tableName));
+		List<Navigatable> aaa = entityManager.createQuery(queryString).getResultList();
 		
 		logger.info("DataBaseService_generateTableLazyContents : {}", aaa.size());
 		
@@ -135,21 +144,7 @@ public class DataBaseService implements Serializable {
 		for(Object zz : aaa){
 			bbb.add((Navigatable)zz);
 		}
-		return bbb;
+		return aaa;
 	}
 	
-	public List<NcmErpTxIfr> generateTableLazyContents1(String tableName) {
-		String entityName = WordUtils.capitalizeFully(tableName, new char[] { '_' }).replaceAll("_", "");
-		String queryString = "from " + entityName;
-		logger.info("DataBaseService_entity Name : {}, {}",entityName, ENamingConvention.SNAKE_CASE.convertToCamelCase(tableName));
-		List<Object> aaa = entityManager.createQuery("from " + entityName).getResultList();
-		
-		logger.info("DataBaseService_generateTableLazyContents : {}", aaa.size());
-		
-		List<NcmErpTxIfr> bbb = new ArrayList<NcmErpTxIfr>();
-		for(Object zz : aaa){
-			bbb.add((NcmErpTxIfr)zz);
-		}
-		return bbb;
-	}
 }

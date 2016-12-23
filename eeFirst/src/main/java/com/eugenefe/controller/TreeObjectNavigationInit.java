@@ -24,8 +24,8 @@ import org.primefaces.model.TreeNode;
 import org.slf4j.Logger;
 
 import com.eugenefe.converter.TableDynamicColumn;
+import com.eugenefe.entity.ncm.NcmLv1Product;
 import com.eugenefe.enums.EColumnType;
-import com.eugenefe.ncm.NcmLv1Product;
 import com.eugenefe.qualifiers.AnnoMethodTree;
 import com.eugenefe.qualifiers.AnnoNavigationFilter;
 import com.eugenefe.qualifiers.SecondEm;
