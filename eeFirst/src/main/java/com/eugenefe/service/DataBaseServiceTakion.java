@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import javax.annotation.PostConstruct;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -24,7 +25,8 @@ import com.eugenefe.util.Navigatable;
 //@SessionScoped
 //@ViewScoped
 //@RequestScoped
-public class DataBaseService implements Serializable {
+@Stateless
+public class DataBaseServiceTakion implements Serializable {
 	@Inject
 	private Logger logger;
 
@@ -33,7 +35,7 @@ public class DataBaseService implements Serializable {
 	private ResourceBundle queries;
 
 	@Inject
-	@SecondEm
+	@OraTakionEm
 	private EntityManager entityManager;
 
 	
@@ -46,30 +48,20 @@ public class DataBaseService implements Serializable {
 
 	private List<Navigatable> tableLazyContents;
 
-	public DataBaseService() {
+	public DataBaseServiceTakion() {
 		System.out.println("DataBaseService Generated");
 	}
 
-	@PostConstruct
+//	@PostConstruct
 	public void create() {
 		logger.info("DataBaseService PostConstruct0 : {},{}", selectedTable.getTableName());
-		if (selectedTable.getTableName() != null) {
-			logger.info("DataBaseService PostConstruct : {},{}", selectedTable.getTableName());
-			// this.tableColumns = getColumnList(selectedTable.getTableName());
-			// this.tableContents =
-			// getDynamicTable(selectedTable.getTableName());
-			setTableColumns(generateColumns(selectedTable.getTableName()));
-			setTableContents(generateTableContents(selectedTable.getTableName()));
-
-			logger.info("DataBaseService PostConstruct1 : {},{}", tableColumns.size(), tableContents.size());
-		}
 	}
 	
 	public <T extends Navigatable> void save(T  mv){
-		EntityTransaction t = entityManager.getTransaction();
-		t.begin();
+//		EntityTransaction t = entityManager.getTransaction();
+//		t.begin();
 		entityManager.persist(mv);
-		t.commit();
+//		t.commit();
 		
 	}
 

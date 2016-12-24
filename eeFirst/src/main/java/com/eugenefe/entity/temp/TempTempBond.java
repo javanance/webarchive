@@ -23,7 +23,7 @@ import com.eugenefe.util.Navigatable;
 
 @Entity
 @Table(name = "BOND", schema = "TAKION79")
-public class TempBond  implements java.io.Serializable, Navigatable, TempMarketVari {
+public class TempTempBond  implements java.io.Serializable, Navigatable, TempMarketVari {
 
 	private String mvId;
 	private String issuerId;
@@ -69,11 +69,11 @@ public class TempBond  implements java.io.Serializable, Navigatable, TempMarketV
 //	private List<Position> posList = new ArrayList<Position>();
 //	
 	
-	public TempBond() {
+	public TempTempBond() {
 	}
 
 	@Id
-//	@Column(name = "MV_ID", unique = true, nullable = false, length = 20)
+	@Column(name = "MV_ID", unique = true, nullable = false, length = 20)
 	public String getMvId() {
 		return this.mvId;
 	}
@@ -493,16 +493,14 @@ public class TempBond  implements java.io.Serializable, Navigatable, TempMarketV
 //		this.posList = posList;
 //	}
 	
-	private TempMarketVariable mVari;
-	@MapsId()
-	@OneToOne(mappedBy = "bd")
-//	@JoinColumn(name ="MV_ID", referencedColumnName ="MV_ID", insertable =false, updatable= false, nullable=true)
+	private TempTempMarketVariable mVari;
+	@OneToOne(optional=false)
 	@JoinColumn(name ="MV_ID")
-	public TempMarketVariable getmVari() {
+	public TempTempMarketVariable getmVari() {
 		return mVari;
 	}
 
-	public void setmVari(TempMarketVariable mVari) {
+	public void setmVari(TempTempMarketVariable mVari) {
 		this.mVari = mVari;
 	}
 
@@ -529,9 +527,9 @@ public class TempBond  implements java.io.Serializable, Navigatable, TempMarketV
 			return true;
 		if ((other == null))
 			return false;
-		if (!(other instanceof TempBond))
+		if (!(other instanceof TempTempBond))
 			return false;
-		TempBond castOther = (TempBond) other;
+		TempTempBond castOther = (TempTempBond) other;
 
 		return this.idString().equals(castOther.idString());
 	}

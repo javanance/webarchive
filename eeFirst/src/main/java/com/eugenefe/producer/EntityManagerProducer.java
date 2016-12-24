@@ -16,19 +16,12 @@
  */
 package com.eugenefe.producer;
 
-import java.util.logging.Logger;
-
 import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Produces;
-import javax.enterprise.inject.spi.InjectionPoint;
-import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceUnit;
+import javax.persistence.PersistenceContextType;
 
-import com.eugenefe.qualifiers.DefaultEm;
 import com.eugenefe.qualifiers.OraTakionEm;
 import com.eugenefe.qualifiers.SecondEm;
 
@@ -60,10 +53,11 @@ public class EntityManagerProducer {
     
     
     @Produces
+//    @PersistenceContext(unitName="takion79", type = PersistenceContextType.EXTENDED)
     @PersistenceContext(unitName="takion79")
     @OraTakionEm   
     private EntityManager emTakion;
     
-    
+   
 
 }

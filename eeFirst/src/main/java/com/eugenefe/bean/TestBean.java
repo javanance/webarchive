@@ -14,12 +14,14 @@ import org.slf4j.Logger;
 //import com.eugenefe.entity.takion.Bond;
 import com.eugenefe.entity.takion.ScenarioDetailTest;
 import com.eugenefe.entity.takion.ScenarioTest;
+import com.eugenefe.entity.temp.Hifive;
 import com.eugenefe.entity.temp.TempBond;
 import com.eugenefe.entity.temp.TempMarketVariable;
 import com.eugenefe.entity.temp.TempPosition;
-import com.eugenefe.qualifiers.MyTransactional;
+import com.eugenefe.entity.temp.TempStock;
+import com.eugenefe.entity.temp.TempTempMarketVariable;
 import com.eugenefe.qualifiers.OraTakionEm;
-import com.eugenefe.service.DataBaseService;
+import com.eugenefe.service.DataBaseServiceTakion;
 
 @Named
 @ViewScoped
@@ -34,6 +36,7 @@ public class TestBean implements Serializable {
 	
 	private List<TempMarketVariable> mvList;
 	
+	
 	public List<TempMarketVariable> getMvList() {
 		return mvList;
 	}
@@ -41,12 +44,25 @@ public class TestBean implements Serializable {
 	public void setMvList(List<TempMarketVariable> mvList) {
 		this.mvList = mvList;
 	}
+	
+	private List<TempTempMarketVariable> tempMvList;
+	
+
+	public List<TempTempMarketVariable> getTempMvList() {
+		return tempMvList;
+	}
+
+	public void setTempMvList(List<TempTempMarketVariable> tempMvList) {
+		this.tempMvList = tempMvList;
+	}
 
 	private List<ScenarioTest> sceList;
 	
 	private List<TempPosition> posList;
 	
 	private List<ScenarioDetailTest> sceDetailTestList;
+	
+	private List<Hifive> hifiveList;
 	public TestBean() {
 		System.out.println("TestBean Gen");
 	}
@@ -67,10 +83,22 @@ public class TestBean implements Serializable {
 		this.posList = posList;
 	}
 
+	public List<Hifive> getHifiveList() {
+		return hifiveList;
+	}
+
+	public void setHifiveList(List<Hifive> hifiveList) {
+		this.hifiveList = hifiveList;
+	}
+
 	@PostConstruct
 	public void  init() {
 //		mvList = entityManager.createQuery("select a from TempMarketVariable a left join fetch a.bd left join fetch a.stock ").getResultList();
-		mvList = entityManager.createQuery("select a from TempMarketVariable a  ").getResultList();
+//		mvList = entityManager.createQuery("select a from TempMarketVariable a  ").getResultList();
+//		tempMvList = entityManager.createQuery("select a from TempTempMarketVariable a left join fetch a.bd").getResultList();
+		
+		tempMvList = entityManager.createQuery("select a from TempTempMarketVariable a").getResultList();
+		
 //		bondList = entityManager.createQuery("from TempBond").getResultList();
 //		
 //		EntityGraph graph = entityManager.getEntityGraph("graph.Scenario.Details");
@@ -79,28 +107,32 @@ public class TestBean implements Serializable {
 //		
 //		sceList = entityManager.createQuery("from Scenario").setHint(EQueryHint.FetchGraph.getValue(), graph).getResultList();
 		
-//		sceList = entityManager.createQuery("from ScenarioTest").getResultList();
+		sceList = entityManager.createQuery("from ScenarioTest").getResultList();
 		
 //		posList = entityManager.createQuery("from TempPosition").getResultList();
 		
 //		sceDetailTestList = entityManager.createQuery("from ScenarionDetailTest").getResultList();
 				
+//		hifiveList = entityManager.createQuery("from Hifive").getResultList();
 		logger.info("aaa");		
 // 		sceList = entityManager.createQuery("from Scenario a left join fetch a.scenarioDetails").getResultList();
 	}
 	@Inject
-	private DataBaseService dbService;
+	private DataBaseServiceTakion dbService;
 	
-//	@MyTransactional
 	public void save(){
+		String mvId = "BOND_105";
 		TempBond bond = new TempBond();
-		bond.setMvId("BOND_100");
+		bond.setMvId(mvId);
+		TempStock stock = new TempStock();
+		stock.setMvId(mvId);
 		TempMarketVariable mv = new TempMarketVariable();
-		mv.setMvId("BOND_100");
-		mv.setBd(bond);
-//		bond.setmVari(mv);
-		dbService.save(mv);
-//		dbService.save(bond);
+		mv.setMvId(mvId);
+//		mv.setBd(bond);
+//		mv.setStock(stock);
+		bond.setmVari(mv);
+//		dbService.save(mv);
+		dbService.save(bond);
 		System.out.println("SAVE *****************************************");
 	}
 	

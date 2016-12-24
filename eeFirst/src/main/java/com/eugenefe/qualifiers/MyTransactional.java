@@ -14,7 +14,7 @@ import javax.interceptor.InterceptorBinding;
 @Qualifier
 @Target({ TYPE, METHOD})
 @Retention(RUNTIME)
-@Documented
+//@Documented
 @InterceptorBinding
 public @interface MyTransactional {
 

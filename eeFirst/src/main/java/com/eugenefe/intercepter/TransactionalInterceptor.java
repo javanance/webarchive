@@ -18,6 +18,7 @@ public class TransactionalInterceptor {
 
 	@AroundInvoke
 	 public Object invoke(InvocationContext context) throws Exception{
+		System.out.println("in the interceptor**************************************");
 	   EntityTransaction t =em.getTransaction();
 	   try {
 	     if(!t.isActive()) 
@@ -25,6 +26,7 @@ public class TransactionalInterceptor {
 	     return context.proceed();
 	   } catch(Exception e) {
 		   t.rollback();
+		   return null;
 	   } finally {
 	     if(t != null && t.isActive()) 
 	       t.commit();

@@ -1,16 +1,11 @@
 package com.eugenefe.entity.temp;
 // Generated Dec 19, 2016 6:36:07 PM by Hibernate Tools 5.2.0.Beta1 with Custom Template_takion!!!!!! 
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.SecondaryTable;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -23,7 +18,7 @@ import com.eugenefe.util.Navigatable;
 @Entity
 @Table(name = "MARKET_VARIABLE", schema = "TAKION79")
 //@SecondaryTable(name="RISK_FACTOR", pkJoinColumns = @PrimaryKeyJoinColumn(name ="RF_ID"))
-public class TempMarketVariable implements java.io.Serializable, Navigatable, TempMarketVari{
+public class TempTempMarketVariable implements java.io.Serializable, Navigatable, TempMarketVari{
 
 	private String mvId;
 	private String mvName;
@@ -33,7 +28,7 @@ public class TempMarketVariable implements java.io.Serializable, Navigatable, Te
 	private String underlyingYn;
 
 
-	public TempMarketVariable() {
+	public TempTempMarketVariable() {
 	}
 
 	@Id
@@ -120,44 +115,40 @@ public class TempMarketVariable implements java.io.Serializable, Navigatable, Te
 	
 	
 //	TO_DO
-	private TempBond bd;
+	private TempTempBond bd;
 
-//	@ManyToOne(fetch =FetchType.LAZY, optional=true)
-//	@JoinColumn(name ="MV_ID",  nullable=true, insertable=false, updatable =false)
-//	@OneToOne(fetch =FetchType.LAZY, optional=true, cascade ={CascadeType.ALL})
-	@OneToOne(fetch =FetchType.LAZY , optional= true)
-	@JoinColumn(name ="MV_ID",  nullable=true)
-	public TempBond getBd() {
+//	@LazyToOne(LazyToOneOption.NO_PROXY)
+	@OneToOne(fetch =FetchType.LAZY , optional= true, mappedBy="mVari")
+//	@JoinColumn(name ="MV_ID" , referencedColumnName ="MV_ID")
+	public TempTempBond getBd() {
 		return bd;
 	}
 
-	public void setBd(TempBond bd) {
+	public void setBd(TempTempBond bd) {
 		this.bd = bd;
 	}
-	
-	private TempStock stock;
-//	@OneToOne(fetch =FetchType.LAZY , optional= true, cascade ={CascadeType.ALL})
-	@OneToOne(fetch =FetchType.LAZY , optional= true)
-	@JoinColumn(name ="MV_ID",  nullable=true)
-	public TempStock getStock() {
+//	
+	private TempTempStock stock;
+	@OneToOne(fetch =FetchType.LAZY , optional= true, mappedBy="stockVari")
+	public TempTempStock getStock() {
 		return stock;
 	}
 
-	public void setStock(TempStock stock) {
+	public void setStock(TempTempStock stock) {
 		this.stock = stock;
 	}
-	
-	private TempEtf etf;
-	
-	@OneToOne(fetch =FetchType.LAZY , optional= true)
-	@JoinColumn(name ="MV_ID",  nullable=true)
-	public TempEtf getEtf() {
-		return etf;
-	}
-
-	public void setEtf(TempEtf etf) {
-		this.etf = etf;
-	}
+//	
+//	private TempEtf etf;
+//	
+//	@OneToOne(fetch =FetchType.LAZY , optional= true)
+//	@JoinColumn(name ="MV_ID",  nullable=true)
+//	public TempEtf getEtf() {
+//		return etf;
+//	}
+//
+//	public void setEtf(TempEtf etf) {
+//		this.etf = etf;
+//	}
 
 	/**
 	 * idString
@@ -182,9 +173,9 @@ public class TempMarketVariable implements java.io.Serializable, Navigatable, Te
 			return true;
 		if ((other == null))
 			return false;
-		if (!(other instanceof TempMarketVariable))
+		if (!(other instanceof TempTempMarketVariable))
 			return false;
-		TempMarketVariable castOther = (TempMarketVariable) other;
+		TempTempMarketVariable castOther = (TempTempMarketVariable) other;
 
 		return this.idString().equals(castOther.idString());
 	}
