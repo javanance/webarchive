@@ -9,6 +9,9 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.LazyToOne;
+import org.hibernate.annotations.LazyToOneOption;
+
 import com.eugenefe.util.Navigatable;
 
 /**
@@ -117,7 +120,7 @@ public class TempTempMarketVariable implements java.io.Serializable, Navigatable
 //	TO_DO
 	private TempTempBond bd;
 
-//	@LazyToOne(LazyToOneOption.NO_PROXY)
+	@LazyToOne(LazyToOneOption.NO_PROXY)
 	@OneToOne(fetch =FetchType.LAZY , optional= true, mappedBy="mVari")
 //	@JoinColumn(name ="MV_ID" , referencedColumnName ="MV_ID")
 	public TempTempBond getBd() {
@@ -129,6 +132,7 @@ public class TempTempMarketVariable implements java.io.Serializable, Navigatable
 	}
 //	
 	private TempTempStock stock;
+	@LazyToOne(LazyToOneOption.NO_PROXY)
 	@OneToOne(fetch =FetchType.LAZY , optional= true, mappedBy="stockVari")
 	public TempTempStock getStock() {
 		return stock;

@@ -97,7 +97,7 @@ public class TestBean implements Serializable {
 //		mvList = entityManager.createQuery("select a from TempMarketVariable a  ").getResultList();
 //		tempMvList = entityManager.createQuery("select a from TempTempMarketVariable a left join fetch a.bd").getResultList();
 		
-		tempMvList = entityManager.createQuery("select a from TempTempMarketVariable a").getResultList();
+//		tempMvList = entityManager.createQuery("select a from TempTempMarketVariable a").getResultList();
 		
 //		bondList = entityManager.createQuery("from TempBond").getResultList();
 //		

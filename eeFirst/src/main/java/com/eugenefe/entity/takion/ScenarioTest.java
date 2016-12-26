@@ -18,6 +18,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import com.eugenefe.embeddable.ScenarioTweek;
+import com.eugenefe.entity.temp.TempTempMarketVariable;
 import com.eugenefe.util.Navigatable;
 
 /**
@@ -89,10 +90,10 @@ public class ScenarioTest implements java.io.Serializable, Navigatable {
 //		this.scenarioDetails = scenarioDetails;
 //	}
 	
-	private Map<Bond, ScenarioTweek> aaa = new HashMap<Bond, ScenarioTweek>();
+	/*private Map<Bond, ScenarioTweek> aaa = new HashMap<Bond, ScenarioTweek>();
 	
 	
-	@ElementCollection(fetch= FetchType.EAGER)
+	@ElementCollection(fetch= FetchType.LAZY)
 //	@Fetch(FetchMode.JOIN)
 	@CollectionTable(name="SCENARIO_DETAIL", joinColumns =@JoinColumn(name="SCENARIO_ID"))
 	@MapKeyJoinColumn(name ="MV_ID")
@@ -106,8 +107,25 @@ public class ScenarioTest implements java.io.Serializable, Navigatable {
 
 	public void setAaa(Map<Bond, ScenarioTweek> aaa) {
 		this.aaa = aaa;
+	}*/
+	private Map<TempTempMarketVariable, ScenarioTweek> aaa = new HashMap<TempTempMarketVariable, ScenarioTweek>();
+	
+	
+	@ElementCollection(fetch= FetchType.LAZY)
+//	@Fetch(FetchMode.JOIN)
+	@CollectionTable(name="SCENARIO_DETAIL", joinColumns =@JoinColumn(name="SCENARIO_ID"))
+	@MapKeyJoinColumn(name ="MV_ID")
+//	@AttributeOverrides({
+//        @AttributeOverride(name="shockType", column=@Column(name="SHOCK_TYPE")),
+//        @AttributeOverride(name="shockValue", column=@Column(name="SHOCK_VALUE")),
+//      })
+	public Map<TempTempMarketVariable, ScenarioTweek> getAaa() {
+		return aaa;
 	}
 
+	public void setAaa(Map<TempTempMarketVariable, ScenarioTweek> aaa) {
+		this.aaa = aaa;
+	}
 	/**
 	 * idString
 	 * @return String
