@@ -1,4 +1,4 @@
-package com.eugenefe.entity.temp;
+package com.eugenefe.entity.takion;
 // Generated Dec 22, 2016 11:17:22 AM by Hibernate Tools 5.2.0.CR1 with Custom Template_takion!!!!!! 
 
 import java.math.BigDecimal;
@@ -19,7 +19,7 @@ import com.eugenefe.util.Navigatable;
 
 @Entity
 @Table(name = "STOCK", schema = "TAKION79")
-public class TempTempStock implements java.io.Serializable, Navigatable, TempMarketVari {
+public class Stock implements java.io.Serializable, Navigatable {
 
 	private String mvId;
 	private String stockType;
@@ -34,7 +34,7 @@ public class TempTempStock implements java.io.Serializable, Navigatable, TempMar
 	private String lastUpdated;
 	private BigDecimal versionNo;
 
-	public TempTempStock() {
+	public Stock() {
 	}
 
 	@Id
@@ -158,15 +158,15 @@ public class TempTempStock implements java.io.Serializable, Navigatable, TempMar
 
 	}
 
-	private TempTempMarketVariable stockVari;
+	private MarketVariable stockVari;
 	
 	@OneToOne(optional=false)
 	@JoinColumn(name ="MV_ID")
-	public TempTempMarketVariable getStockVari() {
+	public MarketVariable getStockVari() {
 		return stockVari;
 	}
 
-	public void setStockVari(TempTempMarketVariable stockVari) {
+	public void setStockVari(MarketVariable stockVari) {
 		this.stockVari = stockVari;
 	}
 
@@ -191,9 +191,9 @@ public class TempTempStock implements java.io.Serializable, Navigatable, TempMar
 			return true;
 		if ((other == null))
 			return false;
-		if (!(other instanceof TempTempStock))
+		if (!(other instanceof Stock))
 			return false;
-		TempTempStock castOther = (TempTempStock) other;
+		Stock castOther = (Stock) other;
 
 		return this.idString().equals(castOther.idString());
 	}

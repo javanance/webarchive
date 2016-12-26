@@ -11,15 +11,12 @@ import javax.persistence.EntityManager;
 
 import org.slf4j.Logger;
 
+import com.eugenefe.entity.takion.Bond;
+import com.eugenefe.entity.takion.MarketVariable;
 //import com.eugenefe.entity.takion.Bond;
 import com.eugenefe.entity.takion.ScenarioDetailTest;
 import com.eugenefe.entity.takion.ScenarioTest;
-import com.eugenefe.entity.temp.Hifive;
-import com.eugenefe.entity.temp.TempBond;
-import com.eugenefe.entity.temp.TempMarketVariable;
-import com.eugenefe.entity.temp.TempPosition;
-import com.eugenefe.entity.temp.TempStock;
-import com.eugenefe.entity.temp.TempTempMarketVariable;
+import com.eugenefe.entity.takion.Stock;
 import com.eugenefe.qualifiers.OraTakionEm;
 import com.eugenefe.service.DataBaseServiceTakion;
 
@@ -32,37 +29,36 @@ public class TestBean implements Serializable {
 	@Inject	@OraTakionEm	
 	private EntityManager entityManager;
 	
-	private List<TempBond> bondList;
+	private List<Bond> bondList;
 	
-	private List<TempMarketVariable> mvList;
+	private List<MarketVariable> mvList;
 	
 	
-	public List<TempMarketVariable> getMvList() {
+	public List<MarketVariable> getMvList() {
 		return mvList;
 	}
 
-	public void setMvList(List<TempMarketVariable> mvList) {
+	public void setMvList(List<MarketVariable> mvList) {
 		this.mvList = mvList;
 	}
 	
-	private List<TempTempMarketVariable> tempMvList;
+	private List<MarketVariable> tempMvList;
 	
 
-	public List<TempTempMarketVariable> getTempMvList() {
+	public List<MarketVariable> getTempMvList() {
 		return tempMvList;
 	}
 
-	public void setTempMvList(List<TempTempMarketVariable> tempMvList) {
+	public void setTempMvList(List<MarketVariable> tempMvList) {
 		this.tempMvList = tempMvList;
 	}
 
 	private List<ScenarioTest> sceList;
 	
-	private List<TempPosition> posList;
 	
 	private List<ScenarioDetailTest> sceDetailTestList;
 	
-	private List<Hifive> hifiveList;
+	
 	public TestBean() {
 		System.out.println("TestBean Gen");
 	}
@@ -75,21 +71,7 @@ public class TestBean implements Serializable {
 		this.entityManager = entityManager;
 	}
 
-	public List<TempPosition> getPosList() {
-		return posList;
-	}
-
-	public void setPosList(List<TempPosition> posList) {
-		this.posList = posList;
-	}
-
-	public List<Hifive> getHifiveList() {
-		return hifiveList;
-	}
-
-	public void setHifiveList(List<Hifive> hifiveList) {
-		this.hifiveList = hifiveList;
-	}
+	
 
 	@PostConstruct
 	public void  init() {
@@ -122,11 +104,11 @@ public class TestBean implements Serializable {
 	
 	public void save(){
 		String mvId = "BOND_105";
-		TempBond bond = new TempBond();
+		Bond bond = new Bond();
 		bond.setMvId(mvId);
-		TempStock stock = new TempStock();
+		Stock stock = new Stock();
 		stock.setMvId(mvId);
-		TempMarketVariable mv = new TempMarketVariable();
+		MarketVariable mv = new MarketVariable();
 		mv.setMvId(mvId);
 //		mv.setBd(bond);
 //		mv.setStock(stock);
@@ -142,11 +124,11 @@ public class TestBean implements Serializable {
 	
 	
 //	*******************getter and setter*************88
-	public List<TempBond> getBondList() {
+	public List<Bond> getBondList() {
 		return bondList;
 	}
 
-	public void setBondList(List<TempBond> bondList) {
+	public void setBondList(List<Bond> bondList) {
 		this.bondList = bondList;
 	}
 

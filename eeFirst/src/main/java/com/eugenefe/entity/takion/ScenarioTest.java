@@ -18,7 +18,6 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import com.eugenefe.embeddable.ScenarioTweek;
-import com.eugenefe.entity.temp.TempTempMarketVariable;
 import com.eugenefe.util.Navigatable;
 
 /**
@@ -108,7 +107,7 @@ public class ScenarioTest implements java.io.Serializable, Navigatable {
 	public void setAaa(Map<Bond, ScenarioTweek> aaa) {
 		this.aaa = aaa;
 	}*/
-	private Map<TempTempMarketVariable, ScenarioTweek> aaa = new HashMap<TempTempMarketVariable, ScenarioTweek>();
+	private Map<MarketVariable, ScenarioTweek> aaa = new HashMap<MarketVariable, ScenarioTweek>();
 	
 	
 	@ElementCollection(fetch= FetchType.LAZY)
@@ -119,11 +118,11 @@ public class ScenarioTest implements java.io.Serializable, Navigatable {
 //        @AttributeOverride(name="shockType", column=@Column(name="SHOCK_TYPE")),
 //        @AttributeOverride(name="shockValue", column=@Column(name="SHOCK_VALUE")),
 //      })
-	public Map<TempTempMarketVariable, ScenarioTweek> getAaa() {
+	public Map<MarketVariable, ScenarioTweek> getAaa() {
 		return aaa;
 	}
 
-	public void setAaa(Map<TempTempMarketVariable, ScenarioTweek> aaa) {
+	public void setAaa(Map<MarketVariable, ScenarioTweek> aaa) {
 		this.aaa = aaa;
 	}
 	/**
