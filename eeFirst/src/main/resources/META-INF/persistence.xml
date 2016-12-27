@@ -31,6 +31,7 @@
 		<properties>
             <property name="hibernate.ejb.use_class_enhancer" value="true" />
             <property name="hibernate.enable_lazy_load_no_trans" value ="true"/>
+            <property name="hibernate.ejb.naming_strategy" value="org.hibernate.cfg.ImprovedNamingStrategy" />
         </properties> 
 	</persistence-unit>
 

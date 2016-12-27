@@ -18,7 +18,7 @@ import com.eugenefe.entity.takion.ScenarioDetailTest;
 import com.eugenefe.entity.takion.ScenarioTest;
 import com.eugenefe.entity.takion.Stock;
 import com.eugenefe.qualifiers.OraTakionEm;
-import com.eugenefe.service.DataBaseServiceTakion;
+import com.eugenefe.service.MegaMenuDbService;
 
 @Named
 @ViewScoped
@@ -100,7 +100,7 @@ public class TestBean implements Serializable {
 // 		sceList = entityManager.createQuery("from Scenario a left join fetch a.scenarioDetails").getResultList();
 	}
 	@Inject
-	private DataBaseServiceTakion dbService;
+	private MegaMenuDbService dbService;
 	
 	public void save(){
 		String mvId = "BOND_105";
@@ -114,7 +114,7 @@ public class TestBean implements Serializable {
 //		mv.setStock(stock);
 		bond.setmVari(mv);
 //		dbService.save(mv);
-		dbService.save(bond);
+//		dbService.save(bond);
 		System.out.println("SAVE *****************************************");
 	}
 	
