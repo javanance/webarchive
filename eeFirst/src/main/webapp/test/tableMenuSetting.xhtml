@@ -78,10 +78,9 @@
        </p:column>
     </p:dataTable> 
     <p:contextMenu id="ctxMenuTable" for="tableMegaMenu">
-    	<!-- <p:menuitem value="#{msg.addRow}" action="#{menuBean.addRow}"  oncomplete="PF('dtMegaMenu').addRow()" process="@this"/> -->
-    	<p:menuitem value="#{msg.addRow}" action="#{menuBean.addRow}"  update="@(.ui-datatable)"/>
-    	<p:menuitem value="#{msg.fixRow}" action="#{menuBean.fixRow}"  update="@(.ui-datatable)"/>
-    	<p:menuitem value="#{msg.deleteRow}" action="#{menuBean.deleteRow}"  update="@(.ui-datatable)"/>
+    	<!-- <p:menuitem value="#{msg.addRow}" action="#{menuBean.addRow}"  update="@(.ui-datatable)" oncomplete="PF('dtMegaMenu').addRow()" process="@this"/> -->
+    	<p:menuitem value="#{msg.addRow}" action="#{menuBean.addRow}"  update="@all"/>
+    	<p:menuitem value="#{msg.deleteRow}" action="#{menuBean.deleteRow}"  update="@all"/>
     </p:contextMenu>
    
   	

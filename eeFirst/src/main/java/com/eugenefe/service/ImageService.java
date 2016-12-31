@@ -9,7 +9,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 
-import com.eugenefe.controller.Theme;
+import com.eugenefe.model.Theme;
 @Named
 @ApplicationScoped
 public class ImageService implements Serializable {

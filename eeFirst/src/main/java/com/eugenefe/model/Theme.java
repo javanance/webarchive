@@ -1,4 +1,4 @@
-package com.eugenefe.controller;
+package com.eugenefe.model;
 import java.io.Serializable;
 
 public class Theme implements Serializable {

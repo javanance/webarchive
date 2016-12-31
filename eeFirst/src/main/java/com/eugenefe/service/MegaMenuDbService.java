@@ -60,7 +60,6 @@ public class MegaMenuDbService implements Serializable {
 		logger.info("merge in dbService : {}, {}", entityManager.contains(megaMenu), megaMenu.toString());
 			entityManager.merge(megaMenu);
 //		entityManager.flush();
-		logger.info("merge1 : {}, {}", entityManager.contains(megaMenu), megaMenu.toString());
 	}
 	
 	public  void persist(MegaMenu  megaMenu){

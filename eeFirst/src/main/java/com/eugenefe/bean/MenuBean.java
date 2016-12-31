@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -28,6 +29,7 @@ import com.eugenefe.service.MegaMenuDbService;
 
 @Named
 @ViewScoped
+//@SessionScoped
 public class MenuBean implements Serializable {
 	@Inject		
 	private Logger logger;
@@ -52,6 +54,7 @@ public class MenuBean implements Serializable {
 	
 	@PostConstruct
 	public void create(){
+		logger.info("PostConstruct MenuBean");
 		Map<String, MenuElement> tempMap = new HashedMap<String, MenuElement>();
 		
 		DefaultMenuItem menuItem;
@@ -64,6 +67,22 @@ public class MenuBean implements Serializable {
 		megaMenuList = dbService.fetchMegaMenu();
 
 		megaMenuModel = new DefaultMenuModel();
+		
+		/*DefaultSubMenu menuGroup1 = new DefaultSubMenu("aaaa");
+		DefaultMenuColumn col1 = new DefaultMenuColumn();
+		col = new DefaultMenuColumn();
+		DefaultSubMenu menuGroup2 = new DefaultSubMenu("bbbb");
+		DefaultSubMenu menuGroup3 = new DefaultSubMenu("cccc");
+		menuItem = new DefaultMenuItem("aaaa");
+		menuGroup3.addElement(menuItem);
+		col1.addElement(menuGroup3);
+		menuGroup2.addElement(menuItem);
+		menuGroup2.addElement(col1);
+		
+		col.addElement(menuGroup2);
+		menuGroup1.addElement(col);
+		megaMenuModel.addElement(menuGroup2);*/
+		
 		
 		for(MegaMenu aa : megaMenuList){
 			if(aa.getMenuGroup() == null || aa.getMenuGroup().isEmpty()){
@@ -120,7 +139,7 @@ public class MenuBean implements Serializable {
 //		dbService.merge(megaMenuList.get(2));
 		for(MegaMenu aa : dirtyList){
 			dbService.merge(aa);
-			logger.info("persist : {}, {}", aa.getMenuId(), aa.getMenuName());
+			logger.info("Save : {}, {}", aa.getMenuId(), aa.getMenuName());
 		}
 	}
 	
@@ -139,9 +158,7 @@ public class MenuBean implements Serializable {
 		megaMenuList.remove(selectedMenu);
 		
 	}
-	public void fixRow(){
-		dataTable.setFrozenRows(rowIndex);
-	}
+	
 	
 	public void onSelect(SelectEvent event){
 		dataTable = (DataTable)event.getSource();
@@ -152,8 +169,8 @@ public class MenuBean implements Serializable {
 		
 	}
 	public void onEdit(CellEditEvent event) {
-        Object oldValue = event.getOldValue();
-        Object newValue = event.getNewValue();
+//        Object oldValue = event.getOldValue();
+//        Object newValue = event.getNewValue();
         
         dirtyList.add(megaMenuList.get(event.getRowIndex())); 
         logger.info("aaa: {}",event.getRowIndex());

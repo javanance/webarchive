@@ -1,4 +1,4 @@
-package com.eugenefe.controller;
+package com.eugenefe.model;
 
 import java.io.Serializable;
 import java.util.Map;
@@ -9,17 +9,15 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.omnifaces.component.util.FaceletContextConsumer;
 import org.slf4j.Logger;
 
-@Named("guestPref")
+
+//User preference 로 대체해야함.==> 삭제대상
 @SessionScoped
 public class GuestPreferences implements Serializable {
-	@Inject
-	private Logger logger;
-//	private String theme = "aristo"; //default
+
 	private String themeString ;
-	
-	private Theme theme;
 	
 	@Inject
 	private FacesContext ctx;
@@ -27,25 +25,23 @@ public class GuestPreferences implements Serializable {
 	@PostConstruct
 	public void init() {
 		themeString = "sam";
+		Map<String, String> params = ctx.getExternalContext().getRequestParameterMap();
+		if(params.containsKey("theme")) {
+			themeString = params.get("theme");
+		}
+		
 	}    	
 
 	public GuestPreferences(){
 	}
 	
-
-	public String getTheme() {
-//		Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-		Map<String, String> params = ctx.getExternalContext().getRequestParameterMap();
-		logger.info("param: {}, {}", themeString, params);
-		if(params.containsKey("theme")) {
-			logger.info("param1: {}", params.get("theme"));
-			themeString = params.get("theme");
-		}
-		
+	
+	public String getThemeString() {
 		return themeString;
 	}
 
-	public void setTheme(String theme) {
-		this.themeString = theme;
+	public void setThemeString(String themeString) {
+		this.themeString = themeString;
 	}
+	
 }

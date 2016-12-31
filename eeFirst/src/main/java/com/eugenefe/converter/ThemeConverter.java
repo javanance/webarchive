@@ -10,7 +10,7 @@ import javax.inject.Inject;
 
 import org.omnifaces.util.Messages;
 
-import com.eugenefe.controller.Theme;
+import com.eugenefe.model.Theme;
 import com.eugenefe.service.ThemeService;
 
 @FacesConverter("themeConverter")

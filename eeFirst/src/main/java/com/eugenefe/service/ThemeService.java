@@ -8,9 +8,9 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 
-import com.eugenefe.controller.Theme;
+import com.eugenefe.model.Theme;
 
-@Named
+//@Named
 @RequestScoped
 public class ThemeService implements Serializable {
 	private static final long serialVersionUID = 1L;

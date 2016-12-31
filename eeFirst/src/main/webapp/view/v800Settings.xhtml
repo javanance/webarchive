@@ -26,11 +26,16 @@
 
 				<p:themeSwitcher id="themeSwitcher" value="#{themeSwitcher.selectedTheme}" var="t" converter="selectThemeConverter" style="width:200px">
 					<!--  <p:themeSwitcher id="themeSwitcher" value="#{themeSwitcher.selectedTheme}" var="t" converter="omnifaces.SelectItemsConverter" style="width:200px"> -->
-					<f:selectItems value="#{themeSwitcher.themeList}" var="_theme" itemLabel="#{_theme.id}-#{_theme.displayName}" itemValue="#{_theme}" />
+					<f:selectItems value="#{themeSwitcher.themeList}" var="_theme" itemLabel="#{_theme.id} : #{_theme.displayName}" itemValue="#{_theme}" />
+					<!-- <p:column>
+            		    <h:outputText styleClass="ui-theme ui-theme-" style="display-block" />
+    		        </p:column> -->
+    		        
 					<p:column>
-						<p:outputLabel id="selectedThemeLabel" value="#{t.id}-#{t.displayName} " />
+						<p:outputLabel id="selectedThemeLabel" value="#{t.id} : #{t.displayName} " />
 					</p:column>
-					<p:ajax listener="#{themeSwitcher.saveTheme()}" update="growl1" />
+					
+					<p:ajax listener="#{themeSwitcher.saveTheme}" update="growl1" />
 				</p:themeSwitcher>
 
 

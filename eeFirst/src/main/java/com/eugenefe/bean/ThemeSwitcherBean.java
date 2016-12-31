@@ -1,4 +1,4 @@
-package com.eugenefe.controller;
+package com.eugenefe.bean;
 
 import java.io.Serializable;
 import java.util.List;
@@ -10,11 +10,13 @@ import javax.inject.Named;
 
 import org.slf4j.Logger;
 
+import com.eugenefe.model.GuestPreferences;
+import com.eugenefe.model.Theme;
 import com.eugenefe.service.ThemeService;
 
 @Named
 @SessionScoped
-public class ThemeSwitcher implements Serializable{
+public class ThemeSwitcherBean implements Serializable{
 	@Inject
 	private Logger logger;
 
@@ -29,23 +31,26 @@ public class ThemeSwitcher implements Serializable{
 	
 	private List<Theme> themeList;
 
-	public ThemeSwitcher() {
+	public ThemeSwitcherBean() {
 	}
 	
-	public String goToHome(){
-		return "/view/home.xhtml?faces-redirect=true";
-	}
+//	public String goToHome(){
+//		return "/view/home.xhtml?faces-redirect=true";
+//	}
 	
 	@PostConstruct
 	public void init() {
-		if ( guestPref== null){
-			logger.info("Prep Null");
-		}
-		logger.info("Prep:{}", guestPref.getTheme());
-//		theme = guestPref.getTheme();
-
 		themeList = service.getThemes();
-		 selectedTheme = themeList.get(28);
+		selectedTheme = themeList.get(28);
+		if ( guestPref != null && !guestPref.getThemeString().isEmpty()){
+			for(Theme aa : themeList) {
+				if(aa.getDisplayName().equals(guestPref.getThemeString().toLowerCase())){
+					selectedTheme =aa;
+					break;
+				}
+			}
+		}
+		logger.info("Prep:{}", selectedTheme.getName());
 	}
 
 
@@ -79,11 +84,17 @@ public class ThemeSwitcher implements Serializable{
 
 	public void saveTheme() {
 //		log.info("Selected Theme1 :#0", guestPref.getTheme());
-		guestPref.setTheme(selectedTheme.getName());
 //		guestPref.setTheme(selectedThemeName);
-		logger.info("Selected Theme : {}", guestPref.getTheme());
 	}
 
-	 
+	public String getSelectedThemeName() {
+		return selectedThemeName;
+	}
+
+	public void setSelectedThemeName(String selectedThemeName) {
+		this.selectedThemeName = selectedThemeName;
+	}
+
+	 	
 
 }

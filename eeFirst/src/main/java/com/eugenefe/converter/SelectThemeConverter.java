@@ -6,7 +6,7 @@ import javax.faces.convert.FacesConverter;
 
 import org.omnifaces.converter.SelectItemsConverter;
 
-import com.eugenefe.controller.Theme;
+import com.eugenefe.model.Theme;
 
 
 /** this Class can be deleted when omnifaces.SelectItemConveter works in the xhtml file 
