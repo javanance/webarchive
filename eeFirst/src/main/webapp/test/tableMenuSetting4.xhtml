@@ -8,14 +8,13 @@
 	xmlns:o="http://omnifaces.org/ui"  xmlns:of="http://omnifaces.org/functions">
 
 
-  <h:form id="formMenuSetting" rendered="#{loginBean.loggedIn}">
+  <h:form id="formMenuSetting">
   	<p:growl id="msgs" showDetail="true"/>
   	<p:panel>
-  		<p:commandButton value="#{msg.save}" action="#{userMenuBean.save}" update="formMenuSetting:tableMegaMenu megaMenuForm:megaMenu"></p:commandButton>
-  		<p:commandButton value="#{msg.default}" action="#{userMenuBean.fetchDefault}" update="formMenuSetting:tableMegaMenu megaMenuForm:megaMenu"></p:commandButton>
+  		<p:commandButton value="#{msg.save}" action="#{menuBean.save}"></p:commandButton>
   	</p:panel>
   	
-    <p:dataTable id="tableMegaMenu" value="#{userMenuBean.userMenuList}" var="_row" widgetVar="dtMegaMenu"
+    <p:dataTable id="tableMegaMenu" value="#{loginBean.loginUser.userMenuList}" var="_row" widgetVar="dtMegaMenu"
       emptyMessage="No History Data found with given criteria. Change the Dates"
       rowKey="#{_row}" rowIndexVar="rowIndex"
       selectionMode="single"
@@ -28,10 +27,22 @@
       paginatorTemplate="{FirstPageLink} {PreviousPageLink} {JumpToPageDropdown} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
       rowsPerPageTemplate="10,15,25,50" 
       style="margin: 0.5em;" styleClass="takion">
-      	<p:ajax event="cellEdit" listener="#{userMenuBean.onEdit}" update="@(.ui-datatable)" />
-      	<p:ajax event="contextMenu" listener="#{userMenuBean.onShowContext}"  />
+      	<!-- <p:ajax event="cellEdit" listener="#{menuBean.onEdit}" update="@(.ui-datatable)" />
+      	<p:ajax event="contextMenu" listener="#{menuBean.onSelect}" /> -->
       	
-     	
+     	<p:column headerText="#{msg.menuId}" sortBy="#{_row.menuId}" filterBy="#{_row.menuId}" filterMatchMode="contains"  filterStyle="width:100%" >
+           <p:cellEditor>
+               <f:facet name="output"><h:outputText value="#{_row.menuId}" /></f:facet>
+               <f:facet name="input"><p:inputText id="menuIdInput" value="#{_row.menuId}" style="width:100%"/></f:facet>
+           </p:cellEditor>
+       </p:column>
+       <p:column headerText="#{msg.menuName}" sortBy="#{_row.menuName}" filterBy="#{_row.menuName}" filterMatchMode="contains"  filterStyle="width:100%" >
+           <p:cellEditor>
+               <f:facet name="output"><h:outputText value="#{_row.menuName}" /></f:facet>
+               <f:facet name="input"><p:inputText id="menuNameInput" value="#{_row.menuName}" style="width:100%"/></f:facet>
+           </p:cellEditor>
+       </p:column>
+       
        <p:column headerText="#{msg.menuGroup}" sortBy="#{_row.menuGroup}" filterBy="#{_row.menuGroup}" filterMatchMode="contains"  filterStyle="width:100%" >
            <p:cellEditor>
                <f:facet name="output"><h:outputText value="#{_row.menuGroup}" /></f:facet>
@@ -43,13 +54,6 @@
            <p:cellEditor>
                <f:facet name="output"><h:outputText value="#{_row.menuColumn}" /></f:facet>
                <f:facet name="input"><p:inputText id="menuColumnInput" value="#{_row.menuColumn}" style="width:100%"/></f:facet>
-           </p:cellEditor>
-       </p:column>
-       
-       <p:column headerText="#{msg.menuName}" sortBy="#{_row.menuName}" filterBy="#{_row.menuName}" filterMatchMode="contains"  filterStyle="width:100%" >
-           <p:cellEditor>
-               <f:facet name="output"><h:outputText value="#{_row.menuName}" /></f:facet>
-               <f:facet name="input"><p:inputText id="menuNameInput" value="#{_row.menuName}" style="width:100%"/></f:facet>
            </p:cellEditor>
        </p:column>
        
@@ -67,30 +71,17 @@
            </p:cellEditor>
        </p:column>
        
-       <p:column headerText="#{msg.menuId}" sortBy="#{_row.menuId}" filterBy="#{_row.menuId}" filterMatchMode="contains"  filterStyle="width:100%" >
+       <p:column headerText="#{msg.menuUrl}" sortBy="#{_row.menu.menuUrl}" filterBy="#{_row.menu.menuUrl}" filterMatchMode="contains"  filterStyle="width:100%" >
            <p:cellEditor>
-               <f:facet name="output"><h:outputText value="#{_row.menuId}" /></f:facet>
-               <!-- <f:facet name="input"><p:inputText id="menuIdInput" value="#{_row.menu.menuId}" style="width:100%"/></f:facet> -->
-               <!-- f:facet name="output">
-               		<o:outputFormat value="#{_menu.menuId}" var="_menu" >
-               			<f:param value="#{_row.menu}"></f:param>
-               		</o:outputFormat> 
-               		<h:outputText value="#{_row.menu.menuId}" />
-               </f:facet>  -->
-               <f:facet name="input">
-	               <h:selectOneMenu value="#{_row.menuId}" style="width:100%"  >
-	                  <f:selectItems value="#{menuMstBean.menuList}" var="_menu" itemLabel="#{_menu.menuId} : #{_menu.menuDesc}" itemValue="#{_menu.menuId}" />
-	               </h:selectOneMenu>
-                </f:facet>   
+               <f:facet name="output"><h:outputText value="#{_row.menu.menuUrl}" /></f:facet>
+               <f:facet name="input"><p:inputText id="menuUrlInput" value="#{_row.menu.menuUrl}" style="width:100%"/></f:facet>
            </p:cellEditor>
-       </p:column>
-       <p:column id="urlCol" headerText="#{msg.menuUrl}" sortBy="#{_row.menu.menuUrl}" filterBy="#{_row.menu.menuUrl}" filterMatchMode="contains"  filterStyle="width:100%" >
-       		<h:outputText value="#{_row.menu.menuUrl}" />
        </p:column>
     </p:dataTable> 
     <p:contextMenu id="ctxMenuTable" for="tableMegaMenu">
-    	<p:menuitem value="#{msg.copyAndAddRow}" action="#{userMenuBean.addRow}"  update="formMenuSetting:tableMegaMenu megaMenuForm:megaMenu"/>
-    	<p:menuitem value="#{msg.deleteRow}" action="#{userMenuBean.deleteRow}"  update="formMenuSetting:tableMegaMenu megaMenuForm:megaMenu"/>
+    	<p:menuitem value="#{msg.addRow}" action="#{menuBean.addRow}"  update="@(.ui-datatable)" oncomplete="PF('dtMegaMenu').addRow()" process="@this"/>
+    	<p:menuitem value="#{msg.addRow}" action="#{menuBean.addRow}"  update="@all"/>
+    	<p:menuitem value="#{msg.deleteRow}" action="#{menuBean.deleteRow}"  update="@all"/>
     </p:contextMenu>
    
   	

@@ -4,12 +4,12 @@
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions"
 	xmlns:o="http://omnifaces.org/ui" xmlns:of="http://omnifaces.org/functions">
- <h:form id="registerForm">
+ <h:form id="updateInfoForm">
   <p:growl id="growl" sticky="false" showDetail="true" life="1000" />
 
   <p:panelGrid id="registerPg" columns="2" cellpadding="10">
    <p:outputLabel id="userIdLabel" for="userIdIt" value="#{msg.userId}" />
-   <p:inputText id="userIdIt" value="#{loginBean.loginUser.userId}" required="true" size="20" />
+   <p:outputLabel id="userIdIt" value="#{loginBean.loginUser.userId}"  size="20" />
    
    <p:outputLabel id="userNameLabel" for="userNameIt" value="#{msg.userName}" />
    <p:inputText id="userNameIt" value="#{loginBean.loginUser.userName}" required="true" size="20" />
@@ -29,8 +29,8 @@
    <p:inputMask id="phoneNumber" value="#{loginBean.password}"  size="20" /> -->
 
    <f:facet name="footer">
-    <p:commandButton id="register" value="#{msg.register}" update="@(form)" actionListener="#{loginBean.register}" action="/view/home??faces-redirect=true"
-        onclick="#{p:widgetVar('registerDlg')}.hide()"   icon="fa  fa-pencil-square-o"  rendered="#{not loginBean.loggedIn}"/>    
+    <p:commandButton id="updateInfo" value="#{msg.save}" update="@(form)" actionListener="#{loginBean.update}" 
+        onclick="#{p:widgetVar('registerDlg')}.hide()"   icon="fa  fa-pencil-square-o"  />    
    </f:facet>
   </p:panelGrid>
 

@@ -3,6 +3,7 @@ package com.eugenefe.producer;
 import java.io.Serializable;
 import java.util.ResourceBundle;
 
+import javax.enterprise.context.SessionScoped;
 import javax.enterprise.inject.Produces;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -12,6 +13,7 @@ import com.eugenefe.qualifiers.MessageBundle;
 import com.eugenefe.qualifiers.QueryResource;
 
 //@RequestScoped
+//@SessionScoped
 public class ResourceProducer implements Serializable {
 
 	@Inject

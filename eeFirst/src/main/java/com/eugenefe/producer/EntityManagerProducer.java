@@ -23,6 +23,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
 
 import com.eugenefe.qualifiers.OraTakionEm;
+import com.eugenefe.qualifiers.OraTakionExtendedEm;
 import com.eugenefe.qualifiers.SecondEm;
 
 /**
@@ -57,6 +58,11 @@ public class EntityManagerProducer {
     @PersistenceContext(unitName="takion79")
     @OraTakionEm   
     private EntityManager emTakion;
+    
+    @Produces
+    @PersistenceContext(unitName="takion79", type = PersistenceContextType.EXTENDED)
+    @OraTakionExtendedEm   
+    private EntityManager emExtTakion;
     
    
 

@@ -11,10 +11,13 @@
 	<f:metadata>
 		<f:viewAction  action="#{layoutBean.initLayout('Home')}"></f:viewAction>/>
 	</f:metadata>
+  	
+  	<!-- <ui:define name="layoutLeft_tab">
+	</ui:define> -->
   
   <ui:define name="layoutCenter">
     <p:panel id="homePenel" >
-      <h:form id="homeForm" >
+      <!-- <h:form id="homeForm" >
      
       <p:commandButton id="testButton" value="#{p:component('registerDlg')}" actionListener="#{sampleDialog.view()}" />
       <p:commandButton id="testButton1" value="View login" actionListener="#{sampleDialog.viewLogin()}" /> 
@@ -47,7 +50,7 @@
       <p:galleria id="galleria" value="#{imageService.imageNames}" var="image"  style="border : none">
      	 <p:graphicImage id="homeImage" value="/img/adv/#{image}" />
       </p:galleria>
-      </h:form> 
+      </h:form>  -->
 
     <!-- <pe:gChart id="gchart" value="#{geoChartController.chartModel}" height="500" width="800" /> -->
 

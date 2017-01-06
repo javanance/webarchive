@@ -1,0 +1,25 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" 
+  xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html"
+  xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions" 
+  xmlns:o="http://omnifaces.org/ui" xmlns:of="http://omnifaces.org/functions">
+
+  <p:layout id="innerLayout" collapseTitle="close" resizeTitle="#{msg.resizeTitle}" widgetVar="innerLayout">
+    <p:layoutUnit id="innerTopLu" position="north" resizable="true" collapsible="true" gutter="4" size="200" rendered="#{layoutBean.renderInnerTop}" styleClass="takion">
+      <ui:insert name="innerLayoutTop" />
+    </p:layoutUnit>
+
+    <p:layoutUnit id="innerRighttLu" position="east"  resizable="true" collapsible="true" size="200" gutter="2" rendered="#{layoutBean.renderInnerRight}" styleClass="takion">
+      <ui:insert name="innnerLayoutRight" />
+    </p:layoutUnit>
+    
+    <p:layoutUnit id="innerBottomLu" position="south"  resizable="true" collapsible="true" size="200" gutter="4" rendered="#{layoutBean.renderInnerBottom}" styleClass="takion">
+      <ui:insert name="innnerLayoutBottom" />
+    </p:layoutUnit>
+    
+    <p:layoutUnit id="innerCennterLu" position="center" resizable="true" gutter="0" styleClass="takion">
+     	<ui:insert name="layoutCenter" />
+    </p:layoutUnit>
+  </p:layout>
+</ui:composition>

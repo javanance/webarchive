@@ -14,24 +14,23 @@ import org.primefaces.context.RequestContext;
 
 @Named
 @SessionScoped
-public class UserLoginView  implements Serializable{
+public class UserLoginView implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private String username;
-    
-    private String password;
-    
-    private boolean loggedIn;
-    
-    
-    public UserLoginView() {
+
+	private String password;
+
+	private boolean loggedIn;
+
+	public UserLoginView() {
 	}
 
-    @PostConstruct
-    public void init(){
-    	loggedIn = false;
-    }
-    
+	@PostConstruct
+	public void init() {
+		loggedIn = false;
+	}
+
 	public String getUsername() {
         return username;
     }

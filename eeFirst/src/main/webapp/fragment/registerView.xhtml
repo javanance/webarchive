@@ -1,0 +1,37 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" 
+	xmlns:f="http://xmlns.jcp.org/jsf/core" 
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:o="http://omnifaces.org/ui" xmlns:of="http://omnifaces.org/functions">
+ <h:form id="registerForm">
+  <p:growl id="growl" sticky="false" showDetail="true" life="1000" />
+
+  <p:panelGrid id="registerPg" columns="2" cellpadding="10">
+   <p:outputLabel id="usernameLabel" for="usernameIt" value="#{msg.username}" />
+   <p:inputText id="usernameIt" value="#{userLoginView.username}" required="true" size="20" />
+   
+   
+   <p:outputLabel id="passwordLable" for="password" value="#{msg.password}" />
+   <p:password id="password" value="#{userLoginView.password}" required="true" size="20" />
+   
+   
+   <p:outputLabel id="confirmPasswordLable" for="password" value="#{msg.rePassword}" />
+   <p:password id="confirmPassword" value="#{userLoginView.password}" required="true" size="20" />
+   
+   <p:outputLabel id="emailLabel" for="email" value="#{msg.email}" />
+   <p:inputMask id="email" value="#{userLoginView.password}" required="true" size="20" />
+   
+   <p:outputLabel id="phoneLabel" for="phoneNumber" value="#{msg.phoneNumber}" />
+   <p:inputMask id="phoneNumber" value="#{userLoginView.password}"  size="20" />
+
+   <f:facet name="footer">
+    <p:commandButton id="register" value="#{msg.register}" update="@(form)" actionListener="#{userLoginView.login()}"
+        onclick="#{p:widgetVar('registerDlg')}.hide()"   icon="fa  fa-pencil-square-o" />    
+         
+   </f:facet>
+  </p:panelGrid>
+
+ </h:form>
+</ui:composition>
+

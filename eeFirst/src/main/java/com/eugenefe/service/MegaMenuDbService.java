@@ -56,6 +56,8 @@ public class MegaMenuDbService implements Serializable {
 		return entityManager.createQuery("from DataTableColumn a where a.dataTableId = 'megaMenu' order by a.columnNo").getResultList();
 	}
 	
+	
+//****************************	crud*************************
 	public void merge(MegaMenu  megaMenu){
 		logger.info("merge in dbService : {}, {}", entityManager.contains(megaMenu), megaMenu.toString());
 			entityManager.merge(megaMenu);

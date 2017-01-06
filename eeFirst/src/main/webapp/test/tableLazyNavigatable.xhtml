@@ -6,7 +6,7 @@ xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/c
 
 
 	<h:form id="formDynamicModel">
-		#{dataViewerLazyBean.selectedTableName}
+		<p/>
 		<p:scrollPanel id="penelNavigation" style="position: absolute;width: 100%; height: 100%;" mode="native">
 		<p:dataTable id="tableNavigation" value="#{dataViewerLazyBean.navi}" var="_row" widgetVar="wgTbNavi"
 			emptyMessage="No History Data found with given criteria. Change the Dates"
@@ -14,32 +14,33 @@ xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/c
 			selectionMode="multiple" selection="#{dataViewerLazyBean.selectedRows}"
 			sortMode="multiple" resizableColumns="true" resizeMode="expand"
 			draggableColumns="true"
-			tableStyle="display: table;   table-layout: auto "
+			tableStyle="display: table;   table-layout: auto ! important"
 			paginatorAlwaysVisible="true" paginator="true"
 			paginatorTemplate="{FirstPageLink} {PreviousPageLink} {JumpToPageDropdown} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}" 
-			paginatorPosition="bottom" rows="20"
+			paginatorPosition="bottom" rows="20"	
 			rowsPerPageTemplate="20,50,100"
-			style="margin: 0.5em;">
+			style="margin: 0.5em;     box-shadow: 1px 0px 3px 0px rgba(0,0,0,0.3);" styleClass="takion">
 
 			<p:columns id="tableColumns" value="#{dataViewerLazyBean.dbService.tableColumns}" var="_column" columnIndexVar="colIndex" sortBy="#{_row[_column.camelColumnName]}"
 				filterBy="#{_row[_column.camelColumnName]}" filterMatchMode="contains" filterStyle="width:90%" visible="#{dataViewerLazyBean.visibleColumns[colIndex]}">
 				<f:facet name="header">
-					<h:outputText value="#{colMsg[_column.columnName]}" />
+					<h:outputText id="txtHeader" value="#{colMsg[_column.columnName]}" />
 				</f:facet>
 
-				<h:outputText value="#{_row[_column.camelColumnName]}" style="#{_column.alignFormat}" >
+				<h:outputText id="txtContents" value="#{_row[_column.camelColumnName]}" style="#{_column.alignFormat}" >
 				</h:outputText>
 			</p:columns>
 			
-			<f:facet name="{Exporters}">
+			<f:facet  name="{Exporters}">
 				<h:commandLink >
+				<!-- <p:graphicImage id="imgExcel" name="/img/excel.png"/> -->
 				<p:graphicImage id="imgExcel" name="/img/primefaces/excel.png"   />
-				<p:dataExporter type="xls" target="tableNavigation" fileName="#{dataViewerLazyBean.selectedTableName}" postProcessor="#{excelProcessBean.postProcessXLS}"  />
+				<p:dataExporter id="dtExporter" type="xls" target="tableNavigation" fileName="#{dataViewerLazyBean.selectedTableName}" postProcessor="#{excelProcessBean.postProcessXLS}"  />
 				</h:commandLink>
 				
-				<p:commandButton id="toggler" type="button" value="Columns" style="float:left" icon="fa fa-user" />
-				<p:columnToggler datasource="tableNavigation" trigger="toggler" >
-					<p:ajax event="toggle" listener="#{dataViewerLazyBean.onToggle}" />
+				<p:commandButton id="togglerButton" type="button" value="Columns" style="float:left" icon="fa fa-user" />
+				<p:columnToggler id="toggler" datasource="tableNavigation" trigger="togglerButton" >
+					<p:ajax  event="toggle" listener="#{dataViewerLazyBean.onToggle}" />
 	            </p:columnToggler>
 			</f:facet>
 			
@@ -47,11 +48,11 @@ xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/c
 		</p:dataTable>
 	</p:scrollPanel>
 		<p:contextMenu id="ctxTable" for="tableNavigation" >
-			<p:menuitem value="#{msg.addToMyMenu0}" action="#{myMenuBean.addMyMenu}" update="@(.ui-datatable)"/>
+			<p:menuitem id="menuItemAdd" value="#{msg.addToMyMenu0}" action="#{userMenuBean.addNavigationMenu}" update="@(.ui-datatable)"/>
 	    </p:contextMenu>
 	    
 	    <p:contextMenu id="ctxColumn" for="tableNavigation:tableColumns" >
-			<p:menuitem value="#{msg.addToMyMenu1}" action="#{myMenuBean.addMyMenu}" update="@(.ui-datatable)"/>
+			<p:menuitem id="menuItemAdd2" value="#{msg.addToMyMenu1}" action="#{myMenuBean.addMyMenu}" update="@(.ui-datatable)"/>
 	    </p:contextMenu>
 	    
 	   

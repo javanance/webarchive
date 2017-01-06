@@ -8,8 +8,8 @@ public enum EViewNew  {
 //	 Home("/home", 									false, 	false, 	false, 	false,	false, 	false)
 //	,MarketVariable("v100MarketVariable")
 	
-	,v101("/view/v101MarketOverview"		, 	true, 	false, 	false, 	false,	false, 	false)
-	,v102("/view/v102ViewHistoryData"	, 	true, 	false, 	false, 	false,	true, 	true)
+	,v101("/view/v101MarketOverview", 				true, 	false, 	false, 	false,	false, 	false)
+	,v102("/view/v102ViewHistoryData",			 	true, 	false, 	false, 	false,	true, 	true)
 //	,ViewRfHistoryData("v102ViewRfHistoryData")
 //	,ViewProdHistoryData("v103ViewProdHistoryData")
 //	,MarketVariableSelect("v100MarketVariable")

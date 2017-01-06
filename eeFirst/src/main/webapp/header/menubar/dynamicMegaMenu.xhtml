@@ -1,11 +1,11 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" 
   xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
-  xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions" xmlns:o="http://omnifaces.org/ui" xmlns:of="http://omnifaces.org/functions"
+  xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions" 
+  xmlns:o="http://omnifaces.org/ui" xmlns:of="http://omnifaces.org/functions"
   >
 
  <h:form id="megaMenuForm"  >
-  <p:megaMenu id="megaMenu" orientation="horizontal" model="#{menuBean.megaMenuModel}" />
-   <!-- <p:menubar id="menuBar" model="#{menuBean.model}"/> -->
+  <p:megaMenu id="megaMenu" orientation="horizontal" model="#{userMegaMenuBean.megaMenuModel}" />
  </h:form>
 </ui:composition>
 

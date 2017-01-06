@@ -11,35 +11,46 @@
     <ui:include src="/header/headerFacet.xhtml" />
   </h:head>
 
-  <h:body styleClass="takion">
-    <p:layout id="mainLayout" fullPage="true" resizeTitle="#{msg.resizeTitle}"    >
-      <p:layoutUnit id="centerLayoutUnit" position="center" resizable="true" gutter="4" styleClass="takion">
+  <h:body >
+    <p:layout id="mainLayout" fullPage="true" resizeTitle="#{msg.resizeTitle}"    styleClass="takion">
+      <p:layoutUnit id="centerLayoutUnit" position="center" resizable="true" gutter="0" >
    		<p:ajaxStatus id="ajaxStatus1" onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
         <p:dialog id="dlgAjaxStatus" modal="false" widgetVar="statusDialog"  header="Loading..." draggable="false" closable="false" showHeader="false">
               <p:graphicImage id="ajaxStatus" value="/img/loading/loading45.gif" />
         </p:dialog>
-        <ui:include src="/templates/templateInner.xhtml" />
+        <ui:include src="/templates/templateInner2.xhtml" />
       </p:layoutUnit>
     
-    <p:layoutUnit id="bottomLayoutUnit" position="south" resizable="true" collapsible="true" size="300" gutter="4" rendered="#{layoutBean.renderBottom}">
+    <p:layoutUnit id="bottomLayoutUnit" position="south" resizable="true" collapsible="true" size="300" gutter="4" rendered="#{layoutBean.renderBottom}" styleClass="takion">
         <ui:insert name="layoutBottom" />
+    </p:layoutUnit>
+
+    <p:layoutUnit id="leftLayoutUnit" position="east" resizable="true" collapsible="true" size="200" gutter="4" style="oveflow:visible;" rendered="#{layoutBean.renderRight}" styleClass="takion">
+      <ui:insert name="layoutRight" />
+    </p:layoutUnit>
+     
+     <p:layoutUnit id="rightLayoutUnit" position="west" resizable="true" collapsible="true" size="#{layoutBean.leftSize}" gutter="4" rendered="#{layoutBean.renderLeft}" styleClass="takion" >
+         <p:accordionPanel id="accoPanel" multiple="true" activeIndex="0,1,2" style="padding : 0px"  >
+	     	 <p:tab id="loginTab" title="User"  >
+	        	<ui:include src="/fragment/login.xhtml" />
+	      	</p:tab>
+	
+	      	<p:tab id="zzzzzzzTab" title="My Menu">
+	      	</p:tab>
+	      	
+	      	<p:tab id="treeTab" title="Tables">
+	      		<ui:insert name="layoutLeft_tab" />
+	      	</p:tab>
+        	<ui:insert name="layoutLeft" />	
+   		 </p:accordionPanel>
       </p:layoutUnit>
 
-      <p:layoutUnit id="leftLayoutUnit" position="east" resizable="true" collapsible="true" size="200" gutter="4" style="oveflow:visible;" rendered="#{layoutBean.renderRight}">
-        <ui:insert name="layoutRight" />
-
-      </p:layoutUnit>
-      <p:layoutUnit id="rightLayoutUnit" position="west" resizable="true" collapsible="true" size="#{layoutBean.leftSize}" gutter="4" style="oveflow:visible;"
-        rendered="#{layoutBean.renderLeft}">
-        <ui:insert name="layoutLeft" />
-      </p:layoutUnit>
-
-      <p:layoutUnit id="topLayoutUnit" position="north" size="120" collapsible="true" gutter="4" styleClass="takion" resizable="false">
-        <ui:include src="/header/header2Column.xhtml" />
+      <p:layoutUnit id="topLayoutUnit" position="north" size="40" collapsible="true" gutter="0" styleClass="takion_top" resizable="false" >
+        <ui:include src="/header/header2Column2.xhtml" />
         <ui:insert name="layoutTop" />
       </p:layoutUnit> 
     </p:layout> 
-    <ui:include src="/fragment/dialogCollection.xhtml" />
+    <!-- <ui:include src="/fragment/dialogCollection.xhtml" /> -->
  </h:body>
 </f:view>
  </h:html>

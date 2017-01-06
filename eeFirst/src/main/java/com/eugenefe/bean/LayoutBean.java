@@ -118,13 +118,15 @@ public class LayoutBean implements Serializable{
 	
 	public void initLayout(String viewId){
 		logger.info("start layout initialize : {}", viewId);
-    	EViewNew temp = EViewNew.valueOf(viewId);
+    	this.viewId = viewId;
+		EViewNew temp = EViewNew.valueOf(viewId);
     	renderBottom = temp.isRenderBottom();
     	renderLeft = temp.isRenderLeft();
     	renderRight = temp.isRenderRight();
     	renderInnerTop = temp.isRenderInnerTop();
     	renderInnerRight =temp.isRenderInnerRight();
     	renderInnerBottom =temp.isRenderInnerBottom();
+    	
     	
     	viewUrl = temp.getUrl();
     	leftSize  = "200";

@@ -11,10 +11,12 @@
 </f:metadata>
 <ui:define name="layoutCenter">
     <p:tabView id="tabView" widgetVar="settingsTabview" >
-      <p:tab id="registerTab" title="#{msg.register}" rendered="#{not userLoginView.loggedIn}" titleStyleClass="takion">
-        <ui:include src="/fragment/register.xhtml" />
-        <!-- <p:commandLink id="com111" onclick="PF('settingsTabview').select(2)"  value="aaa"></p:commandLink> -->
-
+      <p:tab id="registerTab" title="#{msg.register}"  titleStyleClass="takion" rendered="#{not loginBean.loggedIn}">
+        <ui:include src="/fragment/register.xhtml"/>
+      </p:tab>
+      
+       <p:tab id="updateInfoTab" title="#{msg.updateInfo}"  titleStyleClass="takion" rendered="#{loginBean.loggedIn}">
+        <ui:include src="/fragment/updateInfo.xhtml"/>
       </p:tab>
 
       <p:tab id="generalSettingTab" title="#{msg.themeAndLanguage}" titleStyleClass="takion">
@@ -24,9 +26,9 @@
 
 				<p:outputLabel id="themeLabel" for="themeSwitcher" value="#{msg.theme}" style="width:200px" />
 
-				<p:themeSwitcher id="themeSwitcher" value="#{themeSwitcher.selectedTheme}" var="t" converter="selectThemeConverter" style="width:200px">
+				<p:themeSwitcher id="themeSwitcher" value="#{themeSwitcherBean.selectedTheme}" var="t" converter="selectThemeConverter" style="width:200px">
 					<!--  <p:themeSwitcher id="themeSwitcher" value="#{themeSwitcher.selectedTheme}" var="t" converter="omnifaces.SelectItemsConverter" style="width:200px"> -->
-					<f:selectItems value="#{themeSwitcher.themeList}" var="_theme" itemLabel="#{_theme.id} : #{_theme.displayName}" itemValue="#{_theme}" />
+					<f:selectItems value="#{themeSwitcherBean.themeList}" var="_theme" itemLabel="#{_theme.id} : #{_theme.displayName}" itemValue="#{_theme}" />
 					<!-- <p:column>
             		    <h:outputText styleClass="ui-theme ui-theme-" style="display-block" />
     		        </p:column> -->
@@ -35,7 +37,7 @@
 						<p:outputLabel id="selectedThemeLabel" value="#{t.id} : #{t.displayName} " />
 					</p:column>
 					
-					<p:ajax listener="#{themeSwitcher.saveTheme}" update="growl1" />
+					<p:ajax listener="#{themeSwitcherBean.saveTheme}" update="growl1" />
 				</p:themeSwitcher>
 
 

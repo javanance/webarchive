@@ -4,14 +4,17 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.ResourceBundle;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.apache.commons.collections4.map.HashedMap;
+import org.omnifaces.cdi.Param;
 import org.primefaces.component.datatable.DataTable;
 import org.primefaces.event.CellEditEvent;
 import org.primefaces.event.SelectEvent;
@@ -23,8 +26,10 @@ import org.primefaces.model.menu.MenuElement;
 import org.primefaces.model.menu.MenuModel;
 import org.slf4j.Logger;
 
+import com.eugenefe.entity.takion.WebUser;
 import com.eugenefe.model.DataTableColumn;
 import com.eugenefe.model.MegaMenu;
+import com.eugenefe.qualifiers.MessageBundle;
 import com.eugenefe.service.MegaMenuDbService;
 
 @Named
@@ -36,6 +41,12 @@ public class MenuBean implements Serializable {
 	
 	@Inject
 	private MegaMenuDbService dbService;
+	
+//	@Inject 
+//	@MessageBundle
+	private ResourceBundle msg;
+	
+	private FacesContext ctx;
 	
 	private MenuModel megaMenuModel ;
 
@@ -54,6 +65,8 @@ public class MenuBean implements Serializable {
 	
 	@PostConstruct
 	public void create(){
+		FacesContext context = FacesContext.getCurrentInstance();
+		msg = context.getApplication().getResourceBundle(context, "msg");
 		logger.info("PostConstruct MenuBean");
 		Map<String, MenuElement> tempMap = new HashedMap<String, MenuElement>();
 		
@@ -61,44 +74,32 @@ public class MenuBean implements Serializable {
 		DefaultSubMenu menuGroup ;
 		DefaultSubMenu menuColumn ;
 		DefaultMenuColumn col;
-		
+		String tempHead;
+		String tempSub;
 		String tempCol;
+		
 		tableColumnList = dbService.fetchMeta("megaMenu");
 		megaMenuList = dbService.fetchMegaMenu();
 
 		megaMenuModel = new DefaultMenuModel();
 		
-		/*DefaultSubMenu menuGroup1 = new DefaultSubMenu("aaaa");
-		DefaultMenuColumn col1 = new DefaultMenuColumn();
-		col = new DefaultMenuColumn();
-		DefaultSubMenu menuGroup2 = new DefaultSubMenu("bbbb");
-		DefaultSubMenu menuGroup3 = new DefaultSubMenu("cccc");
-		menuItem = new DefaultMenuItem("aaaa");
-		menuGroup3.addElement(menuItem);
-		col1.addElement(menuGroup3);
-		menuGroup2.addElement(menuItem);
-		menuGroup2.addElement(col1);
-		
-		col.addElement(menuGroup2);
-		menuGroup1.addElement(col);
-		megaMenuModel.addElement(menuGroup2);*/
-		
-		
 		for(MegaMenu aa : megaMenuList){
 			if(aa.getMenuGroup() == null || aa.getMenuGroup().isEmpty()){
-				menuItem = new DefaultMenuItem(aa.getMenuName());
+				tempSub = msg.containsKey(aa.getMenuName().trim())? msg.getString(aa.getMenuName().trim()): aa.getMenuName().trim() ;
+				menuItem = new DefaultMenuItem(tempSub);
 				menuItem.setIcon(aa.getIconName());
 				menuItem.setOutcome(aa.getMenuUrl());
 				megaMenuModel.addElement(menuItem);
 				
 			}
 			else {
-				tempCol = aa.getMenuGroup().trim()+ aa.getMenuColumn();
+				tempHead = msg.containsKey(aa.getMenuGroup().trim())? msg.getString(aa.getMenuGroup().trim()): aa.getMenuGroup().trim() ;
+				tempCol = aa.getMenuGroup()+ aa.getMenuColumn();
 				if(tempMap.containsKey(aa.getMenuGroup())){
 					menuGroup = (DefaultSubMenu)tempMap.get(aa.getMenuGroup());
 				}
 				else{
-					menuGroup = new DefaultSubMenu(aa.getMenuGroup());
+					menuGroup = new DefaultSubMenu(tempHead);
 					menuGroup.setIcon(aa.getIconName());
 					
 					megaMenuModel.addElement(menuGroup);
@@ -119,8 +120,8 @@ public class MenuBean implements Serializable {
 					tempMap.put(tempCol+"col", col);
 					tempMap.put(tempCol, menuColumn);
 				}
-
-				menuItem = new DefaultMenuItem(aa.getMenuName());
+				tempSub =  msg.containsKey(aa.getMenuName())? msg.getString(aa.getMenuName()): aa.getMenuName().trim() ;
+				menuItem = new DefaultMenuItem(tempSub);
 				menuItem.setOutcome(aa.getMenuUrl());
 				menuColumn.addElement(menuItem);
 			}
