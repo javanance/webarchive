@@ -1,0 +1,43 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions" xmlns:o="http://omnifaces.org/ui" xmlns:of="http://omnifaces.org/functions">
+
+<p:layout id="headerLayout">
+	
+	<p:layoutUnit id="headerLeftLayoutUnit" position="west" size="200" gutter="0">
+		<h:form id="logoForm">
+			<p:link id="loginLClink" outcome="#{viewUrlBean.getUrl('Home')}">
+				<p:graphicImage id="logoImage" title="#{msg.goToHome}" library="img" name="Gof_conv_margin_grey.png" width="100%" height="100%" />
+			</p:link>
+		</h:form>
+	
+	</p:layoutUnit>
+	
+	<p:layoutUnit id="headerCentorLayoutUnit" position="center" resizable="false" gutter="0">
+		<ui:include src="/header/menubar/dynamicMegaMenu.xhtml" />
+		<!-- <ui:include src="/header/menubar/megaMenu.xhtml" /> -->
+	</p:layoutUnit>
+	
+	<p:layoutUnit id="headerRightLayoutUnit" position="east" resizable="false" gutter="2" size="300" closable="true">
+	   <h:form id="rightHeadForm" >
+	   	<p:panel styleClass="takion" >
+	   		<p:link id="settingClink" >
+				<i class="fa fa-gear fa-2x" style="color : #607D8B"/>
+			</p:link>
+		    <p:menu overlay="true" trigger="settingClink" my="left top" at="left bottom">
+		        <p:submenu label="Ajax" style="display: none">
+		            <p:menuitem value="Save" actionListener="#{menuView.save}"  icon="ui-icon-disk"/>
+		            <p:menuitem value="Update" actionListener="#{menuView.update}"  icon="ui-icon-arrowrefresh-1-w"/>
+		        </p:submenu>
+		    </p:menu>
+
+		   <p:outputLabel value="#{msg.baseDate} :" for="baseDateIt" />
+		   <p:inputText id="baseDateIt" value="#{baseDateBean.bssd}" />
+	   	</p:panel>
+	   </h:form>
+	</p:layoutUnit>
+
+</p:layout>
+</ui:composition>
+
+
+

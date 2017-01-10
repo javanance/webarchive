@@ -1,7 +1,12 @@
 package com.eugenefe.bean;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.Serializable;
+import java.net.URL;
+import java.nio.file.Paths;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -11,11 +16,9 @@ import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hssf.util.HSSFColor;
-import org.apache.poi.hssf.util.HSSFColor.BLACK;
 import org.apache.poi.hssf.util.HSSFColor.GREY_25_PERCENT;
 import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.FillPatternType;
-import org.apache.poi.ss.usermodel.IndexedColors;
 import org.slf4j.Logger;
 
 @Named
@@ -23,9 +26,41 @@ import org.slf4j.Logger;
 public class ExcelProcessBean implements Serializable{
 	@Inject	private Logger logger;
 	 
+	public ExcelProcessBean() {
+		
+	}
 	
+	@PostConstruct
+	public void init(){
+		
+	}
+	
+	public void postProcessXLS1(Object document) {
+		logger.info("Pre Excel 1: {}" );
+//		HSSFWorkbook wb = (HSSFWorkbook) document;
+		HSSFWorkbook template ;
+//		try {
+//			URL resource = BaseDateBean.class.getResource("rpt.xls");
+//			File aa =Paths.get(resource.toURI()).toFile();
+//			
+////			logger.info("Pre Excel : {}", template.getNumberOfSheets());
+//			
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//		}
+		try {
+			FileInputStream fis =new FileInputStream("C://rpt.xls");
+			template  = new HSSFWorkbook(fis);
+			document = template;
+			logger.info("Pre Excel : {}", ((HSSFWorkbook)document).getNumberOfSheets());
+		} catch (Exception e) {
+		}
+		logger.info("Pre Excel 2: {}" );
+		
+	}
 	public void postProcessXLS(Object document) {
 		HSSFWorkbook wb = (HSSFWorkbook) document;
+		logger.info("Post Excel : {}", ((HSSFWorkbook)document).getNumberOfSheets());
 		HSSFSheet sheet = wb.getSheetAt(0);
 		
 //		logger.info("rowSize : {},{}", sheet.getFirstRowNum(), sheet.getLastRowNum());

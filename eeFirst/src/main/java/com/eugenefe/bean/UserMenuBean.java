@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
+import javax.enterprise.event.Event;
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -17,8 +18,9 @@ import org.primefaces.event.SelectEvent;
 import org.slf4j.Logger;
 
 import com.eugenefe.entity.takion.MenuMst;
+import com.eugenefe.entity.takion.WebUser;
 import com.eugenefe.entity.takion.WebUserMenuMulti;
-import com.eugenefe.model.MegaMenu;
+import com.eugenefe.qualifiers.EventUserMenu;
 import com.eugenefe.qualifiers.LoginEvent;
 import com.eugenefe.service.UserMenuDbService;
 
@@ -36,15 +38,12 @@ public class UserMenuBean implements Serializable {
 	private MenuMstBean menuMstBean;
 	
 	@Inject
-	private UserMegaMenuBean userMegaMenuBean;
+	@EventUserMenu
+	private Event<List<WebUserMenuMulti>> eventUserMenu;
 	
-	 
 //	@Inject 
 //	@MessageBundle
 	private ResourceBundle msg;
-	
-	@Inject
-	private LoginBean loginBean;
 	
 	private String	userId;
 	private List<WebUserMenuMulti> userMenuList = new ArrayList<WebUserMenuMulti>();
@@ -60,22 +59,24 @@ public class UserMenuBean implements Serializable {
 	
 	@PostConstruct
 	public void create(){
-		userId = loginBean.getLoginUser().getUserId();
+//		userId = loginBean.getLoginUser().getUserId();
+//		userId ="guest";
 		userMenuList = dbService.fetchUserMenuList(userId);
 		logger.info("Post UserMenuBean : {},{}", userId, userMenuList.size());
 		
 	}
-	public void onLoginEvent(@Observes @LoginEvent String userId){
+	
+	public void onUserChange(@Observes @LoginEvent WebUser loginUser){
+		this.userId = loginUser.getUserId();
 		userMenuList = dbService.fetchUserMenuList(userId);
-		logger.info("On Login Event : {},{}", userId, userMenuList.size());
+		logger.info("On User Change Menu Table : {},{}", userId, userMenuList.size());
 	}
 	
 	public void save(){
 		for(WebUserMenuMulti aa: userMenuList){
 			dbService.merge(aa);
 		}
-		
-		userMegaMenuBean.setMegaMenuModel(userMegaMenuBean.generateMegaMenuModel(userMenuList));
+		eventUserMenu.fire(userMenuList);
 	}
 	
 	public void fetchDefault(){
@@ -94,37 +95,68 @@ public class UserMenuBean implements Serializable {
 			dbService.persist(aa);
 			userMenuList.add(aa);
 		}
-		userMegaMenuBean.setMegaMenuModel(userMegaMenuBean.generateMegaMenuModel(userMenuList));
+		eventUserMenu.fire(userMenuList);
 	}
 	
 	public void addRow(){
 		WebUserMenuMulti newMenu = new WebUserMenuMulti();
 		newMenu.setUserId(userId);
+		
 		newMenu.setMenuId("insert MenuId...");
 		newMenu.setMenuName("insert MenuName...");
+		newMenu.setMenuGroupOrder(selectedMenu.getMenuGroupOrder());
 		newMenu.setMenuGroup(selectedMenu.getMenuGroup());
 		newMenu.setMenuColumn(selectedMenu.getMenuColumn());
 		newMenu.setIconName(selectedMenu.getIconName());
 //		newMenu.setMenu(menu);
 		
 		userMenuList.add(rowIndex+1, newMenu);
+//		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Add :", newMenu.getMenuName() + "for " + userId));
 		
 	}
 	public void deleteRow(){
 		logger.info("delete selected Menu : {}", selectedMenu.getMenuId());
 		dbService.remove(selectedMenu);
 		userMenuList.remove(selectedMenu);
-		
-		userMegaMenuBean.setMegaMenuModel(userMegaMenuBean.generateMegaMenuModel(userMenuList));
+//		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("delete1 :", selectedMenu.getMenuId()));
+		eventUserMenu.fire(userMenuList);
 	}
 	
+	public void addNavigationMenu(String tableName){
+		logger.info("Add Navigation Menu : {}", userMenuList.size());
+		for(WebUserMenuMulti aa : userMenuList){
+			if("v902".equals(aa.getMenuId())){
+				selectedMenu = aa;
+				break;
+			}
+		}
+		WebUserMenuMulti newMenu = new WebUserMenuMulti();
+		newMenu.setUserId(userId);
+		
+		newMenu.setMenuId("v902");
+		newMenu.setMenuName(tableName);
+		newMenu.setMenuGroupOrder(selectedMenu.getMenuGroupOrder());
+		newMenu.setMenuGroup(selectedMenu.getMenuGroup());
+		newMenu.setMenuColumn(selectedMenu.getMenuColumn());
+		newMenu.setIconName(selectedMenu.getIconName());
+		newMenu.setMenu(selectedMenu.getMenu());
+		newMenu.setUrlParam(tableName);
+		
+		userMenuList.add(newMenu);
+		logger.info("Add Navigation Menu12 : {}, {}", selectedMenu.getMenuId(), dbService.toString());
+		dbService.merge(newMenu);
+		
+//		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Add Navi:", userId));
+		eventUserMenu.fire(userMenuList);
+		logger.info("Add Navigation Menu1 : {}", userMenuList.size());
+	}
 	
 	public void onShowContext(SelectEvent event){
 		dataTable = (DataTable)event.getSource();
 		selectedMenu = (WebUserMenuMulti)event.getObject();
 		rowIndex = userMenuList.indexOf(selectedMenu);
 		
-		logger.info("Context Menu Row : {},{}", ((DataTable)event.getSource()), ((MegaMenu)event.getObject()).getMenuId());
+		logger.info("Context Menu Row : {},{}", ((DataTable)event.getSource()), ((WebUserMenuMulti)event.getObject()).getMenuId());
 		
 	}
 	public void onEdit(CellEditEvent event) {

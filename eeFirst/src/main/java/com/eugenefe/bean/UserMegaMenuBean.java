@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
+import javax.enterprise.event.Observes;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -16,12 +17,17 @@ import org.apache.commons.collections4.map.HashedMap;
 import org.primefaces.model.menu.DefaultMenuColumn;
 import org.primefaces.model.menu.DefaultMenuItem;
 import org.primefaces.model.menu.DefaultMenuModel;
+import org.primefaces.model.menu.DefaultSeparator;
 import org.primefaces.model.menu.DefaultSubMenu;
 import org.primefaces.model.menu.MenuElement;
 import org.primefaces.model.menu.MenuModel;
+import org.primefaces.model.menu.Separator;
 import org.slf4j.Logger;
 
+import com.eugenefe.entity.takion.WebUser;
 import com.eugenefe.entity.takion.WebUserMenuMulti;
+import com.eugenefe.qualifiers.EventUserMenu;
+import com.eugenefe.qualifiers.LoginEvent;
 import com.eugenefe.service.UserMenuDbService;
 
 @Named
@@ -32,8 +38,7 @@ public class UserMegaMenuBean implements Serializable {
 	private Logger logger;
 	@Inject
 	private UserMenuDbService dbService;
-	@Inject 
-	private LoginBean loginBean;
+	
 	private String userId;
 	private ResourceBundle msg;
 	private MenuModel megaMenuModel ;
@@ -58,10 +63,25 @@ public class UserMegaMenuBean implements Serializable {
 		FacesContext context = FacesContext.getCurrentInstance();
 		msg = context.getApplication().getResourceBundle(context, "msg");
 		logger.info("PostConstruct UserMegaMenuBean");
-		userId = loginBean.getUserId();
+		
+		userId = "guest";
 		megaMenuList = dbService.fetchUserMenuList(userId);
 
 		megaMenuModel = generateMegaMenuModel(megaMenuList);
+	}
+	
+	public void onUserChange(@Observes @LoginEvent WebUser loginUser){
+		this.userId = loginUser.getUserId();
+		megaMenuList = dbService.fetchUserMenuList(userId);
+
+		megaMenuModel = generateMegaMenuModel(megaMenuList);
+		logger.info("On User Change Menu Bar : {},{}", userId, megaMenuList.size());
+	}
+	
+	public void onMenuChange(@Observes @EventUserMenu List<WebUserMenuMulti> menuList){
+		megaMenuList = menuList;
+	 	megaMenuModel = generateMegaMenuModel(menuList);
+	 	logger.info("On Menu Change : {},{}", userId, megaMenuList.size());
 	}
 	
 	public MenuModel generateMegaMenuModel(List<WebUserMenuMulti> menuList){
@@ -83,8 +103,15 @@ public class UserMegaMenuBean implements Serializable {
 				tempSub = msg.containsKey(aa.getMenuName().trim())? msg.getString(aa.getMenuName().trim()): aa.getMenuName().trim() ;
 				menuItem = new DefaultMenuItem(tempSub);
 				menuItem.setIcon(aa.getIconName());
-				menuItem.setOutcome(aa.getMenu().getMenuUrl());
+				if(aa.getUrlParam()!=null && !aa.getUrlParam().isEmpty()){
+					menuItem.setParam("selectedTableName", aa.getUrlParam());
+				}
+				menuItem.setOutcome(aa.getMenu().getMenuUrl() );
 				menuModel.addElement(menuItem);
+				
+//				Separator sep = new DefaultSeparator();
+//				menuModel.addElement(sep);
+				
 				
 			}
 			else {
@@ -117,6 +144,9 @@ public class UserMegaMenuBean implements Serializable {
 				}
 				tempSub =  msg.containsKey(aa.getMenuName())? msg.getString(aa.getMenuName()): aa.getMenuName().trim() ;
 				menuItem = new DefaultMenuItem(tempSub);
+				if(aa.getUrlParam()!=null && !aa.getUrlParam().isEmpty()){
+					menuItem.setParam("selectedTableName", aa.getUrlParam());
+				}
 				menuItem.setOutcome(aa.getMenu().getMenuUrl());
 				menuColumn.addElement(menuItem);
 			}

@@ -1,0 +1,57 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions" xmlns:o="http://omnifaces.org/ui" xmlns:of="http://omnifaces.org/functions">
+
+
+	<h:form id="formQueryEditor">
+		<p:growl id="msgs" showDetail="true" />
+		<p:hotkey bind="ctrl+shift+s" update="@(.ui-datatable)" actionListener="#{dataTableQueryBean.runSql}" />
+		
+		<!-- <p:outputLabel id ="queryOpl2" name = "query" value="#{dataTableQueryBean.queryText}" ></p:outputLabel> -->
+		<p:panelGrid id="pgEditor" columns="2" style="margin-top: 10px">
+			<!-- <p:outputLabel name = "query" value="msg.query : " for="queryOpl" ></p:outputLabel>
+			<p:outputLabel id ="queryOpl" name = "query" value="#{dataTableQueryBean.queryText}" ></p:outputLabel> -->
+			<p:commandButton id="cBtnRun" title="ctrl+shift+s to run" value="Run Sql"  action="#{dataTableQueryBean.runSql}" icon="ui-icon-disk" update="@(.ui-datatable)" process="@form"/>
+			<p:commandButton value="Save Grid" icon="ui-icon-disk" />
+			<p:defaultCommand target="cBtnRun" />
+		</p:panelGrid>
+		<p:accordionPanel id="accoPanel" multiple="false" style="padding : 0px" value="#{dataTableQueryBean.tabList}" var="listItem">
+			<p:tab id="tab1" title="#{listItem}" closable="true">
+				<pe:ckEditor id="editor" value="#{dataTableQueryBean.inputQueryText}" checkDirtyInterval="0" rows="40" cols="34"  >
+				</pe:ckEditor>
+				<!-- <p:editor id="editor" widgetVar="editorWidget" value="#{dataTableQueryBean.inputQueryText}" controls="" />  -->
+			</p:tab>
+		
+		
+		</p:accordionPanel>
+		
+		<!-- <p:tabView id="tabView"  value="#{dataTableQueryBean.tabList}" var="listItem">
+		</p:tabView> -->
+
+<!-- 		<p:tabView>
+			<p:tab title="aaa">
+			</p:tab>
+			<p:tab title="+">
+				<pe:ckEditor id="editor2" value="#{dataTableQueryBean.inputQueryText}" checkDirtyInterval="0" rows="20" cols="200" />
+			</p:tab>
+		</p:tabView> -->
+
+
+		<!-- <p:editor id="editor" widgetVar="editorWidget" value="#{dataTableQueryBean.queryText}" controls="" /> -->
+		<!--  <p:textEditor widgetVar="editor2" value="#{dataTableQueryBean.queryText}" height="300" style="margin-bottom:10px" placeholder="Enter Query...">
+        <f:facet name="toolbar">
+             <span class="ql-formats">
+                <button class="ql-bold"></button>
+                <button class="ql-italic"></button>
+                <button class="ql-underline"></button>
+                <button class="ql-strike"></button>
+            </span>
+            <span class="ql-formats">
+                <select class="ql-font"></select>
+                <select class="ql-size"></select>
+            </span>
+        </f:facet>
+    </p:textEditor> -->
+	</h:form>
+</ui:composition>

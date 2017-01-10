@@ -16,6 +16,7 @@
       
       <f:facet name="footer">
         <p:panelGrid id="buttonPg" columns="2" style="margin: 0 auto;">
+          <!-- <p:commandButton id="loginButton" value="#{msg.login}" update="loginForm megaMenuForm:megaMenu" action="#{loginBean.login}" icon="fa fa-user "  /> -->
           <p:commandButton id="loginButton" value="#{msg.login}" update="@(form)" action="#{loginBean.login}" icon="fa fa-user "  />
           <p:commandButton id="register" value="#{msg.register}" actionListener="#{loginBean.clear}" action="/view/v800Settings?faces-redirect=true" ajax="true"  icon="fa  fa-pencil-square-o" />
         </p:panelGrid>
@@ -30,7 +31,7 @@
       
        <f:facet name="footer">
         <p:panelGrid id="buttonPg1" columns="2" style="margin: 0 auto;">
-	      <p:commandButton id="logoutButton" value="#{msg.logout}" update="@(form)" action="#{loginBean.logout()}" icon="fa fa-sign-out"/>
+	      <p:commandButton id="logoutButton" value="#{msg.logout}" update="@(form)" action="#{loginBean.logout}" icon="fa fa-power-off" process="@form"/>
 	       <p:commandButton id="updateInfo" value="#{msg.updateInfo}" action="/view/v800Settings?faces-redirect=true" ajax="true"  icon="fa  fa-pencil-square-o" />
         </p:panelGrid>
       </f:facet>

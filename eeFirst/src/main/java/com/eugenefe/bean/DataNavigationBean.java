@@ -30,7 +30,7 @@ public class DataNavigationBean implements Serializable{
 	private TableNameTreeService treeService;
 
 	public DataNavigationBean() {
-		System.out.println("Construction DataNavigationListBean");
+		System.out.println("Construction DataNavigationBean");
 	}
 	
 	@PostConstruct

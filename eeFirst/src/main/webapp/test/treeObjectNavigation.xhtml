@@ -6,20 +6,22 @@
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions"
 	xmlns:o="http://omnifaces.org/ui"  xmlns:of="http://omnifaces.org/functions">
+	
     <p:scrollPanel id="treeOutPanel" mode="native" style="height : 60%">
+    
       <p:tree id="treeObjectNavigation2" value="#{dataNavigationBean.rootNode}" var="node" animate="true" 
         highlight="true" orientation="vertical" selectionMode="single"
         selection="#{dataNavigationBean.selectedNode}"
         draggable="false" droppable="false">
         
-        <p:ajax  event="select" update="@(form)"  listener="#{listenerBean.onChangeEvent}" onstart="PF('wgTbNavi').clearFilters()"  >
+        <p:ajax  event="select" update="@(form)"  listener="#{listenerBean.onChangeEvent}"    onstart="PF('wgTbNavi').clearFilters()">
         </p:ajax>
         
-        <p:treeNode expandedIcon="fa fa-folder-open" collapsedIcon="fa fa-folder">
+        <p:treeNode expandedIcon="fa fa-folder-open" collapsedIcon="fa fa-folder" styleClass="inverse">
           <h:outputText value="#{node}" />
         </p:treeNode>
 
-        <p:treeNode type="Leaf" icon="fa fa-table">
+        <p:treeNode type="Leaf" icon="fa fa-table" styleClass="inverse">
           <h:outputText value="#{node}" />
         </p:treeNode>
 

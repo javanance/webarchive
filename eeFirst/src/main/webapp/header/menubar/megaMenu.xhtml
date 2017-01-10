@@ -53,13 +53,20 @@
 
    </p:submenu>
 
-   <p:menuitem id="menuitem601" value="#{msg.settings}" icon="img_setting"  outcome="#{viewUrlBean.getRedirectUrl('v800')}"  />
    
    <p:menuitem id="menuitem903" value="#{msg.navigation}" icon="img_setting"  outcome="#{viewUrlBean.getUrl('v902')}" />
    <p:menuitem id="menuitem905" value="#{msg.indexColumns}" icon="img_setting"  outcome="/view/v904DataNavigation"  />
    <p:menuitem id="menuitem904" value="#{msg.test}" icon="img_setting"  outcome="/view/v903DataNavigation"  />
    <p:menuitem id="menuitem910" value="#{msg.diagram}" icon="img_setting"  outcome="/view/v910Diagram"  />
-
+	
+   <f:facet name = "options">
+   		<p:menu label="#{msg.settings}" icon="img_limit">
+		   <p:menuitem id="menuitem601" value="#{msg.settings}" icon="img_setting"  outcome="#{viewUrlBean.getRedirectUrl('v800')}"  />
+   		</p:menu>
+   		<!-- <p:menuButton value="Options">
+		   <p:menuitem id="menuitem601" value="#{msg.settings}" icon="img_setting"  outcome="#{viewUrlBean.getRedirectUrl('v800')}"  />
+		</p:menuButton> -->
+   </f:facet>
   </p:megaMenu>
  </h:form>
 </ui:composition>

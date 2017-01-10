@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.event.Event;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -31,7 +32,7 @@ public class LoginBean  implements Serializable{
 	
 	@Inject
 	@LoginEvent
-	private Event<String> loginEvent;
+	private Event<WebUser> loginEvent;
 	
 	private String userId;
     private String password;
@@ -51,11 +52,14 @@ public class LoginBean  implements Serializable{
     	userMap = dbService.fetchUserMap();
     	loginUser = userMap.get("guest");
 //    	loginUser = new WebUser();
-    	userId = loginUser.getUserId();
+//    	userId = loginUser.getUserId();
 		loggedIn = false;
+		
+		logger.info("LoginBean Init : {},{}", loginUser.getUserId(), loggedIn);
 		logger.info("LoginBean Init : {},{}", loginUser.getUserId(), loginUser.getUserMenuList().size());
-		logger.info("LoginBean Init1 : {},{}", loginUser.getUserId(), userMap.get(userId).getUserMenuList().size());
-		logger.info("LoginBean Init2 : {},{}", dbService.fetchUserList().get(0).getUserId(), dbService.fetchUserList().get(0).getUserMenuList().size());
+		logger.info("LoginBean Init1 : {},{}", loginUser.getUserId(), userMap.get(loginUser.getUserId()).getUserMenuList().size());
+
+		loginEvent.fire(loginUser);
     }
     
     public String getUserId() {
@@ -107,13 +111,17 @@ public class LoginBean  implements Serializable{
 	public void login() {
 		userMap = dbService.fetchUserMap();
 		logger.info("LogIn0 : {}, {}", userId, userMap.get("guest").getUserMenuList().size());
-
-		if (userMap.get(userId) !=null && password.equals(userMap.get(userId).getPassword())) {
+		if(userMap.get(userId)!=null){
+			loginUser = userMap.get(userId);
+		}
+		
+		if (password.equals(userMap.get(userId).getPassword())) {
+//			if (userMap.get(userId) !=null && password.equals(userMap.get(userId).getPassword())) {
 			loginUser = userMap.get(userId);
 			loggedIn = true;
 			logger.info("LogIn : {}, {}", loginUser.getUserId(), loggedIn);
 			logger.info("LogIn : {}, {}", loginUser.getUserId(), loginUser.getUserMenuList().size());
-			loginEvent.fire(userId);
+			loginEvent.fire(loginUser);
 		} else {
 			loggedIn = false;
 		}
@@ -121,10 +129,11 @@ public class LoginBean  implements Serializable{
 
 	public void logout() {
 //		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-//		loginUser = new WebUser();
-		loginUser = userMap.get("guest");
-		loggedIn = false;
-		loginEvent.fire("guest");
+		init();
+		
+//		loginUser = userMap.get("guest");
+//		loggedIn = false;
+//		loginEvent.fire(loginUser);
 	}
 	
 	public void clear(){

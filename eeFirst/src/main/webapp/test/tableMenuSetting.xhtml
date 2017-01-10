@@ -9,9 +9,9 @@
 
 
   <h:form id="formMenuSetting" rendered="#{loginBean.loggedIn}">
-  	<p:growl id="msgs" showDetail="true"/>
+  	<p:growl id="growl" showDetail="true" life="3000"/>
   	<p:panel>
-  		<p:commandButton value="#{msg.save}" action="#{userMenuBean.save}" update="formMenuSetting:tableMegaMenu megaMenuForm:megaMenu"></p:commandButton>
+  		<p:commandButton value="#{msg.save}" action="#{userMenuBean.save}" update="formMenuSetting:tableMegaMenu megaMenuForm:megaMenu formMenuSetting:growl"></p:commandButton>
   		<p:commandButton value="#{msg.default}" action="#{userMenuBean.fetchDefault}" update="formMenuSetting:tableMegaMenu megaMenuForm:megaMenu"></p:commandButton>
   	</p:panel>
   	
@@ -24,14 +24,21 @@
       resizableColumns="true" resizeMode="expand"
       scrollable="false" scrollHeight="500"
 	  paginatorAlwaysVisible="true"
-      paginator="true" paginatorPosition="bottom" rows="50"
+      paginator="true" paginatorPosition="bottom" rows="15"
       paginatorTemplate="{FirstPageLink} {PreviousPageLink} {JumpToPageDropdown} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
       rowsPerPageTemplate="10,15,25,50" 
-      style="margin: 0.5em;" styleClass="takion">
+      style="margin: 0.5em;" >
       	<p:ajax event="cellEdit" listener="#{userMenuBean.onEdit}" update="@(.ui-datatable)" />
       	<p:ajax event="contextMenu" listener="#{userMenuBean.onShowContext}"  />
       	
-     	
+       
+        <p:column headerText="#{msg.menuGroupOrder}" sortBy="#{_row.menuGroupOrder}" filterBy="#{_row.menuGroupOrder}" filterMatchMode="contains"  filterStyle="width:100%" >
+           <p:cellEditor>
+               <f:facet name="output"><h:outputText value="#{_row.menuGroupOrder}" /></f:facet>
+               <f:facet name="input"><p:inputText id="menuGroupOrderInput" value="#{_row.menuGroupOrder}" style="width:100%"/></f:facet>
+           </p:cellEditor>
+       </p:column>
+       	
        <p:column headerText="#{msg.menuGroup}" sortBy="#{_row.menuGroup}" filterBy="#{_row.menuGroup}" filterMatchMode="contains"  filterStyle="width:100%" >
            <p:cellEditor>
                <f:facet name="output"><h:outputText value="#{_row.menuGroup}" /></f:facet>
@@ -67,6 +74,8 @@
            </p:cellEditor>
        </p:column>
        
+      
+       
        <p:column headerText="#{msg.menuId}" sortBy="#{_row.menuId}" filterBy="#{_row.menuId}" filterMatchMode="contains"  filterStyle="width:100%" >
            <p:cellEditor>
                <f:facet name="output"><h:outputText value="#{_row.menuId}" /></f:facet>
@@ -87,10 +96,13 @@
        <p:column id="urlCol" headerText="#{msg.menuUrl}" sortBy="#{_row.menu.menuUrl}" filterBy="#{_row.menu.menuUrl}" filterMatchMode="contains"  filterStyle="width:100%" >
        		<h:outputText value="#{_row.menu.menuUrl}" />
        </p:column>
+       <p:column headerText="#{msg.urlParam}" sortBy="#{_row.urlParam}" filterBy="#{_row.urlParam}" filterMatchMode="contains"  filterStyle="width:100%" >
+        	<h:outputText value="#{_row.urlParam}" />
+       </p:column>
     </p:dataTable> 
     <p:contextMenu id="ctxMenuTable" for="tableMegaMenu">
-    	<p:menuitem value="#{msg.copyAndAddRow}" action="#{userMenuBean.addRow}"  update="formMenuSetting:tableMegaMenu megaMenuForm:megaMenu"/>
-    	<p:menuitem value="#{msg.deleteRow}" action="#{userMenuBean.deleteRow}"  update="formMenuSetting:tableMegaMenu megaMenuForm:megaMenu"/>
+    	<p:menuitem value="#{msg.copyAndAddRow}" action="#{userMenuBean.addRow}"  update="formMenuSetting:tableMegaMenu megaMenuForm:megaMenu growl"/>
+    	<p:menuitem value="#{msg.deleteRow}" action="#{userMenuBean.deleteRow}"  update="formMenuSetting:tableMegaMenu megaMenuForm:megaMenu growl"/>
     </p:contextMenu>
    
   	

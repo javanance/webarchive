@@ -3,15 +3,16 @@ package com.eugenefe.bean;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.event.Observes;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.omnifaces.cdi.Param;
 import org.primefaces.event.ToggleEvent;
 import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.TreeNode;
@@ -21,6 +22,7 @@ import org.slf4j.Logger;
 import com.eugenefe.entity.ncm.NcmErpTxIfr;
 import com.eugenefe.model.LazyModelNavigatable;
 import com.eugenefe.model.TableColumn;
+import com.eugenefe.qualifiers.HttpParam;
 import com.eugenefe.qualifiers.SelectedTable;
 import com.eugenefe.service.DataBaseService;
 import com.eugenefe.util.Navigatable;
@@ -37,7 +39,10 @@ public class DataViewerLazyBean implements Serializable{
 	@Inject
 	private DataBaseService dbService;
 	
-//	@Inject @Param
+	@Inject
+//	@SelectedTable
+//	@Param
+	@HttpParam
 	private String selectedTableName;
 	
 	private String changeName;
@@ -81,12 +86,14 @@ public class DataViewerLazyBean implements Serializable{
 	
 	@PostConstruct
 	public void init1(){
-		logger.info("PostConstruct1111 :{}", selectedTableName);
+		logger.info("PostConstruct1111 :{}, {}", selectedTableName);
 		if(selectedTableName!=null){
+			logger.info("PostConstruct000001111 :{}, {}", selectedTableName);
 			dbService.getSelectedTable().setTableName(selectedTableName);
 			onChangeEvent(selectedTableName);
+		}else{
+			selectedTableName = dbService.getSelectedTable().getTableName();
 		}
-		selectedTableName = dbService.getSelectedTable().getTableName();
 		navi = new LazyModelNavigatable<Navigatable>(dbService.generateTableLazyContents(selectedTableName));
 		setVisible();
 	}
@@ -144,7 +151,7 @@ public class DataViewerLazyBean implements Serializable{
 		dbService.setTableColumns(dbService.generateColumns(selectedTableName));
 //		dbService.setTableContents(dbService.generateTableContents(selectedTableName));
 		
-		logger.info("Selected Naviiiiiiiiiiiiiiiiiiiiiii: {},{}", dbService.generateTableLazyContents(selectedTableName).size(), navi.getPageSize());
+//		logger.info("Selected Naviiiiiiiiiiiiiiiiiiiiiii: {},{}", dbService.generateTableLazyContents(selectedTableName).size(), navi.getPageSize());
 		
 //		txIfr = new LazyModelTxIfr(dbService.generateTableLazyContents1(selectedTableName));
 		navi = new LazyModelNavigatable<Navigatable>(dbService.generateTableLazyContents(selectedTableName));

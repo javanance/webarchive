@@ -29,9 +29,11 @@ public class WebUserMenuMulti  implements java.io.Serializable, Navigatable, Clo
 	private MenuMst menu;
 	private String menuName;
 	private String menuGroup;
+	private Integer menuGroupOrder;
     private Integer menuColumn;
     private String menuStyle;
     private String iconName;
+    private String urlParam;
     
     
     @Id
@@ -115,6 +117,15 @@ public class WebUserMenuMulti  implements java.io.Serializable, Navigatable, Clo
 		this.menuGroup = menuGroup;
 	}
 	
+	@Column(name="MENU_GROUP_ORDER", nullable = true)
+	public Integer getMenuGroupOrder() {
+		return menuGroupOrder;
+	}
+	
+	public void setMenuGroupOrder(Integer menuGroupOrder) {
+		this.menuGroupOrder = menuGroupOrder;
+	}
+
 	@Column(name="MENU_COLUMN", nullable = true)
 	public Integer getMenuColumn() {
 		return menuColumn;
@@ -140,6 +151,16 @@ public class WebUserMenuMulti  implements java.io.Serializable, Navigatable, Clo
 
 	public void setIconName(String iconName) {
 		this.iconName = iconName;
+	}
+	
+	
+	@Column(name="URL_PARAM", nullable = true)
+	public String getUrlParam() {
+		return urlParam;
+	}
+
+	public void setUrlParam(String urlParam) {
+		this.urlParam = urlParam;
 	}
 
 	/**

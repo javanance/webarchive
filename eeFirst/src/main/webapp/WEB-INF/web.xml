@@ -49,8 +49,8 @@
 	
 	<context-param>
     <param-name>primefaces.THEME</param-name>
-    	<param-value>#{themeSwitcherBean.selectedTheme.name}</param-value>
-    	<!-- <param-value>sam</param-value> -->
+    	<!-- <param-value>#{themeSwitcherBean.selectedTheme.name}</param-value> -->
+    	<param-value>takion</param-value>
   </context-param>
 	<mime-mapping>
 		<extension>woff2</extension>

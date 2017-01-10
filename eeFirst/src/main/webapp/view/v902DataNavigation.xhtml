@@ -8,7 +8,8 @@
 	xmlns:o="http://omnifaces.org/ui" xmlns:of="http://omnifaces.org/functions"
 	template="/templates/templateMain.xhtml">
 	<f:metadata>
-		<!-- <o:viewParam name="selectedTableName" value="#{dataViewerLazyBean.selectedTableName}"  /> -->
+		 <o:viewParam name="selectedTableName" value="#{dataViewerLazyBean.selectedTableName}"  default="NCM_MST_SAA_CODE"/> 
+		<!-- <f:viewParam name="selectedTableName" value="#{dataViewerLazyBean.selectedTableName}"  /> -->
 		<f:viewAction  action="#{layoutBean.initLayout('v902')}" ></f:viewAction>/>
 		<o:enableRestorableView/>
 	</f:metadata>
@@ -18,7 +19,6 @@
 	</ui:define>
 
 	<ui:define name="layoutCenter">
-		
 		<ui:include src="/test/tableLazyNavigatable.xhtml" />
 	</ui:define>
 </ui:composition>

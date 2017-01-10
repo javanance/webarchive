@@ -25,11 +25,11 @@
         <ui:insert name="layoutBottom" />
     </p:layoutUnit>
 
-    <p:layoutUnit id="leftLayoutUnit" position="east" resizable="true" collapsible="true" size="200" gutter="4" style="oveflow:visible;" rendered="#{layoutBean.renderRight}" styleClass="takion">
+    <p:layoutUnit id="rightLayoutUnit" position="east" resizable="true" collapsible="true" size="300" gutter="4" style="oveflow:visible;" rendered="#{layoutBean.renderRight}" styleClass="takion">
       <ui:insert name="layoutRight" />
     </p:layoutUnit>
      
-     <p:layoutUnit id="rightLayoutUnit" position="west" resizable="true" collapsible="true" size="#{layoutBean.leftSize}" gutter="4" rendered="#{layoutBean.renderLeft}" styleClass="takion" >
+     <p:layoutUnit id="leftLayoutUnit" position="west" resizable="true" collapsible="true" size="#{layoutBean.leftSize}" gutter="4" rendered="#{layoutBean.renderLeft}" styleClass="takion" >
          <p:accordionPanel id="accoPanel" multiple="true" activeIndex="0,1,2" style="padding : 0px"  >
 	     	 <p:tab id="loginTab" title="User"  >
 	        	<ui:include src="/fragment/login.xhtml" />
@@ -46,7 +46,7 @@
       </p:layoutUnit>
 
       <p:layoutUnit id="topLayoutUnit" position="north" size="40" collapsible="true" gutter="0" styleClass="takion_top" resizable="false" >
-        <ui:include src="/header/header2Column2.xhtml" />
+        <ui:include src="/header/header3Column2.xhtml" />
         <ui:insert name="layoutTop" />
       </p:layoutUnit> 
     </p:layout> 
