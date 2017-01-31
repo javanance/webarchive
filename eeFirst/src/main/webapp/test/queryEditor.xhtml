@@ -6,30 +6,92 @@
 
 	<h:form id="formQueryEditor">
 		<p:growl id="msgs" showDetail="true" />
-		<p:hotkey bind="ctrl+shift+s" update="@(.ui-datatable)" actionListener="#{dataTableQueryBean.runSql}" />
-		
+
 		<!-- <p:outputLabel id ="queryOpl2" name = "query" value="#{dataTableQueryBean.queryText}" ></p:outputLabel> -->
+
 		<p:panelGrid id="pgEditor" columns="2" style="margin-top: 10px">
 			<!-- <p:outputLabel name = "query" value="msg.query : " for="queryOpl" ></p:outputLabel>
+			<p:hotkey bind="ctrl+shift+s" update="@(.ui-datatable)" actionListener="#{dataTableQueryBean.runSql}" />
 			<p:outputLabel id ="queryOpl" name = "query" value="#{dataTableQueryBean.queryText}" ></p:outputLabel> -->
-			<p:commandButton id="cBtnRun" title="ctrl+shift+s to run" value="Run Sql"  action="#{dataTableQueryBean.runSql}" icon="ui-icon-disk" update="@(.ui-datatable)" process="@form"/>
-			<p:commandButton value="Save Grid" icon="ui-icon-disk" />
+			<!-- <p:commandButton id="cBtnRun" title="ctrl+shift+s to run" value="Run Sql"  action="#{dataTableQueryBean.runSql}" icon="ui-icon-disk" update="@(.ui-datatable) formQueryEditor:msgs" process="@form"/> -->
+			<p:commandButton id="cBtnRun" title="ctrl+shift+s to run" value="Run Sql" action="#{dataTableQueryBean.runSql}" icon="fa fa-user" update="@(form)" process="@form" />
+			<p:commandButton value="Save Grid" icon="fa fa-save" />
 			<p:defaultCommand target="cBtnRun" />
 		</p:panelGrid>
-		<p:accordionPanel id="accoPanel" multiple="false" style="padding : 0px" value="#{dataTableQueryBean.tabList}" var="listItem">
+
+		<p:inputTextarea rows="20" cols="35" value="#{dataTableQueryBean.inputQueryText}" scrollHeight="400" autoResize="false" />
+
+		<!-- <pe:ckEditor id="editor" value="#{dataTableQueryBean.inputQueryText}" checkDirtyInterval="0" rows="40" cols="34"  >
+				</pe:ckEditor> -->
+		<p:accordionPanel id="accoPanel" activeIndex="0">
+			<p:tab title="#{msg.queryHistory}" >
+					<p:dataTable id="tableQueryHistory" value="#{dataTableQueryBean.queryHistory}" var="_row" widgetVar="wgTbNavi"
+						emptyMessage="No History Data found with given criteria. Change the Dates" rowKey="#{_row}" lazy="false" 
+						selectionMode="single" selection="#{dataTableQueryBean.selectedHistoryQuery}"
+						sortMode="multiple" resizableColumns="true" resizeMode="expand" draggableColumns="true" 
+						tableStyle="display: table;   table-layout: auto ! important" 
+						scrollable="true"				scrollHeight="350" 
+						paginatorAlwaysVisible="true" paginator="true"
+						paginatorTemplate="{FirstPageLink} {PreviousPageLink} {JumpToPageDropdown} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" paginatorPosition="bottom" rows="25"
+						rowsPerPageTemplate="25,50,100" style="margin: 0.5em;     box-shadow: 1px 0px 3px 0px rgba(0,0,0,0.3);">
+	
+						<p:ajax event="rowSelect" listener="#{dataTableQueryBean.onSelectEvent}" update="@(form)"></p:ajax>
+	
+	
+						<p:column id="colQuery1" headerText="#{msg.queryHistory}" sortBy="#{_row.queryStatement}" filterBy="#{_row.queryStatement}" filterMatchMode="contains"
+							filterStyle="width:100%">
+							<h:outputText value="#{_row.queryStatement}" />
+						</p:column>
+	
+					</p:dataTable>
+			</p:tab>
+			<p:tab title="#{msg.queryList}">
+				<p:dataTable id="tableQueryList" value="#{dataTableQueryBean.queryList}" var="_row" widgetVar="wgTbNavi1"
+						emptyMessage="No History Data found with given criteria. Change the Dates" rowKey="#{_row}" lazy="false" 
+						selectionMode="single" selection="#{dataTableQueryBean.selectedListQuery}"
+						sortMode="multiple" resizableColumns="true" resizeMode="expand" draggableColumns="true" tableStyle="display: table;   table-layout: auto ! important" scrollable="true"
+						scrollHeight="350" paginatorAlwaysVisible="true" paginator="true"
+						paginatorTemplate="{FirstPageLink} {PreviousPageLink} {JumpToPageDropdown} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" paginatorPosition="bottom" rows="25"
+						rowsPerPageTemplate="25,50,100" style="margin: 0.5em;     box-shadow: 1px 0px 3px 0px rgba(0,0,0,0.3);">
+	
+						<p:ajax event="rowSelect" listener="#{dataTableQueryBean.onSelectEvent}" update="@(form)"></p:ajax>
+	
+	
+						<p:column id="colQuery" headerText="#{msg.queryList}" sortBy="#{_row.queryStatement}" filterBy="#{_row.queryStatement}" filterMatchMode="contains"
+							filterStyle="width:100%">
+							<h:outputText value="#{_row.queryStatement}" />
+						</p:column>
+	
+					</p:dataTable>
+			</p:tab>
+		</p:accordionPanel>
+
+
+		<p:contextMenu id="ctxTableHistory" for="accoPanel:tableQueryHistory">
+			<p:menuitem id="saveAllItem1" value="#{msg.saveAll}" action="#{dataTableQueryBean.saveAll}" update="@(.ui-datatable)" />
+			<p:menuitem id="deleteItem1" value="#{msg.delete}" action="#{dataTableQueryBean.delete}" update="@(.ui-datatable)" />
+			<p:menuitem id="deleteAllItem1" value="#{msg.deleteAll}" action="#{dataTableQueryBean.deleteAll}" update="@(.ui-datatable)" />
+		</p:contextMenu>
+		
+		<!-- <p:contextMenu id="ctxTableList" for="accoPanel:tableQueryList">
+			<p:menuitem id="saveAllItem2" value="#{msg.saveAll}" action="#{dataTableQueryBean.saveAll}" update="@(.ui-datatable)" />
+			<p:menuitem id="deleteItem2" value="#{msg.delete}" action="#{dataTableQueryBean.delete}" update="@(.ui-datatable)" />
+			<p:menuitem id="deleteAllItem2" value="#{msg.deleteAll}" action="#{dataTableQueryBean.deleteAll}" update="@(.ui-datatable)" />
+		</p:contextMenu> -->
+
+		
+		<!-- <p:accordionPanel id="accoPanel" multiple="false" style="padding : 0px" value="#{dataTableQueryBean.tabList}" var="listItem">
 			<p:tab id="tab1" title="#{listItem}" closable="true">
-				<pe:ckEditor id="editor" value="#{dataTableQueryBean.inputQueryText}" checkDirtyInterval="0" rows="40" cols="34"  >
-				</pe:ckEditor>
-				<!-- <p:editor id="editor" widgetVar="editorWidget" value="#{dataTableQueryBean.inputQueryText}" controls="" />  -->
+				
 			</p:tab>
 		
 		
-		</p:accordionPanel>
-		
+		</p:accordionPanel> -->
+
 		<!-- <p:tabView id="tabView"  value="#{dataTableQueryBean.tabList}" var="listItem">
 		</p:tabView> -->
 
-<!-- 		<p:tabView>
+		<!-- 		<p:tabView>
 			<p:tab title="aaa">
 			</p:tab>
 			<p:tab title="+">

@@ -3,16 +3,18 @@ package com.eugenefe.bean;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.event.Observes;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.http.HttpServletRequest;
 
+import org.primefaces.context.RequestContext;
 import org.primefaces.event.ToggleEvent;
 import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.TreeNode;
@@ -84,18 +86,22 @@ public class DataViewerLazyBean implements Serializable{
 		System.out.println("Construction DataViewerLazyBean_" );
 	}
 	
+	private String queryString;
+	
 	@PostConstruct
 	public void init1(){
-		logger.info("PostConstruct1111 :{}, {}", selectedTableName);
+		logger.info("PostConstruct1111 :{}, {}", selectedTableName, RequestContext.getCurrentInstance().isAjaxRequest());
 		if(selectedTableName!=null){
 			logger.info("PostConstruct000001111 :{}, {}", selectedTableName);
 			dbService.getSelectedTable().setTableName(selectedTableName);
 			onChangeEvent(selectedTableName);
+			
 		}else{
 			selectedTableName = dbService.getSelectedTable().getTableName();
 		}
 		navi = new LazyModelNavigatable<Navigatable>(dbService.generateTableLazyContents(selectedTableName));
 		setVisible();
+		logger.info("PostConstruct22222222 :{}, {}", selectedTableName, RequestContext.getCurrentInstance().isAjaxRequest());
 	}
 	
 //	@PostConstruct
@@ -142,8 +148,11 @@ public class DataViewerLazyBean implements Serializable{
 	}	
 	
 	
-//	public void onChangeEvent(String selectedTableName){
-	public void onChangeEvent(@Observes @SelectedTable String selectedTableName){	
+	public void onChangeEvent(String selectedTableName){
+//	public void onChangeEvent(@Observes @SelectedTable String selectedTableName){	
+		queryString = selectedTableName;
+		logger.info("Selected Table Request: {},{}", selectedTableName,  RequestContext.getCurrentInstance().isAjaxRequest());
+				
 		this.selectedTableName = selectedTableName;
 		dbService.getSelectedTable().setTableName(selectedTableName);
 //		logger.info("Selected Table: {},{}", dbService.getSelectedTable().getTableName());
@@ -156,6 +165,44 @@ public class DataViewerLazyBean implements Serializable{
 //		txIfr = new LazyModelTxIfr(dbService.generateTableLazyContents1(selectedTableName));
 		navi = new LazyModelNavigatable<Navigatable>(dbService.generateTableLazyContents(selectedTableName));
 		setVisible();
+		
+	}
+	
+	public void  onChangeEventGo(@Observes @SelectedTable String selectedTableName){	
+		logger.info("Selected Table Request go: {},{}", selectedTableName,  queryString);
+		
+		String outcome = "/v902DataNavigation";
+		FacesContext context = FacesContext.getCurrentInstance();
+		ExternalContext exCxt = context.getExternalContext();
+		logger.info("Listener : {}, {}", exCxt.getRequestContextPath(), ((HttpServletRequest)exCxt.getRequest()).getQueryString());
+		logger.info("Listener : {}, {}", exCxt.getRequestContextPath(), ((HttpServletRequest)exCxt.getRequest()).getRequestURL());
+		
+		if(RequestContext.getCurrentInstance().isAjaxRequest() && queryString != null){
+			logger.info("In Listener : {}, {}", exCxt.getRequestContextPath(), ((HttpServletRequest)exCxt.getRequest()).getRequestURL());
+			try {
+				exCxt.redirect(exCxt.getRequestContextPath()+outcome);
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+		}
+		else{
+			
+			this.selectedTableName = selectedTableName;
+			dbService.getSelectedTable().setTableName(selectedTableName);
+	//		logger.info("Selected Table: {},{}", dbService.getSelectedTable().getTableName());
+			logger.info("Selected Tableaaaaaaaaaaaaaaaaaaaaa: {},{}", selectedTableName, dbService.getSelectedTable().getTableName());
+			dbService.setTableColumns(dbService.generateColumns(selectedTableName));
+	//		dbService.setTableContents(dbService.generateTableContents(selectedTableName));
+			
+	//		logger.info("Selected Naviiiiiiiiiiiiiiiiiiiiiii: {},{}", dbService.generateTableLazyContents(selectedTableName).size(), navi.getPageSize());
+			
+	//		txIfr = new LazyModelTxIfr(dbService.generateTableLazyContents1(selectedTableName));
+			navi = new LazyModelNavigatable<Navigatable>(dbService.generateTableLazyContents(selectedTableName));
+			setVisible();
+		}
+		
+		
+			
 	}
 	
 	

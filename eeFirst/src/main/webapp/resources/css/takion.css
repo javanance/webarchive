@@ -15,7 +15,18 @@ form {
 .ui-panel-content.ui-widget-content {
 	backgroud: wheat;
 }
-
+/* .ui-inputtextarea{
+	background: white;
+}
+.ui-state-hover{
+	background: white;
+} */
+.ui-inputfield.ui-inputtextarea.ui-widget.ui-state-default.ui-corner-all{
+	background: white;
+}
+.ui-inputfield.ui-inputtextarea.ui-widget.ui-state-default.ui-corner-all.ui-inputtextarea-resizable{
+	background: white;
+}
 .takion_top .ui-layout-unit-content.ui-widget-content {
 	background: wheat;
 	box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.3);

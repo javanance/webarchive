@@ -14,8 +14,9 @@
         selection="#{dataNavigationBean.selectedNode}"
         draggable="false" droppable="false">
         
-        <p:ajax  event="select" update="@(form)"  listener="#{listenerBean.onChangeEvent}"    onstart="PF('wgTbNavi').clearFilters()">
-        </p:ajax>
+        <!-- <p:ajax  event="select" update="@(.ui-datatable)"  listener="#{listenerBean.onChangeEvent}"  onstart="PF('wgTbNavi').clearFilters()" />   -->
+        <p:ajax  event="select" update="@(form)"  listener="#{listenerBean.onChangeEvent}"  onstart="PF('wgTbNavi').clearFilters()" />  
+        
         
         <p:treeNode expandedIcon="fa fa-folder-open" collapsedIcon="fa fa-folder" styleClass="inverse">
           <h:outputText value="#{node}" />

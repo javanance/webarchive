@@ -9,7 +9,7 @@ xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/c
 		<p:growl id="growl" showDetail="true" sticky="true" />  
 		<p/>
 		
-		<p:scrollPanel id="penelNavigation" style="position: absolute;width: 100%; height: 100%;" mode="native">
+		<p:scrollPanel id="penelNavigation" style="width: 100%; height: 100%;" mode="native">
 		<p:dataTable id="tableNavigation" value="#{dataViewerLazyBean.navi}" var="_row" widgetVar="wgTbNavi"
 			emptyMessage="No History Data found with given criteria. Change the Dates"
 			rowKey="#{_row.idString()}" lazy="true" 

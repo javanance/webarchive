@@ -128,5 +128,10 @@ public class DataTableColumn implements Serializable{
 		}
 		return "float : left";
 	}
+	
+	@Override
+	public String toString(){
+		return columnName;
+	}
 }
 

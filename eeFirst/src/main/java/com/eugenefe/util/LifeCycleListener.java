@@ -3,6 +3,7 @@ package com.eugenefe.util;
 import javax.faces.event.PhaseEvent;
 import javax.faces.event.PhaseId;
 import javax.faces.event.PhaseListener;
+import javax.faces.webapp.FacesServlet;
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
