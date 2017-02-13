@@ -16,8 +16,8 @@
       
       <f:facet name="footer">
         <p:panelGrid id="buttonPg" columns="2" style="margin: 0 auto;">
-          <p:commandButton id="loginButton" value="#{msg.login}" update="@(form)" action="#{userLoginView.login()}" icon="fa fa-user "  />
-          <p:commandButton id="register" value="#{msg.register}" action="/view/v800Settings?faces-redirect=true" ajax="true"  icon="fa  fa-pencil-square-o" />
+          <p:commandButton id="loginButton" value="#{msg.login}" update="@(form)" action="#{userLoginView.login()}" icon="inverse  fa fa-user "  />
+          <p:commandButton id="register" value="#{msg.register}" action="/view/v800Settings?faces-redirect=true" ajax="true"  icon="inverse fa  fa-pencil-square-o" />
         </p:panelGrid>
       </f:facet>
     </p:panelGrid>
@@ -27,7 +27,7 @@
         <f:param value="#{userLoginView.username}" />
       </h:outputFormat>
       <!-- <p:outputLabel id="remoteUser" value="#{p:remoteUser()}"></p:outputLabel> -->
-      <p:commandButton id="logoutButton" value="#{msg.logout}" update="@(form)" action="#{userLoginView.logout()}" icon="fa fa-sign-out"/>
+      <p:commandButton id="logoutButton" value="#{msg.logout}" update="@(form)" action="#{userLoginView.logout()}" icon="inverse fa fa-sign-out"/>
     </p:panelGrid>
 
   </h:form>

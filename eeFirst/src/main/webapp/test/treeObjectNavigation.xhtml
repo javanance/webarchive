@@ -7,12 +7,12 @@
 	xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions"
 	xmlns:o="http://omnifaces.org/ui"  xmlns:of="http://omnifaces.org/functions">
 	
-    <p:scrollPanel id="treeOutPanel" mode="native" style="height : 60%">
+    <p:scrollPanel id="treeOutPanel" mode="native" style="height : 80%; width:100%">
     
       <p:tree id="treeObjectNavigation2" value="#{dataNavigationBean.rootNode}" var="node" animate="true" 
         highlight="true" orientation="vertical" selectionMode="single"
         selection="#{dataNavigationBean.selectedNode}"
-        draggable="false" droppable="false">
+        draggable="false" droppable="false" style="width:100%;">
         
         <!-- <p:ajax  event="select" update="@(.ui-datatable)"  listener="#{listenerBean.onChangeEvent}"  onstart="PF('wgTbNavi').clearFilters()" />   -->
         <p:ajax  event="select" update="@(form)"  listener="#{listenerBean.onChangeEvent}"  onstart="PF('wgTbNavi').clearFilters()" />  

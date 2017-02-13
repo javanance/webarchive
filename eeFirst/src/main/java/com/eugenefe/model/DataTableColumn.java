@@ -15,6 +15,7 @@ import javax.persistence.Transient;
 
 import org.apache.commons.lang3.text.WordUtils;
 
+import com.eugenefe.entity.ncm.NcmBatLog;
 import com.eugenefe.entity.ncm.NcmBatLogId;
 import com.eugenefe.enums.model.ENamingConvention;
 
@@ -27,11 +28,14 @@ public class DataTableColumn implements Serializable{
 	private String dataTableId;
 	private Integer columnNo;
 	private String columnName;
+	private String columnComment;
     private String columnType;
     private Integer columnLenght;
     private Integer columnPrecision;
     private Integer columnScale;
     private String alingType;
+    private boolean isUsed;
+    
     
 
     public DataTableColumn() {
@@ -66,6 +70,15 @@ public class DataTableColumn implements Serializable{
 		this.columnName = columnName;
 	}
 	
+	@Column(name = "COLUMN_COMMENT", nullable = false)
+	public String getColumnComment() {
+		return columnComment;
+	}
+
+	public void setColumnComment(String columnComment) {
+		this.columnComment = columnComment;
+	}
+
 	@Transient
 	public String getCamelColumnName() {
 		return ENamingConvention.SNAKE_CASE.convertToCamelCase(columnName);
@@ -129,9 +142,62 @@ public class DataTableColumn implements Serializable{
 		return "float : left";
 	}
 	
+	
+	
+	@Transient
+	public boolean isUsed() {
+		return isUsed;
+	}
+
+	public void setUsed(boolean isUsed) {
+		this.isUsed = isUsed;
+	}
+
+
+	/**
+	 * idString
+	 * @return String
+	 */
+	@Transient
+	public String idString() {
+		StringBuffer buffer = new StringBuffer();
+		buffer.append("#").append(getDataTableId());
+		buffer.append("#").append(getColumnNo());
+
+		String rst = buffer.toString();
+
+		return rst;
+	}
+	
+	@Transient
 	@Override
 	public String toString(){
-		return columnName;
+		return idString();
 	}
+	
+	@Transient
+	@Override
+	public boolean equals(Object other) {
+		if ((this == other))
+			return true;
+		if ((other == null))
+			return false;
+		if (!(other instanceof NcmBatLog))
+			return false;
+		DataTableColumn castOther = (DataTableColumn) other;
+
+		return this.idString().equals(castOther.idString());
+	}
+
+	@Transient
+	@Override
+	public int hashCode() {
+		int result = 17;
+
+		result = 37 * result + (getDataTableId() == null ? 0 : this.getDataTableId().hashCode());
+		result = 37 * result + (getColumnNo() == null ? 0 : this.getColumnNo().hashCode());
+		return result;
+	}
+
 }
 

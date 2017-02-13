@@ -14,8 +14,8 @@
 			<p:hotkey bind="ctrl+shift+s" update="@(.ui-datatable)" actionListener="#{dataTableQueryBean.runSql}" />
 			<p:outputLabel id ="queryOpl" name = "query" value="#{dataTableQueryBean.queryText}" ></p:outputLabel> -->
 			<!-- <p:commandButton id="cBtnRun" title="ctrl+shift+s to run" value="Run Sql"  action="#{dataTableQueryBean.runSql}" icon="ui-icon-disk" update="@(.ui-datatable) formQueryEditor:msgs" process="@form"/> -->
-			<p:commandButton id="cBtnRun" title="ctrl+shift+s to run" value="Run Sql" action="#{dataTableQueryBean.runSql}" icon="fa fa-user" update="@(form)" process="@form" />
-			<p:commandButton value="Save Grid" icon="fa fa-save" />
+			<p:commandButton id="cBtnRun" title="ctrl+shift+s to run" value="Run Sql"  action="#{dataTableQueryBean.runSql}" icon="inverse fa fa-user" update="@(form)" process="@form" />
+			<p:commandButton value="Save Grid" icon="inverse fa fa-save"  />
 			<p:defaultCommand target="cBtnRun" />
 		</p:panelGrid>
 
@@ -31,9 +31,7 @@
 						sortMode="multiple" resizableColumns="true" resizeMode="expand" draggableColumns="true" 
 						tableStyle="display: table;   table-layout: auto ! important" 
 						scrollable="true"				scrollHeight="350" 
-						paginatorAlwaysVisible="true" paginator="true"
-						paginatorTemplate="{FirstPageLink} {PreviousPageLink} {JumpToPageDropdown} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" paginatorPosition="bottom" rows="25"
-						rowsPerPageTemplate="25,50,100" style="margin: 0.5em;     box-shadow: 1px 0px 3px 0px rgba(0,0,0,0.3);">
+						style="margin: 0.5em;     box-shadow: 1px 0px 3px 0px rgba(0,0,0,0.3);">
 	
 						<p:ajax event="rowSelect" listener="#{dataTableQueryBean.onSelectEvent}" update="@(form)"></p:ajax>
 	
@@ -50,7 +48,8 @@
 						emptyMessage="No History Data found with given criteria. Change the Dates" rowKey="#{_row}" lazy="false" 
 						selectionMode="single" selection="#{dataTableQueryBean.selectedListQuery}"
 						sortMode="multiple" resizableColumns="true" resizeMode="expand" draggableColumns="true" tableStyle="display: table;   table-layout: auto ! important" scrollable="true"
-						scrollHeight="350" paginatorAlwaysVisible="true" paginator="true"
+						scrollHeight="350" 
+						paginatorAlwaysVisible="true" paginator="true" 
 						paginatorTemplate="{FirstPageLink} {PreviousPageLink} {JumpToPageDropdown} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" paginatorPosition="bottom" rows="25"
 						rowsPerPageTemplate="25,50,100" style="margin: 0.5em;     box-shadow: 1px 0px 3px 0px rgba(0,0,0,0.3);">
 	

@@ -1,0 +1,53 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions" xmlns:o="http://omnifaces.org/ui" xmlns:of="http://omnifaces.org/functions">
+
+
+	<p:layout style="width:100%;height:100%">
+		<h:form id="formPivotSelector">
+			<p:layoutUnit id="pivotRightLayout" position="east" resizable="true" collapsible="true" size="300" gutter="4" style="oveflow:visible;" styleClass="takion">
+				<p:accordionPanel id="accoPivotSelector" activeIndex="0,2,3,4" multiple="true">
+					<p:tab title="DataTable Columns">
+						<p:scrollPanel id="pivotSelectorPanel1" mode="native" style="height : 30%">
+							<p:selectManyCheckbox id="grid2" value="#{pivotTableBean.selectedColumnList}" layout="grid" columns="1" converter="omnifaces.SelectItemsConverter">
+								<f:selectItems id="items1" value="#{pivotTableBean.columnList}" var="_col" itemLabel="#{_col.columnName}" itemValue="#{_col}" />
+							</p:selectManyCheckbox>
+						</p:scrollPanel>
+					</p:tab>
+					<p:tab title="report">
+						<p:scrollPanel id="pivotSelectorPanel2" mode="native" style="height : 10%">
+						aaa
+						</p:scrollPanel>
+					</p:tab>
+					<p:tab title="columns">
+						<p:scrollPanel id="pivotSelectorPanel3" mode="native" style="height : 20%">
+						<p>aaa</p>
+						</p:scrollPanel>
+					</p:tab>
+					<p:tab title="rows">
+						<p:scrollPanel id="pivotSelectorPanel4" mode="native" style="height : 20%">
+						aaa
+						</p:scrollPanel>
+					</p:tab>
+					<p:tab title="contents">
+					<p:scrollPanel id="pivotSelectorPanel5" mode="native" style="height : 10%">
+						aaa
+						</p:scrollPanel>
+					</p:tab>
+
+				</p:accordionPanel>
+				<!-- <p:contextMenu id="ctxSelectManyCheck" for="accoPivotSelector:grid2">
+					<p:menuitem id="menuItemMoveToReport" value="#{msg.addToReportArea}" action="#{pivotTableBean.addToReport}" update="@(.ui-datatable)" />
+					<p:menuitem id="menuItemMoveToColumn" value="#{msg.addToColumnArea}" action="#{pivotTableBean.addToColumn}" update="@(.ui-datatable)" />
+					<p:menuitem id="menuItemMoveToRow" value="#{msg.addToRowArea}" action="#{pivotTableBean.addToRow}" update="@(.ui-datatable)" />
+					<p:menuitem id="menuItemMoveToContent" value="#{msg.addToContentArea}" action="#{pivotTableBean.addToContent}" update="@(.ui-datatable)" />
+				</p:contextMenu> -->
+			</p:layoutUnit>
+		</h:form>
+
+		<p:layoutUnit position="center">
+			<ui:include src="/test/tableQueryResult.xhtml" />
+		</p:layoutUnit>
+	</p:layout>
+</ui:composition>

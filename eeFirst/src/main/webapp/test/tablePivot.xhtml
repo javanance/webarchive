@@ -1,0 +1,39 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" 
+	xmlns:f="http://xmlns.jcp.org/jsf/core" 
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:o="http://omnifaces.org/ui"  xmlns:of="http://omnifaces.org/functions">
+
+
+  <h:form id="formQueryResult">
+	<p/>    
+    <p:dataTable id="tableQueryResult" value="#{dataTableQueryBean.rstList}" var="_row"
+      emptyMessage="No History Data found with given criteria. Change the Dates"
+      rowKey="#{_row}"
+      sortMode="multiple"
+      resizableColumns="true" resizeMode="expand"
+      scrollable="false" scrollHeight="500"
+      tableStyle="display: table; min-width: 500px;  table-layout: auto ! important"
+	  paginatorAlwaysVisible="true"
+      paginator="true" paginatorPosition="bottom" rows="25"
+      paginatorTemplate="{FirstPageLink} {PreviousPageLink} {JumpToPageDropdown} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" 
+      rowsPerPageTemplate="10,15,25,50,100" 
+      style="margin: 0.5em; border-top-left-radius: 0px; border-top-right-radius: 0px">
+     
+      <p:columns id="tableColumns" value="#{dataTableQueryBean.tableColumnList}" var="_column" columnIndexVar="i"    
+        sortBy="#{_row[i]}"  filterBy="#{_row[i]}"  filterMatchMode="contains" filterStyle="width:100%" >
+        <f:facet name="header">  
+               <!--  <h:outputText value="#{colMsg[_column.columnName]}" /> -->
+                <h:outputText value="#{_column.columnName}" />
+         </f:facet>
+         
+        <h:outputText value="#{_row[i]}"  /> 
+            
+      </p:columns>
+    </p:dataTable> 
+   
+  </h:form>
+</ui:composition>

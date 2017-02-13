@@ -1,6 +1,7 @@
 package com.eugenefe.bean;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -127,6 +128,15 @@ public class DataViewerLazyBean implements Serializable{
 		logger.info("PostConstruct 1:{}, {}", navi, txIfr);
 		setVisible();
 //		
+	}
+	
+	public String format(String aa, TableColumn bb){
+		DecimalFormat formatter = new DecimalFormat("#,###.##");
+		if(bb.getColumnType().equals("NUMBER") && !aa.isEmpty()){
+			return formatter.format(Long.parseLong(aa));
+		}
+		return aa;
+		
 	}
 	
 	public void testPretty(){	

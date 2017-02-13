@@ -1,0 +1,6 @@
+/* chorme user agent stylesheet override */
+
+.ui-paginator .ui-paginator-next .ui-icon, .ui-paginator .ui-paginator-prev .ui-icon, .ui-paginator .ui-paginator-first .ui-icon, .ui-paginator .ui-paginator-last .ui-icon{
+	height: 14px;
+}
+

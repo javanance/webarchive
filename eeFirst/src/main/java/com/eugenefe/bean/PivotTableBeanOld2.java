@@ -15,7 +15,6 @@ import javax.persistence.EntityManager;
 import org.primefaces.event.NodeSelectEvent;
 import org.primefaces.event.NodeUnselectEvent;
 import org.primefaces.model.CheckboxTreeNode;
-import org.primefaces.model.DefaultTreeNode;
 import org.primefaces.model.TreeNode;
 import org.slf4j.Logger;
 
@@ -27,7 +26,7 @@ import com.eugenefe.qualifiers.SelectedTable;
 @Named
 //@SessionScoped
  @ViewScoped
-public class PivotTableBean implements Serializable {
+public class PivotTableBeanOld2 implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Inject
@@ -49,27 +48,6 @@ public class PivotTableBean implements Serializable {
 	private String selectedString;
 	
 	
-	public List<DataTableColumn> getOrigColumnList() {
-		return origColumnList;
-	}
-
-
-	public void setOrigColumnList(List<DataTableColumn> origColumnList) {
-		this.origColumnList = origColumnList;
-	}
-
-	private TreeNode selectedNode;
-	
-	public TreeNode getSelectedNode() {
-		return selectedNode;
-	}
-
-
-	public void setSelectedNode(TreeNode selectedNode) {
-		this.selectedNode = selectedNode;
-	}
-
-
 	public String getSelectedString() {
 		return selectedString;
 	}
@@ -91,30 +69,17 @@ public class PivotTableBean implements Serializable {
 
 	private DataTableColumn selectedColumn;
 	
-	private List<DataTableColumn> availLabel= new ArrayList<DataTableColumn>();
 	private List<DataTableColumn> reportLabel= new ArrayList<DataTableColumn>();
 	private List<DataTableColumn> columnLabel= new ArrayList<DataTableColumn>();
 	private List<DataTableColumn> rowLabel= new ArrayList<DataTableColumn>();
 	private List<DataTableColumn> contentLabel= new ArrayList<DataTableColumn>();
 	
-	
-	private TreeNode availRootNode;
 	private TreeNode reportRootNode;
 	private TreeNode colRootNode;
 	private TreeNode rowRootNode;
 	
 	private String selectedTable;
-
 	
-	public TreeNode getAvailRootNode() {
-		return availRootNode;
-	}
-
-
-	public void setAvailRootNode(TreeNode availRootNode) {
-		this.availRootNode = availRootNode;
-	}
-
 
 	public TreeNode getReportRootNode() {
 		return reportRootNode;
@@ -216,100 +181,55 @@ public class PivotTableBean implements Serializable {
 	}
 
 
-	public PivotTableBean() {
+	public PivotTableBeanOld2() {
 		System.out.println("PivotTableBean Gen");
 
 	}
 
 	@PostConstruct
 	public void init() {
-		/*availRootNode =  new CheckboxTreeNode("avail", null);
-		reportRootNode =  new CheckboxTreeNode("report", null);
-		colRootNode =  new CheckboxTreeNode("column", null);
-		rowRootNode =  new CheckboxTreeNode( "row", null);*/
+		reportRootNode =  new CheckboxTreeNode("Root", null);
+		colRootNode =  new CheckboxTreeNode("Root", null);
+		rowRootNode =  new CheckboxTreeNode("Root", null);
 		
-		availRootNode = new DefaultTreeNode("avail", null);
-		reportRootNode =  new DefaultTreeNode("report", null);
-		TreeNode temp = new DefaultTreeNode("", reportRootNode);
-		colRootNode =  new DefaultTreeNode("column", null);
-		rowRootNode =  new DefaultTreeNode( "row", null);
+		TreeNode nullNode = new CheckboxTreeNode("", rowRootNode);
 		
-		availRootNode.setSelected(true);
 		reportRootNode.setSelected(true);
 		colRootNode.setSelected(true);
 		rowRootNode.setSelected(true);
 
 		onTableChange("NCM_MST_PROD_TYPE");
-		buildAvailTree(availRootNode, availLabel);
-		buildTree(availRootNode, availLabel);
 		logger.info("Post Construct DataTableQuery : {}, {}", columnList.size());
 		
 	}
 	
 	public void onTableChange(@Observes @SelectedTable String selectedTable){
 		this.selectedTable = selectedTable;
-		
-		availLabel.clear();
 		reportLabel.clear();
 		columnLabel.clear();
 		rowLabel.clear();
 		
-		availRootNode = new DefaultTreeNode("avail", null);
-		reportRootNode =  new DefaultTreeNode("report", null);
-		colRootNode =  new DefaultTreeNode("column", null);
-		rowRootNode =  new DefaultTreeNode( "row", null);
+		reportRootNode =  new CheckboxTreeNode("Root", null);
+		colRootNode =  new CheckboxTreeNode("Root", null);
+		rowRootNode =  new CheckboxTreeNode("Root", null);
 		
-		/*availRootNode = new CheckboxTreeNode("avail", null);
-		reportRootNode =  new CheckboxTreeNode("report", null);
-		colRootNode =  new CheckboxTreeNode("column", null);
-		rowRootNode =  new CheckboxTreeNode( "row", null);*/
-		
-		availRootNode.setSelected(true);
 		reportRootNode.setSelected(true);
 		colRootNode.setSelected(true);
 		rowRootNode.setSelected(true);
 		
 		origColumnList = em.createQuery("from DataTableColumn a where a.dataTableId = :dataTableId order by a.columnNo").setParameter("dataTableId", selectedTable).getResultList();
 		generateColumnList();
+		
 		logger.info("onTableChange : {}, {}", selectedTable, columnList.get(0).getColumnComment());
 		
 	}
 	
-	public void remove(){
-		removeFrom(selectedNode.getParent().toString());
-		columnList.add(selectedColumn);
-		availLabel.add(selectedColumn);
-	}
-	
-	public void moveToReport(){
-		removeFrom(selectedNode.getParent().toString());
-		addTo("report");
-		selectedNode.setSelected(true);
-		selectedNode.setSelected(true);
-	}
-	
-	
-	public void moveToColumn(){
-		removeFrom(selectedNode.getParent().toString());
-		addTo("column");
-		selectedNode.setSelected(true);
-
-	}
-	
-	public void moveToRow(){
-		removeFrom(selectedNode.getParent().toString());
-		addTo("row");
-		selectedNode.setSelected(true);
-	}
-	
 	public void addToReport(){
 		addTo(reportRootNode, reportLabel);
-		logger.info("Selected Node : {}, {}", selectedNode);
 	}
 	
 	public void addToColumn(){
 		addTo(colRootNode, columnLabel);
-		logger.info("addToColumn : {}, {}",  columnLabel.size());
 	}
 	public void addToRow(){
 		addTo(rowRootNode, rowLabel);
@@ -319,62 +239,29 @@ public class PivotTableBean implements Serializable {
 		
 	}
 	
-	public void reset(){
-		onTableChange(selectedTable);
-	}
 	
-	/*public void moveToRow(ActionEvent event){
+	public void moveToRow(ActionEvent event){
 		
 		logger.info("Move To Row Event: {}, {}", event.getSource(), event.getPhaseId());
-	}*/
+	}
 	
 	
 	public void onSelectChange(){
-		for(DataTableColumn aa : selectedColumnList){
-			logger.info("onSelectChange : {}, {}",  aa.getColumnName(), aa.getColumnComment());
-			selectedColumn = aa;
-		}
+		logger.info("onSelectChange : {}, {}", selectedColumnList.size(), selectedColumn);
+		logger.info("onSelectChange : {}, {}",  selectedColumnString);
 		
 	}
 	public void onUnselectEvent(NodeUnselectEvent event){
-		if(event.getTreeNode().getType().equals("Leaf")){
-			selectedNode = selectedNode.getParent();
-		}else{
-			selectedNode = event.getTreeNode();
-		}
-		selectedColumn = getEntityFrom(event.getTreeNode().toString().split(":")[0]);
-		logger.info("onUnselectEvent1 : {}, {}", event.getTreeNode().getData(), event.getTreeNode().toString().split(":")[0]);
-		logger.info("onUnselectEvent2 : {}, {}", selectedNode, selectedColumn.getColumnName());
+		logger.info("onUnselectEvent : {}, {}", event.getTreeNode().getData(), event.getTreeNode());
 		
 	}
 	public void onSelectEvent(NodeSelectEvent event){
-		if(event.getTreeNode().getType().equals("Leaf")){
-			selectedNode = selectedNode.getParent();
-		}else{
-			selectedNode = event.getTreeNode();
-		}
-		selectedColumn = getEntityFrom(event.getTreeNode().toString().split(":")[0]);
-		logger.info("onSelectEvent : {}, {}", event.getTreeNode().getData(), selectedNode.getType());
+		
+		logger.info("onSelectEvent : {}, {}", event.getTreeNode().getData(), event.getTreeNode().getChildCount());
 		
 	}
 
 //	****************************************private*************************************
-	private void generateColumnList(){
-		columnList.clear();
-		availLabel.clear();
-		for(DataTableColumn aa : origColumnList){
-//			if(aa.getColumnNo()==2) {
-//				aa.setUsed(true);
-//			}
-//			aa.setUsed(true);
-			columnList.add(aa.getColumnNo()-1, aa);
-			availLabel.add(aa.getColumnNo()-1, aa);
-		}
-	}
-	
-	
-	
-	
 	private void moveItems(TreeNode fromTree, List<DataTableColumn> fromArea, TreeNode toTree,  List<DataTableColumn> toArea){
 		fromTree.clearParent();
 		fromTree.setParent(toTree);
@@ -390,28 +277,20 @@ public class PivotTableBean implements Serializable {
 		String query ;
 		
 		for(DataTableColumn bb : addedColumns){
-			tempNode = new DefaultTreeNode( bb.getColumnName()+":"+bb.getColumnComment(), rootNode);
-//			tempNode = new CheckboxTreeNode( bb.getColumnName()+":"+bb.getColumnComment(), rootNode);
-//			tempNode.setSelected(true);
+			tempNode = new CheckboxTreeNode(bb.getColumnName(), rootNode);
+			tempNode.setSelected(true);
 			query = "select distinct " + bb.getColumnName() + " from " + selectedTable;
 //			query = "select distinct to_char(" + bb.getColumnName() + ") from " + selectedTable;
 			distinctList = ncm.createNativeQuery(query).getResultList();
 			for(Object cc : distinctList){
 				if(cc!=null){
-					dataTempNode = new CheckboxTreeNode("Leaf", cc.toString(), tempNode);
-//					dataTempNode.setSelected(true);
+					dataTempNode = new CheckboxTreeNode(cc.toString(), tempNode);
+					dataTempNode.setSelected(true);
 				}
 			}
-			selectedNode = tempNode;
 		}
 	}
-	private void buildAvailTree(TreeNode rootNode, List<DataTableColumn> addedColumns){
-		TreeNode tempNode;
-		
-		for(DataTableColumn bb : addedColumns){
-			tempNode = new CheckboxTreeNode( bb.getColumnName()+":"+bb.getColumnComment(), rootNode);
-		}
-	}
+	
 	private List<DataTableColumn> generateSelectedEntityList(){
 		List<DataTableColumn> rstList = new ArrayList<DataTableColumn>();
 		
@@ -427,71 +306,25 @@ public class PivotTableBean implements Serializable {
 	}
 	
 	private void addTo(TreeNode rootNode, List<DataTableColumn> label){
-//		List<DataTableColumn> rstList = generateSelectedEntityList();
-		List<DataTableColumn> rstList = selectedColumnList;
+		List<DataTableColumn> rstList = generateSelectedEntityList();
 		label.addAll(rstList);
 		columnList.removeAll(rstList);
 		buildTree(rootNode, rstList);
 	}
 
-	
+	private void generateColumnList(){
+		columnList.clear();
+		for(DataTableColumn aa : origColumnList){
+			columnList.add(aa.getColumnNo()-1, aa);
+		}
+	}
 	
 	private DataTableColumn getEntityFrom(String columnName){
 		for(DataTableColumn bb : origColumnList){
 			if(columnName.equals(bb.getColumnName())){
-				logger.info("Origianl Column Name : {}, {}",columnName, bb.getColumnName());
 				return bb;
 			}
 		}
 		return null;
 	}
-	
-	private void removeFrom(String fromArea){
-		if(fromArea.equals("column")){
-			columnLabel.remove(selectedColumn);
-			colRootNode.getChildren().remove(selectedNode);
-			
-			logger.info("remove : {}, {}", selectedColumn.getColumnName(), selectedNode.getData() );
-			
-		}
-		else if (fromArea.equals("row")) {
-			rowLabel.remove(selectedColumn);
-			rowRootNode.getChildren().remove(selectedNode);
-		}
-		else if (fromArea.equals("report")) {
-			reportLabel.remove(selectedColumn);
-			reportRootNode.getChildren().remove(selectedNode);
-
-		}
-		else if (fromArea.equals("content")) {
-			contentLabel.remove(selectedColumn);
-//			contentRootNode.getChildren().remove(selectedNode);
-		}
-	}
-	
-	private void addTo(String toArea){
-		
-		if(toArea.equals("column")){
-			columnLabel.add(selectedColumn);
-			colRootNode.getChildren().add(selectedNode);
-			
-			logger.info("remove : {}, {}", selectedColumn.getColumnName(), selectedNode.getData() );
-			
-		}
-		else if (toArea.equals("row")) {
-			rowLabel.add(selectedColumn);
-			rowRootNode.getChildren().add(selectedNode);
-		}
-		else if (toArea.equals("report")) {
-			reportLabel.add(selectedColumn);
-			reportRootNode.getChildren().add(selectedNode);
-
-		}
-		else if (toArea.equals("content")) {
-			contentLabel.add(selectedColumn);
-//			contentRootNode.getChildren().add(selectedNode);
-		}
-	}
-	
-	
 }

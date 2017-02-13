@@ -1,0 +1,130 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" 
+xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions" 
+	xmlns:o="http://omnifaces.org/ui" xmlns:of="http://omnifaces.org/functions">
+
+
+	<h:form id="formPivotSelector">
+		<p:accordionPanel id="accoPivotSelector" activeIndex="0,1,2,3,4" multiple="true">
+			<p:tab title="DataTable Columns">
+				<p:scrollPanel id="pivotSelectorPanel1" mode="native" style="height : 25%">
+					<p:selectManyCheckbox id="selectItems" value="#{pivotTableBean.selectedColumnList}" layout="pageDirection" converter="#{dataTableColumnConverter}">
+						<f:selectItems id="items" value="#{pivotTableBean.columnList}" var="_col" itemLabel="#{_col.columnName}:#{_col.columnComment}" itemValue="#{_col}" />
+						<p:ajax event="change" listener="#{pivotTableBean.onSelectChange}" update="@(form)"> </p:ajax>
+					</p:selectManyCheckbox>
+					
+					<p:droppable scope="myScope"/>
+				</p:scrollPanel>
+			</p:tab>
+			
+			<p:tab title="report Label">
+				<p:scrollPanel id="pivotSelectorPanel2" mode="native" style="height : 20%">
+					<p:tree id="treeRptLabel" value="#{pivotTableBean.reportRootNode}" var="_node" animate="true" 
+					        highlight="true" orientation="vertical" 
+					        selectionMode="checkbox" 
+					        draggable="true" droppable="true" dragMode="parent" dragdropScope="myScope" style="width:90%;">
+				        <p:ajax  event="select"  update="@(.ui-contextmenu)"	listener="#{pivotTableBean.onSelectEvent}"  />  
+				        <p:ajax  event="unselect"   update="@(.ui-contextmenu)" listener="#{pivotTableBean.onUnselectEvent}"  />  
+				        
+				        <p:treeNode  >
+				          <h:outputText value="#{_node}" />
+				        </p:treeNode>
+				        <p:treeNode  type="Leaf" >
+				          <h:outputText value="#{_node}" />
+				        </p:treeNode>
+			        </p:tree>
+				</p:scrollPanel>
+			</p:tab>
+			
+			<p:tab title="column Label">
+				<p:scrollPanel id="pivotSelectorPanel3" mode="native" style="height : 20%">
+					<p:tree id="treeColLabel" value="#{pivotTableBean.colRootNode}" var="_node" animate="true" 
+					        highlight="true" orientation="vertical" 
+					        selectionMode="checkbox" 
+					        draggable="true" droppable="true" dragMode="self"  dragdropScope="myScope"  
+					        style="height:100%; width:90%;">
+				        
+				        <p:ajax  event="select" update="@(.ui-contextmenu)" listener="#{pivotTableBean.onSelectEvent}"  />  
+				        <p:ajax  event="unselect"  update="@(.ui-contextmenu)"  listener="#{pivotTableBean.onUnselectEvent}"  />  
+				        <p:treeNode  >
+				          <h:outputText value="#{_node}" />
+				        </p:treeNode>
+				        <p:treeNode  type="Leaf">
+				          <h:outputText value="#{_node}" />
+				        </p:treeNode>
+			        </p:tree>
+			     </p:scrollPanel>
+			</p:tab>
+
+			<p:tab title="rows Label">
+				<p:scrollPanel id="pivotSelectorPanel4" mode="native" style="height : 20%">
+					<p:tree id="treeRowLabel" value="#{pivotTableBean.rowRootNode}" var="_node" animate="true" 
+					        highlight="true" orientation="vertical" 
+					        selectionMode="checkbox"  
+					        draggable="true" droppable="true" dragMode="self"  dragdropScope="myScope"  
+					        style="height:100%; width:90%;" >
+				        <p:ajax  event="select" update="@(.ui-contextmenu)" listener="#{pivotTableBean.onSelectEvent}"  />  
+				        <p:ajax  event="unselect" update="@(.ui-contextmenu)"  listener="#{pivotTableBean.onUnselectEvent}"  />  
+				        
+				        <p:treeNode  >
+				          <h:outputText value="#{_node}" />
+				        </p:treeNode>
+				        <p:treeNode  type="Leaf" >
+				          <h:outputText value="#{_node}" />
+				        </p:treeNode>
+			        </p:tree>
+				</p:scrollPanel>
+			</p:tab>
+			
+			<p:tab title="contents Label">
+				<p:scrollPanel id="pivotSelectorPanel5" mode="native" style="height : 10%">
+						aaa
+				</p:scrollPanel>
+			</p:tab>
+		</p:accordionPanel> 
+		
+		
+		<p:contextMenu id="ctxSelectManyCheck1" for="accoPivotSelector:pivotSelectorPanel1" >
+			<p:menuitem id="menuItemReset1" value="#{msg.reset}" action="#{pivotTableBean.reset}" update="@(form)"  />
+			<p:menuitem id="menuItemMoveToReport1" value="#{msg.addToReportArea}" action="#{pivotTableBean.addToReport}" update="@(form)"  />
+			<p:menuitem id="menuItemMoveToColumn1" value="#{msg.addToColumnArea}" action="#{pivotTableBean.addToColumn}" update="@(form)"  />
+			<p:menuitem id="menuItemMoveToRow1" value="#{msg.addToRowArea}" action="#{pivotTableBean.addToRow}" update="@(form)" />
+			<p:menuitem id="menuItemMoveToContent1" value="#{msg.addToContentArea}" action="#{pivotTableBean.addToContent}" update="@(form)" />
+		</p:contextMenu>
+		
+		 <p:contextMenu id="ctxSelectManyCheck2" for="accoPivotSelector" rendered="#{pivotTableBean.columnList.size() != pivotTableBean.origColumnList.size()}" >
+			<p:menuitem id="menuItemDelete2" value="#{msg.removeFromArea}" actionListener="#{pivotTableBean.remove}" update="@(form)"  />
+			
+			<p:menuitem id="menuItemMoveToReport2" value="#{msg.moveToReportArea}" actionListener="#{pivotTableBean.moveToReport}" update="@(form)" rendered="#{pivotTableBean.selectedNode.parent != 'report'}"/>
+			<p:menuitem id="menuItemMoveToColumn2" value="#{msg.moveToColumnArea}" actionListener="#{pivotTableBean.moveToColumn}" update="@(form)"  rendered="#{pivotTableBean.selectedNode.parent != 'column'}"/>
+			<p:menuitem id="menuItemMoveToRow2" value="#{msg.moveToRowArea}" actionListener="#{pivotTableBean.moveToRow}" update="@(form)" rendered="#{pivotTableBean.selectedNode.parent != 'row'}"/>
+			<p:menuitem id="menuItemMoveToContent2" value="#{msg.moveToContentArea}" actionListener="#{pivotTableBean.moveToContent}" update="@(form)" rendered="#{pivotTableBean.selectedNode.parent != 'content'}"/>
+		</p:contextMenu>
+
+		<!-- <p:contextMenu id="ctxSelectManyCheck3" for="accoPivotSelector" model="#{contextMenuBean.pivotSelectorMenu}" rendered="#{pivotTableBean.columnList.size() != pivotTableBean.origColumnList.size()}">
+		</p:contextMenu> -->
+		 <!-- <p:contextMenu id="ctxSelectManyCheck2" for="accoPivotSelector:treeRptLabel" nodeType="column">
+			<p:menuitem id="menuItemDelete2" value="#{msg.remove}" actionListener="#{pivotTableBean.remove('report')}" update="@(form)"  />
+			<p:menuitem id="menuItemMoveToReport2" value="#{msg.moveToColumntArea1}" actionListener="#{pivotTableBean.moveToColumn}" update="@(form)"  />
+			<p:menuitem id="menuItemMoveToRow2" value="#{msg.moveToRowArea1}" actionListener="#{pivotTableBean.moveToRow}" update="@(form)" />
+			<p:menuitem id="menuItemMoveToContent2" value="#{msg.moveToContentArea1}" actionListener="#{pivotTableBean.moveToContent}" update="@(form)" />
+		</p:contextMenu> -->
+		
+		<!-- <p:contextMenu id="ctxSelectManyCheck3" for="accoPivotSelector:treeColLabel" nodeType="column">
+			<p:menuitem id="menuItemDelete3" value="#{msg.remove}" actionListener="#{pivotTableBean.remove('column')}" update="@(form)" />
+			<p:menuitem id="menuItemMoveToReport3" value="#{msg.moveToReportArea2}" actionListener="#{pivotTableBean.moveToReport}" update="@(form)"  />
+			<p:menuitem id="menuItemMoveToColumn3" value="#{msg.moveToRowArea2}" actionListener="#{pivotTableBean.moveToRow}" update="@(form)"  />
+			<p:menuitem id="menuItemMoveToContent3" value="#{msg.moveToContentArea2}" actionListener="#{pivotTableBean.moveToContent}" update="@(form)" />
+		</p:contextMenu> -->
+		
+		<!--<p:contextMenu id="ctxSelectManyCheck4" for="accoPivotSelector:treeRowLabel" nodeType="column">
+			<p:menuitem id="menuItemDelete4" value="#{msg.remove}" actionListener="#{pivotTableBean.remove('row')}" update="@(form)" />
+			<p:menuitem id="menuItemMoveToReport4" value="#{msg.moveToReportArea3}" actionListener="#{pivotTableBean.moveToReport}" update="@(form)"  />
+			<p:menuitem id="menuItemMoveToColumn4" value="#{msg.moveToColumnArea3}" actionListener="#{pivotTableBean.moveToColumn}" update="@(form)"  />
+			<p:menuitem id="menuItemMoveToContent4" value="#{msg.moveToContentArea3}" actionListener="#{pivotTableBean.moveToContent}" update="@(form)" />
+		</p:contextMenu> -->
+		
+	</h:form>
+</ui:composition>

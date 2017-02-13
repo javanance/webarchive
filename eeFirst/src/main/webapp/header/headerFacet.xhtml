@@ -12,6 +12,9 @@
   </f:facet>
 
   <f:facet name="middle">
+  	
+    <!-- <h:outputStylesheet library="component" name="reset.css" /> -->
+    <h:outputStylesheet library="component" name="normalise.css" />
     <!-- <h:outputStylesheet library="css" name="testcss1.css" /> -->
     <!-- <h:outputStylesheet library="css" name="default_origin.css" /> --> 
     <h:outputStylesheet library="css" name="takion.css" />
@@ -20,10 +23,13 @@
     <h:outputStylesheet library="css" name="menubar.css" />
   </f:facet>
   <link rel="shortcut icon" type="image/png" href="#{request.contextPath}/resources/starcraft/archon.png" />
-  <script type='text/javascript' src='https://www.google.com/jsapi'></script>
-  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-  <script src="http://code.highcharts.com/highcharts.js"></script>
-  <script src="http://code.highcharts.com/stock/highstock.js"></script>
-  <script src="http://code.highcharts.com/modules/exporting.js"></script>
+  
+  <h:outputScript library="js" name="test.js"/>
+  
+  <!-- <script type='text/javascript' src='https://www.google.com/jsapi'></script> -->
+ <!--  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> -->
+  <!-- <script src="http://code.highcharts.com/highcharts.js"></script> -->
+  <!-- <script src="http://code.highcharts.com/stock/highstock.js"></script> -->
+  <!-- <script src="http://code.highcharts.com/modules/exporting.js"></script> -->
 
 </ui:composition>

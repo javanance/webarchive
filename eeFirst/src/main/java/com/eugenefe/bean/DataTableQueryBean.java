@@ -158,7 +158,8 @@ public class DataTableQueryBean implements Serializable {
 		
 		FacesContext context = FacesContext.getCurrentInstance();
 		logger.info("Query Input: {}, {}",  inputQueryText);
-		queryHistory.add(new QueryStatement(queryHistory.size()+1, "takion77", inputQueryText));
+		queryHistory.add(0, new QueryStatement(queryHistory.size()+1, "takion77", inputQueryText));
+//		queryHistory.add(new QueryStatement(queryHistory.size()+1, "takion77", inputQueryText));
 		
 		try {
 			
