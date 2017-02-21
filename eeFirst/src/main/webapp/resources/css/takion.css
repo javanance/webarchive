@@ -1,14 +1,78 @@
 /** jQuery UI CSS Framework* Copyright (c) 2010 AUTHORS.txt (http://jqueryui.com/about)* Dual licensed under the MIT (MIT-LICENSE.txt) and GPL (GPL-LICENSE.txt) licenses.* To view and modify this theme, visit http://jqueryui.com/themeroller/*/
 
 :root {
-	--header-bg-color : wheat;
-	--main-bg-color : #607D8B;
-	--main-border-color : rgb(170, 170, 170);
-	--wigdet-bg-color : gainsboro;
+	--top-bg-color : wheat;
+	--top-header-color :wheat;
+	
 	--main-header-color : #2647A0;
-	--footer-bg-colorL #f8f8f8;
+	--main-widget-color : #607D8B;
+	--main-widget-inverse : white;
+	--main-border-color : rgb(170, 170, 170);
+	/* --main-bg-color : #607D8B; */
+	--main-bg-color : silver;
+	
+	--wigdet-bg-color : gainsboro;
+	
+/* 	--bottom-bg-color : wheat;*/
+ 	--bottom-bg-color : #f8f8f8;
+ 	/* --bottom-bg-color : gainsboro; */
 }	
 
+
+/*************************************layout ***************************/
+.ui-layout-container {
+	/*  background:tan; */
+	/* background: var(--main-bg-color); */
+}
+
+.ui-layout-unit {
+	margin-top: 4px;
+	position: fixed;
+	border: none;
+	padding: 0em;
+	background: var(--main-bg-color);
+	/* background: white; */
+	margin: 5px;
+}
+
+.ui-layout-unit .ui-layout-unit-content {
+	/* box-shadow: 2px 2px 2px 0px silver; */
+	padding: 0px;
+}
+
+.ui-layout-unit-content.ui-widget-content {
+	overflow: hidden;
+	box-shadow: 3px 1px 3px 0px rgba(0, 0, 0, 0.3);
+	/* box-shadow: 0px 3px 3px 0px silver; */
+}
+
+.ui-layout-north .ui-layout-unit-content , .ui-layout-north .ui-layout-west .ui-layout-unit-content{
+	overflow: visible;
+	background: var(--top-bg-color);
+	/*  border-bottom:  2px solid silver; */
+	box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.3);
+	/*  box-shadow: 2px 2px 2px 0px silver; */
+}
+
+.ui-layout-west .ui-layout-unit-content {
+	/* background :var(--main-bg-color); */
+	 /* border-right:  2px solid silver; */
+	/* box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, 0.3); */
+	 box-shadow: 3px 0px 3px 0px silver;
+}
+
+.ui-layout-south .ui-layout-unit-content {
+	background: var(--bottom-bg-color);
+	/* box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, 0.3); */
+	 box-shadow: none;
+}
+
+.ui-layout-resizer-south{
+	background: var(--bottom-bg-color);
+	border-top:  2px solid silver;
+}
+
+/**************************************************************************/
 form {
 	margin: 0px;
 	/* height: 100%; */
@@ -53,8 +117,13 @@ form {
 	background :  var(--main-header-color);
 }
 
+.ui-state-default .ui-sortable-column-icon.ui-icon {
+	background-image: url("#{resource['primefaces-takion/images/ui-icons_ffffff_256x240.png']}");
+}
+
 .ui-state-default .ui-icon {
-	background-image: url("#{resource['primefaces-takion/images/ui-icons_888888_256x240.png']}") /* {iconsDefault} */;
+	/* {iconsDefault} */
+	background-image: url("#{resource['primefaces-takion/images/ui-icons_888888_256x240.png']}") ;
 }
 
 
@@ -125,14 +194,14 @@ form {
 }
 .ui-button.ui-widget.ui-state-default {
 	overflow: hidden;
-	background:  var(--main-bg-color);
-/* 	background: url(/eeFirst/javax.faces.resource/primefaces-takion/images/ui-default.png.xhtml?v=1.0) repeat-x scroll left -1400px var(--main-bg-color); */
+	background:  var(--main-widget-color);
+/* 	background: url(/eeFirst/javax.faces.resource/primefaces-takion/images/ui-default.png.xhtml?v=1.0) repeat-x scroll left -1400px var(--main-widget-color); */
 	color: white;
 	box-shadow: 0.1em 0.1em 0.1em 0 grey;
 	height: 2.4em;
 }
 .ui-treenode-label.ui-corner-all.ui-treenode-outline{
-	background: var(--header-bg-color);
+	background: var(--top-bg-color);
 }
 .ui-treenode.ui-treenode-parent.ui-treenode-selected {
 }
@@ -140,8 +209,14 @@ form {
 	background: indigo;
 }
 
+.takion.ui-menu.ui-menubar.ui-widget.ui-widget-content.ui-corner-all.ui-helper-clearfix{
+	background: var(--bottom-bg-color);
+	border-radius: 0px;
+	/* border : 2px solid silver; */
+}
+
 /* .ui-panel-content.ui-widget-content {
-	background: var(--header-bg-color);
+	background: var(--top-bg-color);
 } */
 /* .ui-inputtextarea{
 	background: white;
@@ -155,34 +230,22 @@ form {
 .ui-inputfield.ui-inputtextarea.ui-widget.ui-state-default.ui-corner-all.ui-inputtextarea-resizable{
 	background: white;
 }
-.takion_top .ui-layout-unit-content.ui-widget-content {
-	background: var(--header-bg-color);
-	box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.3);
-}
 
-.takion .ui-layout-unit-content.ui-widget-content {
-	box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, 0.3);
-}
-
-.takion.ui-layout-container {
-	/*  background:tan; */
-	
-}
 
 .ui-corner-all { /* -webkit-border-radius: 6px; */
 	border-radius: 0px;
 }
 
 .fa {
-	color: var(--main-bg-color);
+	color: var(--main-widget-color);
 }
 .inverse.fa {
 	/* color: #607D8B; */
-	color: white;
+	color: var(--main-widget-inverse);
 }
 
 .ui-widget .fa{
-	color: var(--main-bg-color);
+	color: var(--main-widget-color);
 }
 
 .ui-widget .inverse.fa {
@@ -260,14 +323,14 @@ i {
 }
 
 .takion.ui-panel.ui-widget {
-	background: var(--header-bg-color);
-/* 	background: url(/eeFirst/javax.faces.resource/primefaces-takion/images/ui-bg_flat_75_ffffff_40x100.png.xhtml?v=1.0) repeat-x scroll left -1400px var(--header-bg-color); */
+	background: var(--top-bg-color);
+/* 	background: url(/eeFirst/javax.faces.resource/primefaces-takion/images/ui-bg_flat_75_ffffff_40x100.png.xhtml?v=1.0) repeat-x scroll left -1400px var(--top-bg-color); */
 }
 
 .takion.ui-panel-content.ui-widget-content {
 	padding: 0 px;
-	background: var(--header-bg-color);
-/* 	background: url("#{resource['primefaces-takion/images/ui-bg_flat_75_ffffff_40x100.png']}") repeat-x scroll left -1400px var(--header-bg-color); */
+	background: var(--top-bg-color);
+/* 	background: url("#{resource['primefaces-takion/images/ui-bg_flat_75_ffffff_40x100.png']}") repeat-x scroll left -1400px var(--top-bg-color); */
 }
 
 .ui-widget, .ui-widget .ui-widget {
@@ -364,10 +427,8 @@ i {
     font-size: 16px;
     border: 1px solid #757575;
 } */
-.ui-layout-container {
-	/*  background:tan; */
-	
-}
+
+
 
 .ui-widget-header td {
 	text-align: right;
@@ -415,7 +476,7 @@ table .ui-menuitem-text {
 
 .ui-megamenu.ui-widget-content {
 	margin: 0px;
-	background: var(--header-bg-color);
+	background: var(--top-bg-color);
 	/* background : indigo; */
 	border: none;
 	/* height : 30%; */
@@ -433,27 +494,9 @@ table .ui-menuitem-text {
 	background: white;
 	margin : 5px;s
 } */
-.ui-layout-unit {
-	margin-top: 4px;
-	position: fixed;
-	border: none;
-	padding: 0em;
-	background: white;
-	/* background: white; */
-	margin: 5px;
-}
 
-.ui-layout-unit-content.ui-widget-content {
-	overflow: hidden;
-}
 
-.ui-layout-north .ui-layout-unit-content {
-	overflow: visible;
-}
 
-.ui-layout-unit .ui-layout-unit-content {
-	padding: 0px;
-}
 
 .ui-panelgrid .ui-panelgrid-cell {
 	border: none;

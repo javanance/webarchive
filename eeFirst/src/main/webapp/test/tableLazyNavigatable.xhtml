@@ -4,7 +4,6 @@
 xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions"
 	 xmlns:o="http://omnifaces.org/ui" xmlns:of="http://omnifaces.org/functions">
-
 	
 	<h:form id="formDynamicModel">
 		<p:growl id="growl" showDetail="true" sticky="true" />  
@@ -18,8 +17,8 @@ xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/c
 		<!-- <p:commandButton id="scrollToTopLink" styleClass="scrollToTop" actionListener="#{actionListenerBean.scrollToTop()}" update="@form" icon="scrollToTopImg" title="Icon Only"  /> -->
 		<!-- <p:commandButton id="scrollToTopLink" styleClass="scrollToTop" actionListener="#{actionListenerBean.scrollToTop()}" update="@form" value=""/> -->
 		
-		<p:scrollPanel id="penelNavigation" style="width: 100%; height: 100%;" mode="native" >
-		<p:outputLabel id="aaa" value="aaa" ></p:outputLabel>
+		<p:scrollPanel id="penelNavigation" style="width: 100%; height: 95%;" mode="native" >
+<!-- 		<p:outputLabel id="aaa" value="aaa" ></p:outputLabel> -->
 
 		<p:dataTable id="tableNavigation" value="#{dataViewerLazyBean.navi}" var="_row" widgetVar="wgTbNavi"
 			emptyMessage="No History Data found with given criteria. Change the Dates"
@@ -52,26 +51,32 @@ xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/c
 					<f:convertNumber pattern="###,###" locale="ko" />
 					<o:converter converterId="javax.faces.Number" currencySymbol="KRW" type="currency"></o:converter>
 				</h:outputText> -->
-				<p:outputLabel value="total size : #{of:formatNumber(dataViewerLazyBean.navi.rowCount, '#,###')}" style="font-size : 1.1em" ></p:outputLabel>
+				<!-- <p:outputLabel value="total size : #{of:formatNumber(dataViewerLazyBean.navi.rowCount, '#,###')}" style="font-size : 1.1em" ></p:outputLabel> -->
+				<p:outputLabel value="#{msg.totalSize} : #{of:formatNumber(dataViewerLazyBean.navi.rowCount, '#,###')}" style="font-size : 1.1em" ></p:outputLabel>
 			</f:facet>
 
 			<f:facet  name="{Exporters}">
 				<p:spacer width="10" style="float:right;"/>
-				<p:commandLink style="float:right; margin : 0px; padding: 0px">
+				<p:commandLink ajax="false" style="float:right; margin : 0px; padding: 0px"  >
 					<i class="inverse fa fa-file-excel-o fa-3x"/>
 					<p:dataExporter id="dtExporter" type="xls" target="tableNavigation" fileName="#{dataViewerLazyBean.selectedTableName}"  preProcessor="#{excelProcessBean.postProcessXLS1}"  postProcessor="#{excelProcessBean.postProcessXLS}"  />
+					<!-- <p:dataExporter id="dtExporter" type="xls" target="tableNavigation" fileName="#{dataViewerLazyBean.selectedTableName}"  /> -->
 				</p:commandLink>
-				<!-- <p:outputLabel value="Excel Download"  style="float:right; font-size: 1.1em; margin : 6px" /> -->
 				
 				<p:spacer width="10" style="float:left;"/>
-				<p:commandButton id="togglerButton" type="button" value="Columns" icon="inverse fa fa-user"  style="float:left ; font-size: 1.1em;  margin: 0px ; border : 1px solid white; box-shadow: 1px 1px 1px 0 grey;" >
+				<p:commandButton id="togglerButton" type="button" value="Columns" icon="inverse fa fa-th-large"  style="float:left ; font-size: 1.1em;  margin: 0px ; border : 1px solid white; box-shadow: 1px 1px 1px 0 grey;" >
 				</p:commandButton>
 				<p:columnToggler id="toggler" datasource="tableNavigation" trigger="togglerButton" >
 					<p:ajax  event="toggle" listener="#{dataViewerLazyBean.onToggle}" />
 	            </p:columnToggler>
 			</f:facet>
 		</p:dataTable>
-	    <p:outputLabel value="aaa"/><p:spacer height="500"/>
+		<p:spacer height="20"/>
+				
+		<!-- <p:commandButton value="Excel" ajax="false">
+				<p:dataExporter type="xls" target="tableNavigation" fileName="cars"/>
+		</p:commandButton> -->
+	    <!-- <p:outputLabel value="aaa"/><p:spacer height="500"/> -->
 	</p:scrollPanel>
 		<p:contextMenu id="ctxTable" for="tableNavigation" >
 			<!-- <p:menuitem id="menuItemAdd" value="#{msg.addToMenuBar}" action="#{userMenuBean.addNavigationMenu(dataViewerLazyBean.selectedTableName)}" 

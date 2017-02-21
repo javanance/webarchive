@@ -114,6 +114,7 @@ public class ExcelProcessBean implements Serializable{
 			header.getCell(i).setCellStyle(headerCellStyle);
 			sheet.autoSizeColumn(i);
 		}
+		logger.info("Post Excel2 : {}", ((HSSFWorkbook)document).getNumberOfSheets());
 	}
 
 }

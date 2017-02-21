@@ -1,7 +1,7 @@
 /** jQuery UI CSS Framework* Copyright (c) 2010 AUTHORS.txt (http://jqueryui.com/about)* Dual licensed under the MIT (MIT-LICENSE.txt) and GPL (GPL-LICENSE.txt) licenses.* To view and modify this theme, visit http://jqueryui.com/themeroller/*/
 /* Component containers----------------------------------*/
 :root {
-	--main-bg-color : #607D8B;
+	--main-widget-color : #607D8B;
 }
 
 .ui-widget {
@@ -1013,7 +1013,7 @@ button.ui-state-active .ui-button-text {
 }
 .ui-datatable-resizable th.ui-resizable-column{
 	/* background : #012482;  #37474F #607D8B*/  
-	background :  var(--main-bg-color);
+	background :  var(--main-widget-color);
     color: white;
     font-weight:bold;
    /*  font-size: 1.2em; */
@@ -1024,7 +1024,7 @@ button.ui-state-active .ui-button-text {
 }
 
 .ui-paginator.ui-paginator-bottom.ui-widget-header{
-	background:  var(--main-bg-color);
+	background:  var(--main-widget-color);
 	border-bottom: 1px solid rgb(170, 170, 170);
     border-left: 1px solid rgb(170, 170, 170);
     border-right: 1px solid rgb(170, 170, 170);

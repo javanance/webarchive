@@ -6,19 +6,19 @@
   xmlns:o="http://omnifaces.org/ui" xmlns:of="http://omnifaces.org/functions">
 
   <p:layout id="innerLayout" collapseTitle="close" resizeTitle="#{msg.resizeTitle}" widgetVar="innerLayout">
-    <p:layoutUnit id="innerTopLu" position="north" resizable="true" collapsible="true" gutter="2" size="200" rendered="#{layoutBean.renderInnerTop}">
+    <p:layoutUnit id="innerTopLu" position="north" resizable="true" collapsible="true" gutter="4" size="200" rendered="#{layoutBean.renderInnerTop}" >
       <ui:insert name="innerLayoutTop" />
     </p:layoutUnit>
 
-    <p:layoutUnit id="innerRighttLu" position="east"  resizable="true" collapsible="true" size="200" gutter="4" rendered="#{layoutBean.renderInnerRight}">
+    <p:layoutUnit id="innerRighttLu" position="east"  resizable="true" collapsible="true" size="200" gutter="4" rendered="#{layoutBean.renderInnerRight}" >
       <ui:insert name="innnerLayoutRight" />
     </p:layoutUnit>
     
-    <p:layoutUnit id="innerBottomLu" position="south"  resizable="true" collapsible="true" size="200" gutter="4" rendered="#{layoutBean.renderInnerBottom}">
+    <p:layoutUnit id="innerBottomLu" position="south"  resizable="true" collapsible="true" size="200" gutter="4" rendered="#{layoutBean.renderInnerBottom}" >
       <ui:insert name="innnerLayoutBottom" />
     </p:layoutUnit>
     
-    <p:layoutUnit id="innerCennterLu" position="center" resizable="true" gutter="4" >
+    <p:layoutUnit id="innerCennterLu" position="center" resizable="true" gutter="4"  >
      	<ui:insert name="layoutCenter" />
     </p:layoutUnit>
   </p:layout>

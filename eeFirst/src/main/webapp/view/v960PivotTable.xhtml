@@ -15,13 +15,13 @@
 		<p:tabView id="pivotTabView" dynamic="true" styleClass="takion" >
 			
 			
-			<p:tab title="Pivot Table" styleClass="takion" titleStyle="width: 49.90%">
-				<p:layout style="width:100%;height:100%">
-					<p:layoutUnit id="pivotRightLayout" position="east" resizable="true" collapsible="true" size="250" gutter="4" style="oveflow:visible;" styleClass="takion">
+			<p:tab title="Pivot Table" styleClass="takion" titleStyle="width: 49.90%;" >
+				<p:layout style="width:100%; height:94%">
+					<p:layoutUnit id="pivotRightLayout" position="east" resizable="true" collapsible="true" size="250" gutter="8" style="oveflow:visible;" >
 						<ui:include src="/test/pivotSelector.xhtml" />
 					</p:layoutUnit>
 
-					<p:layoutUnit position="center">
+					<p:layoutUnit position="center" gutter="8">
 						<ui:include src="/test/tablePivot.xhtml" />
 					</p:layoutUnit>
 				</p:layout>
